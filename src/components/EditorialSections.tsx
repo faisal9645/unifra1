@@ -35,7 +35,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
   return (
     <div className="bg-[#0b0c0e] text-white">
       {/* SECTION 1: PHILOSOPHY / INTRO (Screenshot 7: A DIFFERENT KIND OF DEVELOPER) */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-3">
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] flex items-center gap-2">
@@ -70,7 +70,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 2: 01 THE FLAGSHIP RESIDENCE / Meet MYSA (Screenshot 7) */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
@@ -174,7 +174,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 3: 02 THE UNIFRA WAY / Designed around your life (Screenshot 7) */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="text-left mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2 flex items-center gap-2">
             <span className="font-mono text-gray-500">02</span>
@@ -289,7 +289,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 4: THE UNIFRA STANDARD (Screenshot 6: Luxury Re-imagined Without Compromise) */}
-      <section className="py-20 sm:py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <section className="py-20 sm:py-32 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Copy & 6 Feature Badges */}
           <div className="lg:col-span-6 space-y-6">
@@ -405,7 +405,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 5: THE UNIFRA PERSPECTIVE (Screenshot 7: The luxury of enough) */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Photo 1: Double-height window living room */}
           <div className="lg:col-span-4 relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 h-[380px] sm:h-[460px]">
@@ -462,7 +462,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 6: THE LIFESTYLE (Screenshot 6: An Unparalleled Experience) */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3">
             THE LIFESTYLE
@@ -574,7 +574,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 8: PRIVATE VIEWING & ADVISORY CONCIERGE */}
-      <section id="contact-section" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="contact-section" className="py-20 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <div className="relative bg-[#121418] border border-[#dfb776]/40 p-8 sm:p-14 rounded-sm shadow-2xl overflow-hidden">
           {/* Subtle gold concentric rings decoration */}
           <div className="absolute -top-24 -right-24 w-72 h-72 border border-[#dfb776]/10 rounded-full pointer-events-none" />
@@ -667,7 +667,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
 
       {/* SECTION 10: HALLMARK BAR (Screenshot 7: Crafted for Coastal Living • Designed with Intention • Delivered with Care) */}
       <section className="py-8 bg-[#07080a] border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="flex items-center justify-center gap-3 text-xs font-mono tracking-[0.22em] text-gray-400 uppercase">
               <span className="text-[#dfb776]">▤</span>

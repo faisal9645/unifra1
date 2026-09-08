@@ -18,7 +18,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
   return (
     <div className="pt-24 pb-20 bg-[#0b0c0e] text-[#f3f4f6]">
       {/* 1. Hero Banner */}
-      <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
         <div className="relative rounded-sm overflow-hidden min-h-[380px] sm:min-h-[460px] flex items-center justify-center p-8 sm:p-14 shadow-2xl border border-white/10">
           <img
             src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1800&q=80"
@@ -43,7 +43,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
       </section>
 
       {/* 2. Our Journey Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             CHRONICLE
@@ -112,7 +112,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
       </section>
 
       {/* 4. Our Guiding Principles */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             TENETS
@@ -166,7 +166,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
       <CoreValues />
 
       {/* 5. See Our Services */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             CAPABILITIES
@@ -247,7 +247,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
       </section>
 
       {/* 6. Our Craftsmanship */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-[#121418] rounded-sm p-8 sm:p-12 border border-white/10 shadow-2xl">
           <div className="rounded-sm overflow-hidden border border-white/10 h-72 sm:h-96 order-2 lg:order-1">
             <img
@@ -281,7 +281,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
       </section>
 
       {/* 7. Meet Our Team CTA Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <div className="relative rounded-sm overflow-hidden p-8 sm:p-14 text-white shadow-xl bg-[#121418] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="max-w-2xl text-center md:text-left">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#dfb776] font-medium mb-2 block">

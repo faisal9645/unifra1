@@ -136,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             : 'bg-gradient-to-b from-[#0b0c0e]/90 via-[#0b0c0e]/60 to-transparent backdrop-blur-[2px] py-4 sm:py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <div className="flex items-center justify-between">
           {/* Logo matching screenshot 7 & 6 combination: Gold "U" monogram + "UNIFRA" */}
           <button

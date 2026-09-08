@@ -32,7 +32,7 @@ export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVi
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">

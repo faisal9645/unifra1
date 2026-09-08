@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigatePage, onOpenContact })
         U
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
         {/* Main Grid: Screenshot 7 & 6 combined */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           {/* Column 1: Brand & Philosophy (Screenshot 7: For the life you imagine) */}

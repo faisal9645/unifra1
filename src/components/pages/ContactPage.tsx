@@ -34,7 +34,7 @@ export const ContactPage: React.FC = () => {
   return (
     <div className="pt-24 pb-20 bg-[#0b0c0e] text-[#f3f4f6]">
       {/* 1. Hero Banner */}
-      <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
         <div className="relative rounded-sm overflow-hidden min-h-[380px] sm:min-h-[460px] flex items-center justify-center p-8 sm:p-14 shadow-2xl border border-white/10">
           <img
             src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1800&q=80"
@@ -60,7 +60,7 @@ export const ContactPage: React.FC = () => {
       </section>
 
       {/* 2. Get In Touch Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             CONSULTATION
@@ -190,7 +190,7 @@ export const ContactPage: React.FC = () => {
       </section>
 
       {/* 3. Visit Our Office Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             HEADQUARTERS

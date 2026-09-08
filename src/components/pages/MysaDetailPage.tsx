@@ -347,7 +347,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
   return (
     <div className="pt-24 pb-20 bg-[#0b0c0e] text-[#f3f4f6] relative">
       {/* Top Breadcrumb & VIP Access Status Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-6 flex flex-wrap items-center justify-between gap-4">
         {onNavigateProjects && (
           <button
             onClick={onNavigateProjects}
@@ -397,7 +397,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </div>
 
       {/* 1. Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-16">
         <div className="text-center max-w-4xl mx-auto">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
@@ -432,7 +432,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 2. Interactive Hero Architectural Perspective Showcase */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
         <div className="bg-[#121418] rounded-sm border border-white/10 overflow-hidden shadow-2xl">
           {/* Main Selected Perspective Image */}
           <div className="relative h-[360px] sm:h-[500px] lg:h-[580px] w-full group overflow-hidden bg-black">
@@ -531,7 +531,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 3. Comprehensive MYSA Visual Architecture Gallery (All 13 Pictures) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div className="text-left max-w-2xl">
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2 flex items-center gap-2">
@@ -652,7 +652,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 4. Villa Floor Plans */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             LAYOUT BLUEPRINTS
@@ -787,7 +787,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 5. World-Class Amenities */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             LUXURY COMFORTS
@@ -876,7 +876,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 6. Detailed Specifications */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             TECHNICAL SPECIFICATIONS
@@ -944,7 +944,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 7. Project Status */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
             TIMELINE
@@ -1009,7 +1009,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 8. Location Advantage */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-[#121418] rounded-sm p-8 sm:p-12 border border-white/10 shadow-2xl">
           <div className="space-y-4 text-left">
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776]">
@@ -1108,7 +1108,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 10. Bottom CTA Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <div className="relative rounded-sm overflow-hidden p-8 sm:p-14 text-white shadow-2xl min-h-[300px] flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"

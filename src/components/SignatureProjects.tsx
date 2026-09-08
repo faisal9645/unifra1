@@ -53,7 +53,7 @@ export const SignatureProjects: React.FC<SignatureProjectsProps> = ({
 
   return (
     <section id="projects" className="py-20 sm:py-28 bg-[#0b0c0e] text-white border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Section Header matching screenshot 6: CURATED COLLECTIONS | Signature Developments */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-14 gap-6 pb-6 border-b border-white/10">
           <div>
