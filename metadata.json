@@ -1,0 +1,6 @@
+{
+  "name": "Unifra Properties | 3D Luxury Real Estate",
+  "description": "Award-winning 3D luxury real estate experience for Unifra Properties, featuring an interactive 3D architectural villa, Coverflow gallery, 360° virtual walkthrough, and signature project explorer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
