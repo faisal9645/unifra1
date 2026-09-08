@@ -114,7 +114,9 @@ body.theme-light ::-webkit-scrollbar-thumb:hover {
 /* Surface backgrounds for light mode */
 body.theme-light .bg-\[\#0b0c0e\],
 body.theme-light section.bg-\[\#0b0c0e\],
-body.theme-light div.bg-\[\#0b0c0e\] {
+body.theme-light div.bg-\[\#0b0c0e\],
+body.theme-light footer.bg-\[\#07080a\],
+body.theme-light .bg-\[\#07080a\] {
   background-color: #f8f9fb !important;
 }
 
@@ -140,19 +142,24 @@ body.theme-light .bg-white\/\[0\.08\] {
 }
 
 /* Gradient overrides */
-body.theme-light .from-\[\#0b0c0e\] {
+body.theme-light .from-\[\#0b0c0e\],
+body.theme-light .from-\[\#07080a\] {
   --tw-gradient-from: #f8f9fb var(--tw-gradient-from-position) !important;
 }
-body.theme-light .to-\[\#0b0c0e\] {
+body.theme-light .to-\[\#0b0c0e\],
+body.theme-light .to-\[\#07080a\] {
   --tw-gradient-to: #f8f9fb var(--tw-gradient-to-position) !important;
 }
-body.theme-light .via-\[\#0b0c0e\] {
+body.theme-light .via-\[\#0b0c0e\],
+body.theme-light .via-\[\#07080a\] {
   --tw-gradient-via: #f8f9fb var(--tw-gradient-via-position) !important;
 }
-body.theme-light .from-\[\#0e1014\] {
+body.theme-light .from-\[\#0e1014\],
+body.theme-light .from-\[\#121418\] {
   --tw-gradient-from: #ffffff var(--tw-gradient-from-position) !important;
 }
-body.theme-light .to-\[\#0e1014\] {
+body.theme-light .to-\[\#0e1014\],
+body.theme-light .to-\[\#121418\] {
   --tw-gradient-to: #ffffff var(--tw-gradient-to-position) !important;
 }
 
@@ -190,7 +197,7 @@ body.theme-light .divide-white\/10 > * + * {
   border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Form inputs in Light Mode */
+/* Form inputs & select dropdowns in Light Mode */
 body.theme-light input[type="text"],
 body.theme-light input[type="email"],
 body.theme-light input[type="tel"],
@@ -200,6 +207,16 @@ body.theme-light select {
   background-color: #ffffff !important;
   color: #121418 !important;
   border-color: rgba(0, 0, 0, 0.18) !important;
+}
+
+body.theme-light select option {
+  background-color: #ffffff !important;
+  color: #121418 !important;
+}
+
+select option {
+  background-color: #121418;
+  color: #f3f4f6;
 }
 
 body.theme-light input::placeholder,
@@ -224,7 +241,7 @@ body.theme-light .glass-dark {
   color: #121418 !important;
 }
 
-/* Keep solid buttons with gold background high contrast and legible */
+/* Solid gold buttons high contrast */
 body.theme-light .bg-\[\#dfb776\],
 body.theme-light button.bg-\[\#dfb776\],
 body.theme-light a.bg-\[\#dfb776\] {
@@ -258,6 +275,98 @@ body.theme-light .shadow-2xl {
 body.theme-light .shadow-xl {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
 }
+
+/* Preserve text color inside dark photo overlays, image cards, and dark buttons in Light mode */
+body.theme-light [class*="from-black"] *,
+body.theme-light [class*="via-black"] *,
+body.theme-light [class*="to-black"] *,
+body.theme-light .bg-black\/60 *,
+body.theme-light .bg-black\/70 *,
+body.theme-light .bg-black\/80 *,
+body.theme-light .bg-black\/90 *,
+body.theme-light .bg-black\/95 * {
+  color: inherit;
+}
+
+body.theme-light [class*="from-black"] .text-white,
+body.theme-light [class*="via-black"] .text-white,
+body.theme-light [class*="to-black"] .text-white,
+body.theme-light .bg-black\/60 .text-white,
+body.theme-light .bg-black\/70 .text-white,
+body.theme-light .bg-black\/80 .text-white,
+body.theme-light .bg-black\/90 .text-white,
+body.theme-light .bg-black\/95 .text-white {
+  color: #ffffff !important;
+}
+
+body.theme-light [class*="from-black"] .text-gray-300,
+body.theme-light [class*="from-black"] .text-gray-200,
+body.theme-light [class*="from-black"] .text-gray-400 {
+  color: #e2e8f0 !important;
+}
+
+/* Solid dark/colored buttons in light mode stay white text */
+body.theme-light button.bg-black,
+body.theme-light a.bg-black {
+  color: #ffffff !important;
+}
+body.theme-light button.bg-black *,
+body.theme-light a.bg-black * {
+  color: #ffffff !important;
+}
+
+/* Outer modal backdrops remain dark translucent overlay */
+body.theme-light .fixed.inset-0.bg-black\/85,
+body.theme-light .fixed.inset-0.bg-black\/90,
+body.theme-light .fixed.inset-0.bg-black\/95,
+body.theme-light .fixed.inset-0.bg-black\/80,
+body.theme-light .fixed.inset-0.bg-black\/75 {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Table styling for Admin Leads Page in light mode */
+body.theme-light table {
+  color: #121418 !important;
+}
+
+body.theme-light th {
+  background-color: #f8f9fb !important;
+  color: #4a5568 !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-light tr {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.theme-light tr:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Badge status colors in Light Mode */
+body.theme-light .text-amber-300,
+body.theme-light .text-amber-400 {
+  color: #b45309 !important;
+}
+body.theme-light .text-blue-300,
+body.theme-light .text-blue-400 {
+  color: #1d4ed8 !important;
+}
+body.theme-light .text-\[\#0ea5e9\] {
+  color: #0284c7 !important;
+}
+body.theme-light .text-purple-300,
+body.theme-light .text-purple-400 {
+  color: #6b21a8 !important;
+}
+body.theme-light .text-emerald-300,
+body.theme-light .text-emerald-400 {
+  color: #047857 !important;
+}
+body.theme-light .text-emerald-500 {
+  color: #059669 !important;
+}
+
 
 
 
