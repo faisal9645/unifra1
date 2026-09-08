@@ -25,6 +25,7 @@ interface ThreeHeroVillaProps {
   onSelectHotspot: (hotspot: Hotspot) => void;
   selectedHotspot: Hotspot | null;
   onSelectGalleryItem?: (item: GalleryItem) => void;
+  theme?: 'light' | 'dark';
 }
 
 export type LightingMode = 'day' | 'sunset' | 'night';
@@ -33,7 +34,8 @@ export type HeroMode = '3d' | 'photo';
 export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
   onSelectHotspot,
   selectedHotspot,
-  onSelectGalleryItem
+  onSelectGalleryItem,
+  theme = 'dark'
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -41,10 +43,15 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
   const [heroMode, setHeroMode] = useState<HeroMode>('3d');
   const [photoIndex, setPhotoIndex] = useState<number>(0);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
-  const [lightingMode, setLightingMode] = useState<LightingMode>('night');
+  const [lightingMode, setLightingMode] = useState<LightingMode>(() => theme === 'light' ? 'day' : 'night');
   const [isWireframe, setIsWireframe] = useState<boolean>(false);
   const [activeHotspotId, setActiveHotspotId] = useState<string | null>(null);
   const [isOrbiting, setIsOrbiting] = useState<boolean>(false);
+
+  // Sync lighting mode when site theme toggles
+  useEffect(() => {
+    setLightingMode(theme === 'light' ? 'day' : 'night');
+  }, [theme]);
 
   // Screen coordinates for 2D hotspot overlays projected from 3D space
   const [projectedHotspots, setProjectedHotspots] = useState<
@@ -79,30 +86,34 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
   const sphericalCoords = useRef({ radius: 10.5, phi: Math.PI / 3.2, theta: Math.PI / 4 });
 
   // Update lighting conditions
-  const applyLighting = useCallback((mode: LightingMode, scene: THREE.Scene) => {
+  const applyLighting = useCallback((mode: LightingMode, scene: THREE.Scene, currentTheme: 'light' | 'dark' = 'dark') => {
     if (!lightsRef.current) return;
     const { sun, ambient, poolLight, interiorLight1, interiorLight2, sunsetRim } = lightsRef.current;
 
+    const isLight = currentTheme === 'light' || document.body.classList.contains('theme-light');
+
     if (mode === 'day') {
-      scene.background = new THREE.Color(0x0e1015);
-      scene.fog = new THREE.FogExp2(0x0e1015, 0.025);
+      const bgColor = isLight ? 0xebf2f8 : 0x0e1015;
+      scene.background = new THREE.Color(bgColor);
+      scene.fog = new THREE.FogExp2(bgColor, isLight ? 0.015 : 0.025);
       sun.color.setHex(0xfffbf0);
-      sun.intensity = 2.4;
+      sun.intensity = isLight ? 3.0 : 2.4;
       sun.position.set(10, 15, 10);
-      ambient.color.setHex(0x3a4252);
-      ambient.intensity = 1.2;
+      ambient.color.setHex(isLight ? 0x94a3b8 : 0x3a4252);
+      ambient.intensity = isLight ? 2.0 : 1.2;
       poolLight.intensity = 1.5;
-      interiorLight1.intensity = 2.5;
-      interiorLight2.intensity = 2.5;
+      interiorLight1.intensity = 2.0;
+      interiorLight2.intensity = 2.0;
       sunsetRim.intensity = 0.2;
     } else if (mode === 'sunset') {
-      scene.background = new THREE.Color(0x1a1215);
-      scene.fog = new THREE.FogExp2(0x1a1215, 0.028);
+      const bgColor = isLight ? 0xf5e6dd : 0x1a1215;
+      scene.background = new THREE.Color(bgColor);
+      scene.fog = new THREE.FogExp2(bgColor, 0.02);
       sun.color.setHex(0xff8c42);
       sun.intensity = 3.2;
       sun.position.set(14, 5, 8);
-      ambient.color.setHex(0x422d36);
-      ambient.intensity = 1.0;
+      ambient.color.setHex(isLight ? 0xc49a88 : 0x422d36);
+      ambient.intensity = 1.4;
       poolLight.intensity = 3.5;
       interiorLight1.intensity = 4.5;
       interiorLight2.intensity = 4.5;
@@ -127,9 +138,9 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
 
   useEffect(() => {
     if (sceneRef.current) {
-      applyLighting(lightingMode, sceneRef.current);
+      applyLighting(lightingMode, sceneRef.current, theme);
     }
-  }, [lightingMode, applyLighting]);
+  }, [lightingMode, theme, applyLighting]);
 
   // Wireframe toggle
   useEffect(() => {

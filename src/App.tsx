@@ -197,13 +197,15 @@ function AppContent() {
         {currentPage === 'home' && (
           <>
             {/* Hero Section with Real-Time 3D Interactive Villa (Fixed scroll-through) */}
-            <section id="hero" className="relative w-full h-screen min-h-[650px] max-h-[1080px] bg-[#0b0c0e]">
+            <section id="hero" className={`relative w-full h-screen min-h-[650px] max-h-[1080px] transition-colors duration-500 ${theme === 'light' ? 'bg-[#ebf2f8]' : 'bg-[#0b0c0e]'}`}>
               <ThreeHeroVilla
+                theme={theme}
                 onSelectHotspot={(hotspot) => setSelectedHotspot(hotspot)}
                 selectedHotspot={selectedHotspot}
                 onSelectGalleryItem={(item) => setSelectedGalleryItem(item)}
               />
               <HeroOverlay
+                theme={theme}
                 onExploreProjects={() => handleNavigatePage('mysa-detail')}
                 onOpenVirtualTour={() => setIsVirtualTourOpen(true)}
                 onNavigateOurStory={() => handleNavigatePage('about-story')}
