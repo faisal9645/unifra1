@@ -33,12 +33,21 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrolled = window.scrollY > 20;
+      let scrolled = false;
+      if (currentPage === 'home') {
+        // On home page, header shrinks ONLY AFTER scroll-world 3D animation is completed (past 1.85x window height)
+        const scrollWorldHeight = window.innerHeight * 1.85;
+        scrolled = window.scrollY > scrollWorldHeight;
+      } else {
+        scrolled = window.scrollY > 40;
+      }
       setIsScrolled(prev => (prev !== scrolled ? scrolled : prev));
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [currentPage]);
 
   // Listen for outside clicks/touches to close dropdowns reliably on touch devices & desktop
   useEffect(() => {
@@ -123,14 +132,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? isLight
-            ? 'bg-white/95 backdrop-blur-md border-b border-black/10 py-3 shadow-md'
-            : 'bg-[#0b0c0e]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
-          : isLight
-            ? 'bg-gradient-to-b from-white/95 via-white/70 to-transparent backdrop-blur-[2px] py-4 sm:py-5'
-            : 'bg-gradient-to-b from-[#0b0c0e]/90 via-[#0b0c0e]/60 to-transparent backdrop-blur-[2px] py-4 sm:py-5'
+          ? 'bg-[#0b0c0e]/95 backdrop-blur-xl border-b border-[#dfb776]/30 py-2.5 sm:py-3 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
+          : 'bg-gradient-to-b from-[#0b0c0e]/95 via-[#0b0c0e]/65 to-transparent backdrop-blur-sm py-4 sm:py-5.5'
       }`}
     >
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
@@ -138,20 +143,38 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Logo matching screenshot 7 & 6 combination: Gold "U" monogram + "UNIFRA" */}
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 text-left group cursor-pointer focus:outline-none"
+            className="flex items-center gap-2.5 sm:gap-3 text-left group cursor-pointer focus:outline-none"
           >
             {/* Monogram U Badge */}
-            <div className="w-9 h-9 sm:w-10 sm:h-10 border border-[#dfb776] bg-[#dfb776]/10 flex items-center justify-center text-[#dfb776] group-hover:bg-[#dfb776] group-hover:text-[#0b0c0e] transition-all duration-300">
-              <span className="font-serif-luxury text-xl sm:text-2xl font-bold leading-none">U</span>
+            <div
+              className={`border border-[#dfb776] bg-[#dfb776]/10 flex items-center justify-center text-[#dfb776] group-hover:bg-[#dfb776] group-hover:text-[#0b0c0e] transition-all duration-300 rounded-xs ${
+                isScrolled ? 'w-7 h-7 sm:w-8 sm:h-8' : 'w-9 h-9 sm:w-10 sm:h-10'
+              }`}
+            >
+              <span
+                className={`font-serif-luxury font-bold leading-none transition-all duration-300 ${
+                  isScrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'
+                }`}
+              >
+                U
+              </span>
             </div>
 
             <div className="flex flex-col">
-              <span className={`font-serif-luxury text-xl sm:text-2xl font-bold tracking-[0.22em] uppercase group-hover:text-[#dfb776] transition-colors leading-none ${
-                isLight ? 'text-[#121418]' : 'text-white'
-              }`}>
+              <span
+                className={`font-serif-luxury font-bold tracking-[0.22em] uppercase group-hover:text-[#dfb776] transition-all duration-300 leading-none text-white ${
+                  isScrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'
+                }`}
+              >
                 UNIFRA
               </span>
-              <span className="text-[6.5px] sm:text-[7.5px] font-mono tracking-[0.32em] text-[#dfb776] uppercase mt-1">
+              <span
+                className={`font-mono tracking-[0.32em] text-[#dfb776] uppercase transition-all duration-300 overflow-hidden ${
+                  isScrolled
+                    ? 'max-h-0 opacity-0 mt-0 text-[0px]'
+                    : 'max-h-4 opacity-100 mt-1 text-[6.5px] sm:text-[7.5px]'
+                }`}
+              >
                 LEGACY OF LUXURY LIVING
               </span>
             </div>
@@ -419,7 +442,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={onOpenContact}
-              className="border border-[#dfb776] hover:border-[#dfb776] bg-[#dfb776] hover:bg-[#c59b4c] text-[#0b0c0e] text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase px-4 py-2 rounded-sm transition-all duration-200 cursor-pointer shadow-sm flex items-center gap-1.5"
+              className={`border border-[#dfb776] hover:border-[#dfb776] bg-[#dfb776] hover:bg-[#c59b4c] text-[#0b0c0e] font-semibold tracking-[0.2em] uppercase rounded-sm transition-all duration-300 cursor-pointer shadow-md flex items-center gap-1.5 ${
+                isScrolled ? 'px-3 py-1.5 text-[10px]' : 'px-4 py-2 text-[10px] sm:text-[11px]'
+              }`}
             >
               <span>BOOK A PRIVATE TOUR</span>
               <span className="text-[12px]">↗</span>
