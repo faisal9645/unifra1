@@ -8,7 +8,9 @@ import {
   MapPin,
   User,
   Phone,
-  Mail
+  Mail,
+  Video,
+  Compass
 } from 'lucide-react';
 import { GalleryItem, ProjectItem, BlogPost } from '../types';
 import { saveLead } from '../utils/leadsStorage';
@@ -255,35 +257,52 @@ interface VirtualTourModalProps {
 }
 
 export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ isOpen, onClose }) => {
-  const [currentRoom, setCurrentRoom] = useState<'living' | 'master' | 'pool' | 'terrace'>('living');
+  const [viewMode, setViewMode] = useState<'video' | '360'>('video');
+  const [currentRoom, setCurrentRoom] = useState<'living' | 'master' | 'salon' | 'terrace' | 'kitchen' | 'lounge'>('living');
   const [panX, setPanX] = useState(0);
   const isDragging = useRef(false);
   const startX = useRef(0);
 
+  // YouTube Video ID provided by user: XuMGAoSu3HE
+  const youtubeVideoId = 'XuMGAoSu3HE';
+  const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`;
+
   const rooms = {
     living: {
-      name: 'Double Height Great Room',
-      level: 'Ground Floor',
-      imageUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80',
-      specs: 'Ceiling Height: 22 Ft • Italian Leather • Fluted Oak'
+      name: 'Double-Height Great Room',
+      level: 'Ground Floor Central Atrium',
+      imageUrl: '/images/mysa3d/LIVING-VIEW1.jpg',
+      specs: '22-Ft Ceiling Volume • Floating Timber Stairs • Double-Ring Chandelier'
     },
     master: {
-      name: 'Master Sanctuary & Terrace',
-      level: 'Level 1 Wing',
-      imageUrl: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=2000&q=80',
-      specs: 'King Suite • Walk-in Wardrobe • Private Bamboo Deck'
+      name: 'Master Sanctuary Loft Suite',
+      level: 'Level 1 East Wing',
+      imageUrl: '/images/mysa3d/MASTER-BEDROOM5.jpg',
+      specs: 'Cathedral Volume • Exposed Timber Rafters • Balcony Glazing'
     },
-    pool: {
-      name: 'Infinity Lap Pool & Garden',
-      level: 'Outdoor Courtyard',
-      imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80',
-      specs: '38 Ft Lap Pool • Travertine Deck • Fiber-Optic Ambience'
+    salon: {
+      name: 'Furnished Living Salon',
+      level: 'Ground Level Residence',
+      imageUrl: '/images/mysa3d/BAX09923.jpg',
+      specs: 'Solid Teak Furnishings • Built-in Media Wall • Sheer Linen Drapes & Recessed Lighting'
     },
     terrace: {
-      name: 'Skyline Sea-Breeze Lounge',
-      level: 'Level 2 Rooftop',
-      imageUrl: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=2000&q=80',
-      specs: 'Open Air Barbeque • Ocean Glimpse • Teak Pergola'
+      name: 'Scandinavian Butterfly Gable',
+      level: 'Level 2 Elevation & Façade',
+      imageUrl: '/images/mysa3d/02A.jpg',
+      specs: 'Angled Zinc-Bronze Roof • Clerestory Gable Window • Cantilevered Planter'
+    },
+    kitchen: {
+      name: 'Minimalist Culinary Studio',
+      level: 'Ground Level Culinary Wing',
+      imageUrl: '/images/mysa3d/KITCHEN.jpg',
+      specs: 'Calacatta Marble Backsplash • Integrated Oven Tower • Blum Touch-to-Open Joinery'
+    },
+    lounge: {
+      name: 'Family Mezzanine Lounge',
+      level: 'Level 1 Entertainment',
+      imageUrl: '/images/mysa3d/LOUNGE.jpg',
+      specs: 'First Floor Entertainment Salon • Engineered Oak • Bespoke Credenza'
     }
   };
 
@@ -308,27 +327,59 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ isOpen, onCl
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-black/90 backdrop-blur-xl animate-in fade-in">
       <div className="relative w-full max-w-5xl h-[85vh] bg-[#0b0c0e] rounded-sm overflow-hidden flex flex-col shadow-2xl border border-white/10">
         {/* Top Header Controls */}
-        <div className="p-4 sm:p-6 flex items-center justify-between border-b border-white/10 bg-[#121418] z-20">
+        <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 bg-[#121418] z-20">
           <div className="flex items-center gap-3">
             <div className="w-2.5 h-2.5 rounded-full bg-[#dfb776] animate-pulse" />
             <div>
-              <h3 className="text-white font-serif-luxury text-lg sm:text-xl font-normal">
-                {rooms[currentRoom].name}
+              <h3 className="text-white font-serif-luxury text-base sm:text-xl font-normal leading-snug">
+                {viewMode === 'video'
+                  ? 'Unifra MYSA Official Walkthrough Film'
+                  : rooms[currentRoom].name}
               </h3>
               <div className="text-[10px] font-mono text-gray-400">
-                {rooms[currentRoom].level} • {rooms[currentRoom].specs}
+                {viewMode === 'video'
+                  ? 'HD Official Video Tour • Vettuvankeni ECR Gated Villa Enclave'
+                  : `${rooms[currentRoom].level} • ${rooms[currentRoom].specs}`}
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setPanX(0)}
-              className="p-2 rounded-sm border border-white/10 hover:border-[#dfb776] text-gray-400 hover:text-white transition-colors cursor-pointer"
-              title="Recenter view"
-            >
-              <RotateCw className="w-4 h-4" />
-            </button>
+          <div className="flex items-center gap-2 self-end sm:self-auto">
+            {/* View Mode Switcher */}
+            <div className="bg-black/60 p-1 rounded-sm border border-white/10 flex items-center gap-1">
+              <button
+                onClick={() => setViewMode('video')}
+                className={`px-3 py-1.5 rounded-sm text-[10px] sm:text-[11px] font-mono uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                  viewMode === 'video'
+                    ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <Video className="w-3.5 h-3.5" />
+                <span>Official Video</span>
+              </button>
+              <button
+                onClick={() => setViewMode('360')}
+                className={`px-3 py-1.5 rounded-sm text-[10px] sm:text-[11px] font-mono uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                  viewMode === '360'
+                    ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>360° View</span>
+              </button>
+            </div>
+
+            {viewMode === '360' && (
+              <button
+                onClick={() => setPanX(0)}
+                className="p-2 rounded-sm border border-white/10 hover:border-[#dfb776] text-gray-400 hover:text-white transition-colors cursor-pointer"
+                title="Recenter view"
+              >
+                <RotateCw className="w-4 h-4" />
+              </button>
+            )}
             <button
               onClick={onClose}
               className="p-2 rounded-sm border border-white/10 hover:border-[#dfb776] text-gray-400 hover:text-white transition-colors cursor-pointer"
@@ -338,52 +389,67 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ isOpen, onCl
           </div>
         </div>
 
-        {/* 360 Pan Canvas Simulation */}
-        <div
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          className="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        >
-          <div
-            style={{
-              transform: `scale(1.15) translateX(${panX * 0.4}px)`,
-              transition: isDragging.current ? 'none' : 'transform 0.4s ease-out'
-            }}
-            className="w-full h-full"
-          >
-            <img
-              src={rooms[currentRoom].imageUrl}
-              alt={rooms[currentRoom].name}
-              className="w-full h-full object-cover pointer-events-none"
+        {/* Modal Main Content Body */}
+        {viewMode === 'video' ? (
+          <div className="relative flex-1 w-full bg-black flex items-center justify-center overflow-hidden">
+            <iframe
+              src={youtubeEmbedUrl}
+              title="Unifra MYSA Official Walkthrough & Cinematic Film"
+              className="w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
             />
           </div>
-
-          {/* Centered Drag Indicator */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-sm border border-white/15 text-[#dfb776] text-[10px] font-mono pointer-events-none flex items-center gap-2">
-            <span>← DRAG HORIZONTALLY TO ROTATE 360° VIEW →</span>
-          </div>
-        </div>
-
-        {/* Bottom Room Selector Tabs */}
-        <div className="p-4 bg-[#121418] border-t border-white/10 flex flex-wrap items-center justify-center gap-2 z-20">
-          {(Object.keys(rooms) as (keyof typeof rooms)[]).map((key) => (
-            <button
-              key={key}
-              onClick={() => {
-                setCurrentRoom(key);
-                setPanX(0);
-              }}
-              className={`px-4 py-2 rounded-sm text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
-                currentRoom === key
-                  ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-lg'
-                  : 'bg-black/40 text-gray-400 hover:text-white border border-white/10'
-              }`}
+        ) : (
+          <>
+            {/* 360 Pan Canvas Simulation */}
+            <div
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              className="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing select-none"
             >
-              {rooms[key].name}
-            </button>
-          ))}
-        </div>
+              <div
+                style={{
+                  transform: `scale(1.15) translateX(${panX * 0.4}px)`,
+                  transition: isDragging.current ? 'none' : 'transform 0.4s ease-out'
+                }}
+                className="w-full h-full"
+              >
+                <img
+                  src={rooms[currentRoom].imageUrl}
+                  alt={rooms[currentRoom].name}
+                  className="w-full h-full object-cover pointer-events-none"
+                />
+              </div>
+
+              {/* Centered Drag Indicator */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-sm border border-white/15 text-[#dfb776] text-[10px] font-mono pointer-events-none flex items-center gap-2">
+                <span>← DRAG HORIZONTALLY TO ROTATE 360° VIEW →</span>
+              </div>
+            </div>
+
+            {/* Bottom Room Selector Tabs */}
+            <div className="p-4 bg-[#121418] border-t border-white/10 flex flex-wrap items-center justify-center gap-2 z-20">
+              {(Object.keys(rooms) as (keyof typeof rooms)[]).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    setCurrentRoom(key);
+                    setPanX(0);
+                  }}
+                  className={`px-4 py-2 rounded-sm text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                    currentRoom === key
+                      ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-lg'
+                      : 'bg-black/40 text-gray-400 hover:text-white border border-white/10'
+                  }`}
+                >
+                  {rooms[key].name}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

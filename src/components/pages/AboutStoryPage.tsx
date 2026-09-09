@@ -16,28 +16,30 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
   onOpenContact
 }) => {
   return (
-    <div className="pt-24 pb-20 bg-[#0b0c0e] text-[#f3f4f6]">
+    <div className="pt-20 pb-12 bg-[#0b0c0e] text-[#f3f4f6]">
       {/* 1. Hero Banner */}
-      <section className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
-        <div className="relative rounded-sm overflow-hidden min-h-[380px] sm:min-h-[460px] flex items-center justify-center p-8 sm:p-14 shadow-2xl border border-white/10">
+      <section className="relative w-full overflow-hidden mb-10">
+        <div className="relative min-h-[380px] sm:min-h-[460px] flex items-center justify-center p-8 sm:p-14 shadow-2xl border-y border-white/10 dark-overlay-card">
           <img
-            src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1800&q=80"
-            alt="About Unifra Interior"
+            src="/images/mysa3d/mysa.jpg"
+            alt="MYSA Luxe Villas Twilight Elevation"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/60" />
 
-          <div className="relative z-10 text-center max-w-3xl text-white">
-            <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
-              <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
-              <span>THE UNIFRA HERITAGE</span>
+          <div className="relative z-10 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 text-center text-white">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
+                <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
+                <span>THE UNIFRA HERITAGE</span>
+              </div>
+              <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight mb-4">
+                About <span className="italic font-serif-luxury text-[#dfb776]">Unifra</span>
+              </h1>
+              <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">
+                Dreams are meant to come true. We'll make it happen for you.
+              </p>
             </div>
-            <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight mb-4">
-              About <span className="italic font-serif-luxury text-[#dfb776]">Unifra</span>
-            </h1>
-            <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">
-              Dreams are meant to come true. We'll make it happen for you.
-            </p>
           </div>
         </div>
       </section>
@@ -154,8 +156,8 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
 
           <div className="rounded-sm overflow-hidden border border-white/10 h-72 sm:h-96">
             <img
-              src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
-              alt="Unifra Modern Kitchen Interior"
+              src="/images/mysa3d/KITCHEN.jpg"
+              alt="MYSA Minimalist Culinary Studio & Island"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
@@ -251,8 +253,8 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-[#121418] rounded-sm p-8 sm:p-12 border border-white/10 shadow-2xl">
           <div className="rounded-sm overflow-hidden border border-white/10 h-72 sm:h-96 order-2 lg:order-1">
             <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
-              alt="Unifra Architectural Craftsmanship Villa"
+              src="/images/mysa3d/03.jpg"
+              alt="MYSA Cantilevered Granite Balcony & Craftsmanship"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>

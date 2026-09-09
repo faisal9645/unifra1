@@ -28,6 +28,8 @@ import {
   Image as ImageIcon
 } from 'lucide-react';
 
+import { ThreeHeroVilla } from '../ThreeHeroVilla';
+
 export interface MysaPhoto {
   id: string;
   title: string;
@@ -41,134 +43,114 @@ export interface MysaPhoto {
 
 export const MYSA_VILLA_PHOTOS: MysaPhoto[] = [
   {
-    id: 'facade-cascading',
-    title: 'Contemporary Cascading Facade',
+    id: 'facade-butterfly',
+    title: 'Scandinavian Butterfly Pitched Roof & Clerestory',
     category: 'Facade',
     categoryLabel: 'Facade & Architecture',
     location: 'MYSA Villas, Vettuvankeni ECR',
-    area: 'Villa 04 • 5,400 Sq.Ft.',
-    imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=85',
-    description: 'Warm sandstone cladding paired with dark slate accents, cantilevered terraces, and ambient architectural lighting.'
+    area: 'Villa 01 & 02 • Level 2 Gable',
+    imageUrl: '/images/mysa3d/02A.jpg',
+    description: 'Signature Scandinavian butterfly pitched roof clad in dark bronze fascia with front-facing triangular clerestory gable glass and warm recessed soffit LED wash.'
   },
   {
-    id: 'dusk-elevation',
-    title: 'Evening Dusk Ambience & Travertine Lighting',
+    id: 'facade-granite',
+    title: 'Cantilevered Dark Granite Balcony & Sconces',
     category: 'Facade',
     categoryLabel: 'Facade & Architecture',
-    location: 'Main Gated Enclave Street View',
-    area: 'Full Villa Elevation • 3 Levels',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1600&q=85',
-    description: 'Warm 2700K perimeter cove illumination highlights the hand-cut travertine walls and floating cantilever steps as dusk settles over the coast.'
+    location: 'West Elevation & Arrival Portico',
+    area: 'Villa 03 & 04 • Cantilever Terrace',
+    imageUrl: '/images/mysa3d/03.jpg',
+    description: 'Deep cantilevered dark granite balcony block with toughened glass balustrade, dual architectural satin brass sconces, integrated planter box, and double-car portico.'
   },
   {
-    id: 'twilight-pool',
-    title: 'Private Infinity Plunge Pool & Courtyard Deck',
-    category: 'Pool & Grounds',
-    categoryLabel: 'Pool & Grounds',
-    location: 'Ground Floor Courtyard',
-    area: '38-Ft Lap Pool • Travertine Deck',
-    imageUrl: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1600&q=85',
-    description: 'Integrated fiber-optic underwater lighting, dual water curtain spouts, and non-slip flamed granite deck surrounded by coastal foliage.'
+    id: 'facade-dusk',
+    title: 'MYSA Dusk Elevation & Golden Interior Illumination',
+    category: 'Facade',
+    categoryLabel: 'Facade & Architecture',
+    location: 'Main Gated Enclave Avenue',
+    area: 'Full 3-Level Elevation • 5,800 Sq.Ft.',
+    imageUrl: '/images/mysa3d/mysa.jpg',
+    description: 'Evening twilight view capturing warm 2700K interior illumination through double-height glass atriums and coastal reflection lap pool.'
+  },
+  {
+    id: 'lotus-gate',
+    title: 'Illuminated Lotus Portal & Executive EV Portico',
+    category: 'Facade',
+    categoryLabel: 'Facade & Architecture',
+    location: 'Gated Enclave Arrival Boulevard',
+    area: 'Monolithic Gate Monument & Driveway',
+    imageUrl: '/images/mysa3d/BAX00768.jpg',
+    description: 'Monolithic black granite monument with illuminated brass lotus insignia, Belgian cobble arrival driveway, and covered executive EV portico.'
+  },
+  {
+    id: 'furnished-salon',
+    title: 'Completed Furnished Living Salon & Media Console',
+    category: 'Living',
+    categoryLabel: 'Living & Great Room',
+    location: 'Ground Level Residence',
+    area: '680 Sq.Ft. Finished Suite',
+    imageUrl: '/images/mysa3d/BAX09923.jpg',
+    description: 'Authentic photograph of the completed ground-floor salon featuring bespoke teak armchairs, floating media console, sheer drapery, and warm recessed ambient lighting.'
   },
   {
     id: 'grand-living',
-    title: 'Sun-Drenched Double-Height Great Room',
+    title: 'Double-Height Great Room & Floating Oak Staircase',
     category: 'Living',
     categoryLabel: 'Living & Great Room',
-    location: 'Ground Level Heart',
-    area: '850 Sq.Ft. • 22-Ft Ceiling',
-    imageUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=85',
-    description: 'Expansive 22-foot high structural volume with full-height acoustic fluted oak wall, custom Italian leather furnishings, and direct garden access.'
+    location: 'Ground Level Central Atrium',
+    area: '920 Sq.Ft. • 22-Ft Ceiling Volume',
+    imageUrl: '/images/mysa3d/LIVING-VIEW1.jpg',
+    description: 'Expansive 22-foot double-height living room featuring floating timber cantilever staircase, double-ring gold chandelier, and imported composite Italian marble.'
   },
   {
-    id: 'scandinavian-living',
-    title: 'Scandinavian Living & Media Lounge',
-    category: 'Living',
-    categoryLabel: 'Living & Great Room',
-    location: 'Ground Level Family Wing',
-    area: '620 Sq.Ft.',
-    imageUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=85',
-    description: 'Clean architectural lines with recessed warm LED perimeter wash, natural timber accents, and imported composite Italian marble.'
-  },
-  {
-    id: 'master-sanctuary',
-    title: 'The Master Sanctuary Suite',
-    category: 'Master Suite',
-    categoryLabel: 'Master Sanctuary & Suites',
-    location: 'First Level East Wing',
-    area: '620 Sq.Ft. • King Suite',
-    imageUrl: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=85',
-    description: 'Minimalist Scandinavian-inspired bedroom with integrated fluted headboard, ambient cove lighting, engineered oak floors, and floor-to-ceiling garden views.'
-  },
-  {
-    id: 'master-loft',
-    title: 'Master Bedroom Loft with Timber Trusses',
-    category: 'Master Suite',
-    categoryLabel: 'Master Sanctuary & Suites',
-    location: 'First Level Private Wing',
-    area: '540 Sq.Ft. • Cathedral Volume',
-    imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=85',
-    description: 'Cathedral double-height ceiling showcasing exposed natural timber trusses, floor-to-ceiling balcony glazing, and walk-in dressing lounge.'
-  },
-  {
-    id: 'dining-pavilion',
-    title: 'Bespoke Dining Pavilion & Wine Lounge',
-    category: 'Kitchen & Dining',
-    categoryLabel: 'Dining & Kitchen',
-    location: 'Ground Level Garden Wing',
-    area: '480 Sq.Ft.',
-    imageUrl: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1600&q=85',
-    description: '10-seater smoked oak table beneath bespoke hand-blown kinetic glass pendants, opening directly onto the outdoor reflection pool.'
-  },
-  {
-    id: 'chef-kitchen',
-    title: 'Minimalist Chef Kitchen & Waterfall Island',
+    id: 'culinary-studio',
+    title: 'Minimalist Culinary Studio & Quartz Waterfall Island',
     category: 'Kitchen & Dining',
     categoryLabel: 'Dining & Kitchen',
     location: 'Ground Level Culinary Suite',
-    area: '420 Sq.Ft.',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85',
-    description: 'Seamless waterfall quartz island, concealed Gaggenau appliances, Blum touch-to-open walnut cabinetry, and separate butler preparation pantry.'
+    area: '450 Sq.Ft. Gourmet Studio',
+    imageUrl: '/images/mysa3d/KITCHEN.jpg',
+    description: 'Seamless waterfall quartz kitchen island with breakfast bar, integrated premium appliances, Blum touch-to-open walnut joinery, and concealed ambient channels.'
   },
   {
-    id: 'travertine-spa',
-    title: 'Travertine Spa Ensuite with Freestanding Tub',
-    category: 'Spa',
-    categoryLabel: 'Spa & Ensuite',
-    location: 'Master Retreat Ensuite',
-    area: '280 Sq.Ft. • Master Bath',
-    imageUrl: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1600&q=85',
-    description: 'Monolithic freestanding soaking tub carved from solid limestone with ceiling-mounted rainfall shower and private bamboo lightwell.'
+    id: 'mezzanine-lounge',
+    title: 'First Floor Family Mezzanine Lounge & Media Salon',
+    category: 'Living',
+    categoryLabel: 'Living & Great Room',
+    location: 'First Level Entertainment Wing',
+    area: '580 Sq.Ft.',
+    imageUrl: '/images/mysa3d/LOUNGE.jpg',
+    description: 'Intimate first-floor family salon and media lounge with bespoke floating credenza, designer sculptural seating, and warm engineered timber flooring.'
   },
   {
-    id: 'penthouse-terrace',
-    title: 'Penthouse Stargazing Terrace & Sky Pergola',
-    category: 'Pool & Grounds',
-    categoryLabel: 'Pool & Grounds',
-    location: 'Level 2 Rooftop Suite',
-    area: '1,200 Sq.Ft. Open Terrace',
-    imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=85',
-    description: 'Entertainment pergola lounge with open-air coastal seating, built-in barbecue station, and panoramic views of the Bay of Bengal coastline.'
-  },
-  {
-    id: 'sunrise-balcony',
-    title: 'Sunrise Balcony Suite & Timber Louvers',
+    id: 'master-sanctuary',
+    title: 'Master Sanctuary Loft Suite & Timber Rafters',
     category: 'Master Suite',
     categoryLabel: 'Master Sanctuary & Suites',
-    location: 'First Level Front Elevation',
-    area: '180 Sq.Ft. Balcony Deck',
-    imageUrl: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=85',
-    description: 'Private cantilevered balcony deck featuring motorized timber louvers that calibrate natural ventilation and coastal sea breezes.'
+    location: 'First Level East Wing',
+    area: '650 Sq.Ft. • Cathedral Volume',
+    imageUrl: '/images/mysa3d/MASTER-BEDROOM5.jpg',
+    description: 'Cathedral volume master suite under the butterfly pitched roof with exposed natural timber rafters, plush king bed suite, and floor-to-ceiling balcony glazing.'
   },
   {
-    id: 'central-driveway',
-    title: 'Central Arrival Driveway & Twin Portico',
-    category: 'Facade',
-    categoryLabel: 'Facade & Architecture',
-    location: 'Gated Enclave Private Boulevard',
-    area: 'Dual-Portico Entrance',
-    imageUrl: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1600&q=85',
-    description: 'Hand-laid Belgian cobble driveway, covered dual-vehicle parking porticos, and illuminated landscaping leading to the bespoke villa entrances.'
+    id: 'first-floor-suite',
+    title: 'First Floor Luxury Guest Haven with Wood Slat Accent',
+    category: 'Master Suite',
+    categoryLabel: 'Master Sanctuary & Suites',
+    location: 'First Level North Wing',
+    area: '480 Sq.Ft. Ensuite',
+    imageUrl: '/images/mysa3d/first-floor-bedroom.jpg',
+    description: 'First floor ensuite bedroom featuring vertical wood slat headboard, integrated warm cove backlighting, and floor-to-ceiling garden glazing.'
+  },
+  {
+    id: 'ground-floor-suite',
+    title: 'Ground Floor Garden Suite & Pool Walkout',
+    category: 'Master Suite',
+    categoryLabel: 'Master Sanctuary & Suites',
+    location: 'Ground Level Garden Wing',
+    area: '460 Sq.Ft. Ensuite',
+    imageUrl: '/images/mysa3d/ground-floor-bedroom.jpg',
+    description: 'Ground level bedroom with floor-to-ceiling acoustic sliding glass doors opening directly to the private garden courtyard and lap pool.'
   }
 ];
 
@@ -200,21 +182,11 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
   // FAQ expanded state
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
-  // Hero perspective switcher
-  const [activeHeroPhotoIndex, setActiveHeroPhotoIndex] = useState<number>(0);
-
   // Gallery category filter
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   // Fullscreen Lightbox Modal state
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  const heroFeaturedPhotos = [
-    MYSA_VILLA_PHOTOS[2], // twilight-pool
-    MYSA_VILLA_PHOTOS[0], // facade-cascading
-    MYSA_VILLA_PHOTOS[3], // grand-living
-    MYSA_VILLA_PHOTOS[6], // master-loft
-  ];
 
   const filteredPhotos = selectedCategory === 'All'
     ? MYSA_VILLA_PHOTOS
@@ -245,21 +217,21 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       title: 'Ground Floor Plan',
       area: '1,800 sq.ft.',
       description: 'Grand entrance foyer leading to expansive double-height living room, guest bedroom suite, modern open kitchen with pantry, powder room, covered dual-car garage, and private outdoor swimming deck with landscaped plunge pool.',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+      image: '/images/mysa3d/ground-floor-bedroom.jpg',
       highlights: ['Double-Height Living & Dining', 'Private Lap Pool & Deck', 'Chef Kitchen with Prep Island', 'Guest Suite with Garden View']
     },
     first: {
       title: 'First Floor Plan',
       area: '2,400 sq.ft.',
       description: 'Master sanctuary suite with Scandinavian timber paneling, private sunrise balcony, walk-in dressing lounge, spa bathroom with freestanding soaking tub, plus two secondary ensuite bedrooms and family lounge.',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80',
+      image: '/images/mysa3d/first-floor-bedroom.jpg',
       highlights: ['Master Suite with Walk-In Closet', 'Private Sun Deck Balconies', 'Central Family Lounge', 'Luxury Ensuite Bathrooms']
     },
     second: {
       title: 'Second Floor Plan (Penthouse & Terrace)',
       area: '1,600 sq.ft.',
       description: 'Entertainment lounge / home theater studio, fitness wellness studio, barbecue terrace overlooking coastal treetops, covered pergola seating, and utility laundry area.',
-      image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+      image: '/images/mysa3d/LOUNGE.jpg',
       highlights: ['Rooftop Stargazing Terrace', 'Private Gymnasium / Studio', 'Pergola Covered Seating', 'Solar & DG Integration Zone']
     }
   };
@@ -345,9 +317,27 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
   ];
 
   return (
-    <div className="pt-24 pb-20 bg-[#0b0c0e] text-[#f3f4f6] relative">
+    <div className="pt-0 pb-20 bg-[#0b0c0e] text-[#f3f4f6] relative">
+      {/* Floating Sticky Brochure Button on the Right */}
+      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40">
+        <button
+          onClick={onOpenBrochure}
+          className="bg-[#121418] hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] px-3.5 py-4 rounded-l-sm shadow-2xl flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest [writing-mode:vertical-rl] rotate-180 cursor-pointer transition-all border-l border-y border-white/20 hover:border-[#dfb776]"
+        >
+          <FileText className="w-3.5 h-3.5 rotate-90 text-[#dfb776]" />
+          <span>Brochure →</span>
+        </button>
+      </div>
+
+      {/* 0. 4K Interactive Render Banner Carousel (Full Viewport Width & Height directly under Fixed Header) */}
+      <ThreeHeroVilla
+        theme="dark"
+        onOpenVirtualTour={onOpenVirtualTour}
+        onExploreProjects={onOpenContact}
+      />
+
       {/* Top Breadcrumb & VIP Access Status Bar */}
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 my-8 flex flex-wrap items-center justify-between gap-4">
         {onNavigateProjects && (
           <button
             onClick={onNavigateProjects}
@@ -385,17 +375,6 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         </div>
       </div>
 
-      {/* Floating Sticky Brochure Button on the Right */}
-      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40">
-        <button
-          onClick={onOpenBrochure}
-          className="bg-[#121418] hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] px-3.5 py-4 rounded-l-sm shadow-2xl flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest [writing-mode:vertical-rl] rotate-180 cursor-pointer transition-all border-l border-y border-white/20 hover:border-[#dfb776]"
-        >
-          <FileText className="w-3.5 h-3.5 rotate-90 text-[#dfb776]" />
-          <span>Brochure →</span>
-        </button>
-      </div>
-
       {/* 1. Header */}
       <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-16">
         <div className="text-center max-w-4xl mx-auto">
@@ -431,106 +410,9 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         </div>
       </section>
 
-      {/* 2. Interactive Hero Architectural Perspective Showcase */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
-        <div className="bg-[#121418] rounded-sm border border-white/10 overflow-hidden shadow-2xl">
-          {/* Main Selected Perspective Image */}
-          <div className="relative h-[360px] sm:h-[500px] lg:h-[580px] w-full group overflow-hidden bg-black">
-            <img
-              src={heroFeaturedPhotos[activeHeroPhotoIndex].imageUrl}
-              alt={heroFeaturedPhotos[activeHeroPhotoIndex].title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            {/* Ambient gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0e] via-[#0b0c0e]/30 to-transparent" />
-            <div className="absolute inset-0 bg-radial-at-c from-transparent via-transparent to-black/60" />
 
-            {/* Top Bar Badges */}
-            <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between pointer-events-none">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xs bg-black/70 backdrop-blur-md border border-white/20 text-[#dfb776] text-[10px] font-mono uppercase tracking-widest pointer-events-auto">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#dfb776] animate-pulse" />
-                <span>PERSPECTIVE {activeHeroPhotoIndex + 1} OF 4</span>
-              </div>
 
-              <button
-                onClick={() => {
-                  const globalIdx = MYSA_VILLA_PHOTOS.findIndex(
-                    p => p.id === heroFeaturedPhotos[activeHeroPhotoIndex].id
-                  );
-                  setLightboxIndex(globalIdx !== -1 ? globalIdx : 0);
-                }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xs bg-black/80 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] text-xs font-mono uppercase tracking-wider transition-all border border-white/20 hover:border-[#dfb776] shadow-xl pointer-events-auto cursor-pointer"
-                title="Expand High-Resolution Image"
-              >
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">High-Res View</span>
-              </button>
-            </div>
-
-            {/* Bottom Details Overlay */}
-            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-              <div className="max-w-2xl text-left">
-                <div className="inline-block text-[10px] font-mono uppercase tracking-widest text-[#dfb776] bg-[#dfb776]/15 border border-[#dfb776]/30 px-2.5 py-0.5 rounded-xs mb-2">
-                  {heroFeaturedPhotos[activeHeroPhotoIndex].area}
-                </div>
-                <h3 className="font-serif-luxury text-2xl sm:text-3xl lg:text-4xl text-white font-normal drop-shadow-md">
-                  {heroFeaturedPhotos[activeHeroPhotoIndex].title}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-300 font-light mt-1.5 max-w-xl line-clamp-2 drop-shadow">
-                  {heroFeaturedPhotos[activeHeroPhotoIndex].description}
-                </p>
-              </div>
-
-              <button
-                onClick={() => {
-                  const globalIdx = MYSA_VILLA_PHOTOS.findIndex(
-                    p => p.id === heroFeaturedPhotos[activeHeroPhotoIndex].id
-                  );
-                  setLightboxIndex(globalIdx !== -1 ? globalIdx : 0);
-                }}
-                className="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
-              >
-                <Eye className="w-4 h-4 text-[#dfb776]" />
-                <span>Full Screen (13 Photos)</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Perspective Selector Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/10 bg-[#0e1014] border-t border-white/10">
-            {heroFeaturedPhotos.map((photo, idx) => {
-              const isActive = activeHeroPhotoIndex === idx;
-              return (
-                <button
-                  key={photo.id}
-                  onClick={() => setActiveHeroPhotoIndex(idx)}
-                  className={`p-3.5 sm:p-4 text-left transition-all flex items-center gap-3 cursor-pointer ${
-                    isActive
-                      ? 'bg-[#dfb776]/10 border-b-2 sm:border-b-0 sm:border-t-2 border-[#dfb776]'
-                      : 'hover:bg-white/[0.03] opacity-75 hover:opacity-100'
-                  }`}
-                >
-                  <img
-                    src={photo.imageUrl}
-                    alt={photo.title}
-                    className="w-12 h-10 object-cover rounded-xs border border-white/15 shrink-0"
-                  />
-                  <div className="overflow-hidden">
-                    <div className="text-[9px] font-mono uppercase tracking-wider text-[#dfb776] truncate">
-                      {photo.categoryLabel}
-                    </div>
-                    <div className={`text-xs font-medium truncate ${isActive ? 'text-white font-semibold' : 'text-gray-300'}`}>
-                      {photo.title}
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Comprehensive MYSA Visual Architecture Gallery (All 13 Pictures) */}
+      {/* 3. Comprehensive MYSA Visual Architecture Gallery (All 11 Pictures) */}
       <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div className="text-left max-w-2xl">
@@ -542,7 +424,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
               MYSA Villas <span className="italic font-serif-luxury text-[#dfb776]">Photo Showcase</span>
             </h2>
             <p className="text-xs sm:text-sm text-gray-400 font-light">
-              Explore all 13 authentic photographs capturing the travertine facade, double-height great room, private infinity plunge pool, and Scandinavian master sanctuaries.
+              Explore all 11 authentic photographs capturing the Scandinavian butterfly roof, cantilevered dark granite balcony, double-height great room, minimalist culinary studio, and master sanctuaries.
             </p>
           </div>
 
@@ -562,13 +444,11 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         {/* Filter Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-8 no-scrollbar border-b border-white/10 text-xs font-mono">
           {[
-            { id: 'All', label: 'All Pictures (13)' },
-            { id: 'Facade', label: 'Facade & Elevation' },
+            { id: 'All', label: 'All Pictures (11)' },
+            { id: 'Facade', label: 'Facade & Architecture' },
             { id: 'Living', label: 'Living & Great Room' },
-            { id: 'Master Suite', label: 'Master Sanctuary' },
-            { id: 'Kitchen & Dining', label: 'Kitchen & Dining' },
-            { id: 'Pool & Grounds', label: 'Pool & Grounds' },
-            { id: 'Spa', label: 'Spa Ensuite' }
+            { id: 'Master Suite', label: 'Suites & Sanctuaries' },
+            { id: 'Kitchen & Dining', label: 'Culinary Studio' }
           ].map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
@@ -771,7 +651,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
                 <button
                   type="button"
                   onClick={() => {
-                    const targetId = activeFloorPlan === 'ground' ? 'grand-living' : activeFloorPlan === 'first' ? 'master-sanctuary' : 'penthouse-terrace';
+                    const targetId = activeFloorPlan === 'ground' ? 'grand-living' : activeFloorPlan === 'first' ? 'master-sanctuary' : 'mezzanine-lounge';
                     const idx = MYSA_VILLA_PHOTOS.findIndex(p => p.id === targetId);
                     setLightboxIndex(idx !== -1 ? idx : 0);
                   }}
@@ -1062,6 +942,46 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         </div>
       </section>
 
+      {/* 8.5. Official MYSA YouTube Walkthrough & Cinematic Film Section */}
+      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
+        <div className="bg-[#121418] rounded-sm border border-white/10 overflow-hidden shadow-2xl p-6 sm:p-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4 border-b border-white/10 pb-6">
+            <div>
+              <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+                <span>OFFICIAL YOUTUBE VILLA FILM</span>
+              </div>
+              <h2 className="font-serif-luxury text-2xl sm:text-4xl font-normal text-white tracking-tight">
+                MYSA Luxe Villas — <span className="italic font-serif-luxury text-[#dfb776]">Official Walkthrough Video</span>
+              </h2>
+            </div>
+            <p className="text-xs font-mono text-gray-400 max-w-md">
+              Watch the full-length architectural video tour of MYSA Luxe Villas on East Coast Road, showcasing double-height living spaces, master loft suites, and private poolside decks.
+            </p>
+          </div>
+
+          {/* YouTube Video Player Container */}
+          <div className="relative w-full aspect-video bg-black rounded-sm overflow-hidden border border-white/10 shadow-2xl">
+            <iframe
+              src="https://www.youtube.com/embed/XuMGAoSu3HE?rel=0&modestbranding=1"
+              title="MYSA Luxe Villas Official Walkthrough & Cinematic Film"
+              className="w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-4 px-2 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+            <div>MYSA LUXE VILLAS • VETTUVANKENI ECR</div>
+            <div className="flex items-center gap-4">
+              <span>HD 1080P ARCHITECTURAL FILM</span>
+              <span>•</span>
+              <span>FULL INTERIOR WALKTHROUGH</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 9. Frequently Asked Questions */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="text-center mb-12">
@@ -1109,9 +1029,9 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
 
       {/* 10. Bottom CTA Banner */}
       <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
-        <div className="relative rounded-sm overflow-hidden p-8 sm:p-14 text-white shadow-2xl min-h-[300px] flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
+        <div className="relative rounded-sm overflow-hidden p-8 sm:p-14 text-white shadow-2xl min-h-[300px] flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10 dark-overlay-card">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+            src="/images/mysa3d/mysa.jpg"
             alt="MYSA Villa Banner"
             className="absolute inset-0 w-full h-full object-cover"
           />

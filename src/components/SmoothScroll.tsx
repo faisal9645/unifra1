@@ -25,13 +25,14 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children, isLocked =
   useEffect(() => {
     // Create modern Lenis instance with luxury architectural easing
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.95,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.05,
+      touchMultiplier: 1.6,
+      autoResize: true,
       infinite: false
     });
 
@@ -72,7 +73,7 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children, isLocked =
       lenisRef.current.scrollTo(target, {
         offset: options?.offset ?? 0,
         immediate: options?.immediate ?? false,
-        duration: options?.duration ?? 1.2
+        duration: options?.duration ?? 0.95
       });
     } else {
       if (typeof target === 'number') {

@@ -20,6 +20,10 @@ export interface GalleryItem {
   imageUrl: string;
   description: string;
   area: string;
+  heroEyebrow?: string;
+  heroHeadlineMain?: string;
+  heroHeadlineItalic?: string;
+  heroSubtitle?: string;
 }
 
 export interface ProjectItem {
@@ -79,4 +83,9 @@ export interface ClientLead {
   createdAt: string; // ISO string
   formattedDate: string;
   status: LeadStatus;
+  budget?: string;
+  assignedAgent?: string;
+  tags?: string[];
+  followUpDate?: string;
+  visitDate?: string;
 }

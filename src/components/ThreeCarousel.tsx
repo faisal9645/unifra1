@@ -4,10 +4,12 @@ import { GALLERY_ITEMS } from '../data/mockData';
 import { GalleryItem } from '../types';
 
 interface ThreeCarouselProps {
+  theme?: 'light' | 'dark';
   onSelectImage: (item: GalleryItem) => void;
 }
 
-export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ onSelectImage }) => {
+export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ theme = 'dark', onSelectImage }) => {
+  const isLight = theme === 'light';
   const [currentIndex, setCurrentIndex] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
@@ -26,21 +28,32 @@ export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ onSelectImage }) =
   };
 
   return (
-    <section id="gallery" className="py-20 sm:py-28 bg-[#0b0c0e] text-white relative overflow-hidden border-t border-white/10">
+    <section
+      id="gallery"
+      className={`py-10 sm:py-14 relative overflow-hidden border-t transition-colors duration-500 ${
+        isLight ? 'bg-[#f8f9fb] text-[#121418] border-black/10' : 'bg-[#0b0c0e] text-white border-white/10'
+      }`}
+    >
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
-            <span>ARCHITECTURAL PORTFOLIO</span>
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+          <div className={`text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] mb-3 flex items-center justify-center gap-2 ${
+            isLight ? 'text-[#9b6f1e] font-semibold' : 'text-[#dfb776]'
+          }`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-[#9b6f1e]' : 'bg-[#dfb776]'}`} />
+            <span>FEATURED VILLA LIFESTYLE</span>
           </div>
 
-          <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight mb-4">
-            A Glimpse of Our <span className="italic font-serif-luxury text-[#dfb776]">Dream Homes</span>
+          <h2 className={`font-serif-luxury text-3xl sm:text-5xl font-normal tracking-tight mb-4 ${
+            isLight ? 'text-gray-950' : 'text-white'
+          }`}>
+            A Glimpse of Our <span className={`italic font-serif-luxury ${isLight ? 'text-[#9b6f1e]' : 'text-[#dfb776]'}`}>Dream Homes</span>
           </h2>
 
-          <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
-            Explore the modern aesthetics and functional elegance that define a Unifra residence.
+          <p className={`text-xs sm:text-sm leading-relaxed max-w-xl mx-auto ${
+            isLight ? 'text-gray-700' : 'text-gray-400'
+          }`}>
+            Experience the peace, 24/7 gated security, and luxury of Chennai’s premier independent villa communities.
           </p>
 
           {/* Category Filter Chips */}
@@ -55,7 +68,9 @@ export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ onSelectImage }) =
                 className={`px-3.5 py-1.5 rounded-sm text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat
                     ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
-                    : 'bg-[#121418] text-gray-400 hover:text-white border border-white/10'
+                    : isLight
+                      ? 'bg-white text-gray-800 hover:text-black border border-black/15 hover:border-black/30 shadow-xs'
+                      : 'bg-[#121418] text-gray-400 hover:text-white border border-white/10'
                 }`}
               >
                 {cat}
@@ -100,7 +115,7 @@ export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ onSelectImage }) =
                   zIndex,
                   opacity
                 }}
-                className={`absolute w-[260px] sm:w-[320px] lg:w-[370px] h-[360px] sm:h-[440px] lg:h-[490px] rounded-sm overflow-hidden cursor-pointer transition-all duration-500 ease-out shadow-2xl bg-[#121418] group border ${
+                className={`absolute w-[260px] sm:w-[320px] lg:w-[370px] h-[360px] sm:h-[440px] lg:h-[490px] rounded-sm overflow-hidden cursor-pointer transition-all duration-500 ease-out shadow-2xl bg-[#121418] group border dark-overlay-card ${
                   isCenter ? 'border-[#dfb776]/60 shadow-[0_10px_35px_rgba(223,183,118,0.15)]' : 'border-white/10'
                 }`}
               >
@@ -144,21 +159,29 @@ export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ onSelectImage }) =
             );
           })}
 
-          {/* Navigation Chevron Buttons */}
+          {/* Navigation Chevron Arrow Buttons - High Contrast Day/Night styling */}
           <button
             onClick={prevSlide}
-            className="absolute left-2 sm:left-6 z-40 p-3 sm:p-3.5 rounded-sm bg-[#121418]/90 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] shadow-2xl backdrop-blur-md transition-all duration-200 border border-white/15 cursor-pointer"
+            className={`absolute left-2 sm:left-6 z-40 p-3 sm:p-3.5 rounded-sm shadow-2xl backdrop-blur-md transition-all duration-200 border cursor-pointer group ${
+              isLight
+                ? 'bg-white/95 hover:bg-[#dfb776] text-gray-900 hover:text-[#0b0c0e] border-black/15 hover:border-[#dfb776]'
+                : 'bg-[#121418]/95 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] border-white/15 hover:border-[#dfb776]'
+            }`}
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-2 sm:right-6 z-40 p-3 sm:p-3.5 rounded-sm bg-[#121418]/90 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] shadow-2xl backdrop-blur-md transition-all duration-200 border border-white/15 cursor-pointer"
+            className={`absolute right-2 sm:right-6 z-40 p-3 sm:p-3.5 rounded-sm shadow-2xl backdrop-blur-md transition-all duration-200 border cursor-pointer group ${
+              isLight
+                ? 'bg-white/95 hover:bg-[#dfb776] text-gray-900 hover:text-[#0b0c0e] border-black/15 hover:border-[#dfb776]'
+                : 'bg-[#121418]/95 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] border-white/15 hover:border-[#dfb776]'
+            }`}
             aria-label="Next slide"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
           </button>
         </div>
 
@@ -169,7 +192,11 @@ export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ onSelectImage }) =
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`h-1.5 rounded-none transition-all duration-300 cursor-pointer ${
-                currentIndex === idx ? 'w-8 bg-[#dfb776]' : 'w-2 bg-white/20 hover:bg-white/40'
+                currentIndex === idx
+                  ? 'w-8 bg-[#dfb776]'
+                  : isLight
+                    ? 'w-2 bg-black/20 hover:bg-black/40'
+                    : 'w-2 bg-white/20 hover:bg-white/40'
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />

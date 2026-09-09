@@ -13,7 +13,7 @@ export const INITIAL_LEADS: ClientLead[] = [
     timeline: 'Immediate (0 – 30 Days)',
     interestedUnit: 'MYSA Luxe 4BHK Villa with Private Pool',
     source: 'Villa Showcase Gate (VIP Unlock)',
-    notes: 'Inquired about East-facing elevation and private chauffeur quarters.',
+    notes: 'Inquired about East-facing elevation and private chauffeur quarters. Requesting fast track site visit during next Chennai trip.',
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(),
     formattedDate: new Date(Date.now() - 1000 * 60 * 60 * 3).toLocaleString('en-IN', {
       day: 'numeric',
@@ -22,7 +22,11 @@ export const INITIAL_LEADS: ClientLead[] = [
       hour: '2-digit',
       minute: '2-digit'
     }),
-    status: 'VIP Visit Scheduled'
+    status: 'VIP Visit Scheduled',
+    budget: '₹ 6.50 Cr',
+    assignedAgent: 'Rajesh Sharma (Senior VP)',
+    tags: ['NRI Investor', 'Hot Lead', '5BHK Request'],
+    visitDate: 'Sep 12, 2026 • 11:00 AM'
   },
   {
     id: 'lead-2',
@@ -42,7 +46,80 @@ export const INITIAL_LEADS: ClientLead[] = [
       hour: '2-digit',
       minute: '2-digit'
     }),
-    status: 'Contacted'
+    status: 'Contacted',
+    budget: '₹ 5.85 Cr',
+    assignedAgent: 'Priya V. (VIP Concierge)',
+    tags: ['Local Buyer', 'Doctor', 'EV Charging']
+  },
+  {
+    id: 'lead-3',
+    name: 'Karthik Ramanathan',
+    email: 'karthik@hypergrowth.io',
+    phone: '+91 99801 44321',
+    city: 'Bengaluru / ECR',
+    timeline: 'Immediate (0 – 30 Days)',
+    interestedUnit: 'Unifra Aurelia Oceanfront Mansion',
+    source: 'Virtual Tour 3D',
+    notes: 'Tech founder seeking high-privacy oceanfront estate with dedicated server room and smart automation.',
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(),
+    formattedDate: new Date(Date.now() - 1000 * 60 * 60 * 48).toLocaleString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }),
+    status: 'New Lead',
+    budget: '₹ 7.45 Cr',
+    assignedAgent: 'Unassigned',
+    tags: ['Tech Founder', 'Oceanfront', 'High Budget']
+  },
+  {
+    id: 'lead-4',
+    name: 'Siddharth & Meera Kapoor',
+    email: 'smkapoor@emiratescapital.ae',
+    phone: '+971 50 892 1430',
+    city: 'Dubai (UAE)',
+    timeline: 'Within 1 to 3 Months',
+    interestedUnit: 'MYSA Luxe 4BHK Villa with Private Pool',
+    source: 'Brochure Download',
+    notes: 'Seeking summer holiday residence on ECR with private reflection pool.',
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString(),
+    formattedDate: new Date(Date.now() - 1000 * 60 * 60 * 72).toLocaleString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }),
+    status: 'VIP Visit Scheduled',
+    budget: '₹ 6.00 Cr',
+    assignedAgent: 'Rajesh Sharma (Senior VP)',
+    tags: ['NRI Dubai', 'Holiday Home'],
+    visitDate: 'Sep 15, 2026 • 03:30 PM'
+  },
+  {
+    id: 'lead-5',
+    name: 'Rameshwaram Infra Enterprises',
+    email: 'corporate.realestate@rameshwaram.com',
+    phone: '+91 98250 11990',
+    city: 'Ahmedabad / Chennai',
+    timeline: 'Immediate (0 – 30 Days)',
+    interestedUnit: 'Dual Villa Combination (MYSA 01 & 02)',
+    source: 'Direct Phone Concierge',
+    notes: 'Closed booking deposit for dual villa plot combination.',
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 120).toISOString(),
+    formattedDate: new Date(Date.now() - 1000 * 60 * 60 * 120).toLocaleString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }),
+    status: 'Converted',
+    budget: '₹ 11.70 Cr',
+    assignedAgent: 'Karthik R. (Managing Director)',
+    tags: ['Corporate Booking', 'Closed Deal', 'Dual Villa']
   }
 ];
 
@@ -55,7 +132,7 @@ export function getStoredLeads(): ClientLead[] {
       return INITIAL_LEADS;
     }
     const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) {
+    if (Array.isArray(parsed) && parsed.length > 0) {
       return parsed;
     }
     return INITIAL_LEADS;
@@ -76,6 +153,9 @@ export function saveLead(
     source?: string;
     notes?: string;
     status?: LeadStatus;
+    budget?: string;
+    assignedAgent?: string;
+    tags?: string[];
   }
 ): ClientLead {
   const currentLeads = getStoredLeads();
@@ -99,21 +179,22 @@ export function saveLead(
       hour: '2-digit',
       minute: '2-digit'
     }),
-    status: leadInput.status || 'New Lead'
+    status: leadInput.status || 'New Lead',
+    budget: leadInput.budget || '₹ 5.85 Cr',
+    assignedAgent: leadInput.assignedAgent || 'Unassigned',
+    tags: leadInput.tags || ['New Web Inquiry']
   };
 
   const updatedLeads = [newLead, ...currentLeads];
 
   try {
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updatedLeads));
-    // Also save latest user credentials to quick session
     sessionStorage.setItem('unifra_client_name', newLead.name);
     sessionStorage.setItem('unifra_client_phone', newLead.phone);
     sessionStorage.setItem('unifra_client_email', newLead.email);
     localStorage.setItem(UNLOCKED_KEY, 'true');
     sessionStorage.setItem(UNLOCKED_KEY, 'true');
 
-    // Notify listeners across app
     window.dispatchEvent(new CustomEvent('unifra_leads_updated', { detail: newLead }));
   } catch (err) {
     console.error('Failed to persist lead', err);
@@ -122,17 +203,21 @@ export function saveLead(
   return newLead;
 }
 
-export function updateLeadStatus(id: string, status: LeadStatus): void {
+export function updateLead(id: string, updates: Partial<ClientLead>): void {
   const currentLeads = getStoredLeads();
   const updated = currentLeads.map((item) =>
-    item.id === id ? { ...item, status } : item
+    item.id === id ? { ...item, ...updates } : item
   );
   try {
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(updated));
     window.dispatchEvent(new CustomEvent('unifra_leads_updated'));
   } catch (err) {
-    console.error('Failed to update lead status', err);
+    console.error('Failed to update lead', err);
   }
+}
+
+export function updateLeadStatus(id: string, status: LeadStatus): void {
+  updateLead(id, { status });
 }
 
 export function deleteLead(id: string): void {

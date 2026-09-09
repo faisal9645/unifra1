@@ -14,7 +14,7 @@ export const OurTeamPage: React.FC<OurTeamPageProps> = ({
     {
       name: 'Mr. Siddiq Ahmed',
       role: 'Founder',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
+      image: '/images/team/siddiq-ahmed.png',
       bio: 'With a vision to redefine luxury living in Chennai, Mr. Siddiq Ahmed founded Unifra to create homes that blend contemporary aesthetics with timeless elegance. His leadership and passion for excellence are the driving forces behind our commitment to quality and innovation.',
       linkedin: 'https://linkedin.com',
       email: 'siddiq@unifra.in'
@@ -22,34 +22,18 @@ export const OurTeamPage: React.FC<OurTeamPageProps> = ({
     {
       name: 'Nikesh Jothi Rajan',
       role: 'Project Manager',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80',
+      image: '/images/team/nikesh-rajan.png',
       bio: 'As Project Manager, Nikesh orchestrates every phase of construction with precision and foresight. His expertise in timeline management and quality control ensures that every Unifra project is delivered on schedule and to the highest standards, turning blueprints into beautiful homes.',
       linkedin: 'https://linkedin.com',
       email: 'nikesh@unifra.in'
-    },
-    {
-      name: 'Priya Sundaram',
-      role: 'Principal Architect',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
-      bio: 'Priya specializes in Scandinavian spatial planning and climate-responsive coastal design. She brings over 12 years of architectural experience translating Scandinavian warmth into Chennai’s tropical landscape with natural ventilation and double-height light wells.',
-      linkedin: 'https://linkedin.com',
-      email: 'priya@unifra.in'
-    },
-    {
-      name: 'Vikram Raghavan',
-      role: 'Head of Client Relations',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80',
-      bio: 'Vikram leads private client advisory and bespoke customization journeys. He ensures transparent updates throughout structural milestones, private site visits, and personalized material selections for our homeowners.',
-      linkedin: 'https://linkedin.com',
-      email: 'vikram@unifra.in'
     }
   ];
 
   return (
-    <div className="pt-28 pb-24 bg-[#0b0c0e] text-[#f3f4f6]">
+    <div className="pt-20 pb-12 bg-[#0b0c0e] text-[#f3f4f6]">
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
             <span>LEADERSHIP & ARCHITECTURAL MINDS</span>

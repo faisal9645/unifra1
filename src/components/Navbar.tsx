@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Menu, X, Phone, Sparkles, ShieldCheck, Sun, Moon } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone, Sparkles, ShieldCheck } from 'lucide-react';
 import { SIGNATURE_PROJECTS } from '../data/mockData';
 
 export type AppPage = 'home' | 'about-story' | 'about-team' | 'projects' | 'mysa-detail' | 'contact' | 'blog' | 'ventures' | 'careers' | 'admin';
@@ -10,8 +10,6 @@ interface NavbarProps {
   onOpenContact: () => void;
   onOpenVillaAccess?: (source?: string) => void;
   isVillaUnlocked?: boolean;
-  theme: 'light' | 'dark';
-  onToggleTheme: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -19,9 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigatePage,
   onOpenContact,
   onOpenVillaAccess,
-  isVillaUnlocked = false,
-  theme,
-  onToggleTheme
+  isVillaUnlocked = false
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -37,9 +33,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const scrolled = window.scrollY > 20;
+      setIsScrolled(prev => (prev !== scrolled ? scrolled : prev));
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -122,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isLight = theme === 'light';
+  const isLight = false;
 
   return (
     <header
@@ -377,31 +374,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </nav>
 
-          {/* Right Action side: Day/Night Mode Toggle + Phone + BOOK A PRIVATE TOUR button + ADMIN CRM */}
+          {/* Right Action side: Phone + BOOK A PRIVATE TOUR button + ADMIN CRM */}
           <div className="hidden sm:flex items-center gap-3.5">
-            {/* Day and Night Mode Switcher Button */}
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border transition-all duration-300 cursor-pointer select-none font-sans ${
-                isLight
-                  ? 'bg-amber-50/90 hover:bg-amber-100/90 text-amber-950 border-amber-300/80 shadow-xs'
-                  : 'bg-white/[0.08] hover:bg-white/15 text-amber-200 border-white/20 shadow-inner'
-              }`}
-              title={isLight ? 'Switch to Night Mode (Dark)' : 'Switch to Day Mode (Light)'}
-              aria-label="Toggle Day and Night Mode"
-            >
-              <div className={`flex items-center justify-center w-4 h-4 rounded-full transition-all duration-300 ${
-                isLight
-                  ? 'text-amber-700'
-                  : 'text-amber-300'
-              }`}>
-                {isLight ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </div>
-              <span className="text-[10px] font-mono uppercase tracking-widest font-bold">
-                {isLight ? 'DAY MODE' : 'NIGHT MODE'}
-              </span>
-            </button>
 
             <button
               type="button"
@@ -452,21 +426,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Mobile Actions: Day/Night Toggle + Menu Button */}
+          {/* Mobile Actions: Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className={`p-2 rounded-full border transition-all cursor-pointer ${
-                isLight
-                  ? 'bg-black/5 text-gray-800 border-black/15'
-                  : 'bg-white/5 text-gray-200 border-white/15'
-              }`}
-              title={isLight ? 'Switch to Night Mode' : 'Switch to Day Mode'}
-              aria-label="Toggle Day and Night Mode"
-            >
-              {isLight ? <Moon className="w-4 h-4 text-[#9b6f1e]" /> : <Sun className="w-4 h-4 text-[#dfb776]" />}
-            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`p-2 rounded transition-colors focus:outline-none ${
@@ -480,48 +441,71 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className={`lg:hidden border-b px-6 py-6 shadow-2xl max-h-[85vh] overflow-y-auto ${
-          isLight ? 'bg-white border-black/10 text-gray-900' : 'bg-[#0e1014] border-white/10 text-white'
+      {/* Mobile Full-Height Drawer Overlay with Smooth Animation */}
+      <div
+        className={`fixed inset-0 z-[100] mobile-menu-overlay lg:hidden flex flex-col justify-between transition-all duration-300 ease-in-out ${
+          mobileMenuOpen
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 -translate-y-4 pointer-events-none'
+        } ${
+          isLight ? 'bg-white text-gray-900' : 'bg-[#0b0c0e] text-white'
+        }`}
+      >
+        {/* Top Header inside Mobile Menu Drawer */}
+        <div className={`px-4 sm:px-8 py-4 sm:py-5 border-b flex items-center justify-between shrink-0 ${
+          isLight ? 'border-black/10' : 'border-white/10'
         }`}>
-          <div className="flex flex-col gap-3">
-            {/* Day / Night Toggle inside Mobile Drawer */}
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className={`w-full py-2.5 px-3 rounded-xs border text-xs font-mono uppercase tracking-widest flex items-center justify-between cursor-pointer transition-colors ${
-                isLight
-                  ? 'bg-black/5 text-gray-800 border-black/15'
-                  : 'bg-white/5 text-gray-200 border-white/10'
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                {isLight ? <Moon className="w-4 h-4 text-[#9b6f1e]" /> : <Sun className="w-4 h-4 text-[#dfb776]" />}
-                <span>{isLight ? 'SWITCH TO NIGHT MODE' : 'SWITCH TO DAY MODE'}</span>
-              </div>
-              <span className="text-[10px] font-semibold text-[#dfb776]">
-                {isLight ? 'CURRENT: DAY' : 'CURRENT: NIGHT'}
+          <button
+            onClick={() => handleNavClick('home')}
+            className="flex items-center gap-3 text-left group cursor-pointer focus:outline-none"
+          >
+            <div className="w-9 h-9 border border-[#dfb776] bg-[#dfb776]/10 flex items-center justify-center text-[#dfb776]">
+              <span className="font-serif-luxury text-xl font-bold leading-none">U</span>
+            </div>
+            <div className="flex flex-col">
+              <span className={`font-serif-luxury text-lg font-bold tracking-[0.22em] uppercase ${
+                isLight ? 'text-[#121418]' : 'text-white'
+              }`}>
+                UNIFRA
               </span>
-            </button>
+              <span className="text-[6.5px] font-mono tracking-[0.32em] text-[#dfb776] uppercase">
+                LEGACY OF LUXURY LIVING
+              </span>
+            </div>
+          </button>
+
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className={`p-2 rounded-full border transition-all cursor-pointer ${
+              isLight ? 'border-black/15 text-gray-800 hover:bg-black/5' : 'border-white/15 text-white hover:bg-white/10'
+            }`}
+            aria-label="Close menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Full-Height Scrollable Content */}
+        <div className="flex-1 overflow-y-auto px-6 sm:px-10 py-6 flex flex-col justify-between gap-6">
+          <div className="flex flex-col gap-3 sm:gap-4">
 
             {/* Mobile PROJECTS Expandable Accordion */}
-            <div className={`border-b pb-2 ${isLight ? 'border-black/5' : 'border-white/5'}`}>
+            <div className={`border-b pb-3 ${isLight ? 'border-black/10' : 'border-white/10'}`}>
               <button
                 type="button"
                 onClick={() => setMobileProjectsOpen(prev => !prev)}
-                className={`w-full flex items-center justify-between py-2 text-xs uppercase tracking-widest hover:text-[#dfb776] ${
-                  isLight ? 'text-gray-800' : 'text-gray-200'
+                className={`w-full flex items-center justify-between py-2.5 text-sm uppercase tracking-widest font-semibold hover:text-[#dfb776] ${
+                  isLight ? 'text-gray-900' : 'text-white'
                 }`}
               >
-                <span className={currentPage === 'projects' || currentPage === 'mysa-detail' ? 'text-[#dfb776] font-semibold' : ''}>
+                <span className={currentPage === 'projects' || currentPage === 'mysa-detail' ? 'text-[#dfb776]' : ''}>
                   PROJECTS
                 </span>
-                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${mobileProjectsOpen ? 'rotate-180 text-[#dfb776]' : ''}`} />
+                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${mobileProjectsOpen ? 'rotate-180 text-[#dfb776]' : ''}`} />
               </button>
 
               {mobileProjectsOpen && (
-                <div className={`mt-2 pl-3 space-y-1 border-l border-[#dfb776]/30 py-1 rounded-xs ${
+                <div className={`mt-2 pl-3 space-y-2 border-l-2 border-[#dfb776] py-2 rounded-xs ${
                   isLight ? 'bg-black/[0.02]' : 'bg-white/[0.02]'
                 }`}>
                   <button
@@ -542,14 +526,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                         onClick={() => {
                           handleNavClick(isMysa ? 'mysa-detail' : 'projects');
                         }}
-                        className={`w-full text-left py-2 px-2 text-xs flex items-center justify-between border-t ${
+                        className={`w-full text-left py-2.5 px-2 text-xs flex items-center justify-between border-t ${
                           isLight
                             ? 'border-black/5 text-gray-700 hover:text-black'
                             : 'border-white/5 text-gray-300 hover:text-white'
                         }`}
                       >
                         <div className="flex flex-col">
-                          <span className={isMysa ? 'font-semibold text-[#dfb776]' : ''}>
+                          <span className={isMysa ? 'font-semibold text-[#dfb776]' : 'font-medium'}>
                             {proj.name.toUpperCase()}
                           </span>
                           <span className={`text-[10px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
@@ -576,8 +560,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleNavClick('about-story')}
-              className={`text-left py-2.5 text-xs uppercase tracking-widest hover:text-[#dfb776] border-b ${
-                isLight ? 'border-black/5 text-gray-800' : 'border-white/5 text-gray-200'
+              className={`text-left py-3 text-sm uppercase tracking-widest font-semibold hover:text-[#dfb776] border-b ${
+                isLight ? 'border-black/10 text-gray-900' : 'border-white/10 text-white'
               }`}
             >
               ABOUT US (OUR STORY)
@@ -585,8 +569,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleNavClick('about-team')}
-              className={`text-left py-2.5 text-xs uppercase tracking-widest hover:text-[#dfb776] border-b ${
-                isLight ? 'border-black/5 text-gray-800' : 'border-white/5 text-gray-200'
+              className={`text-left py-3 text-sm uppercase tracking-widest font-semibold hover:text-[#dfb776] border-b ${
+                isLight ? 'border-black/10 text-gray-900' : 'border-white/10 text-white'
               }`}
             >
               OUR TEAM
@@ -594,8 +578,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleNavClick('blog')}
-              className={`text-left py-2.5 text-xs uppercase tracking-widest hover:text-[#dfb776] border-b ${
-                isLight ? 'border-black/5 text-gray-800' : 'border-white/5 text-gray-200'
+              className={`text-left py-3 text-sm uppercase tracking-widest font-semibold hover:text-[#dfb776] border-b ${
+                isLight ? 'border-black/10 text-gray-900' : 'border-white/10 text-white'
               }`}
             >
               LIFESTYLE & BLOG
@@ -603,8 +587,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleNavClick('contact')}
-              className={`text-left py-2.5 text-xs uppercase tracking-widest hover:text-[#dfb776] border-b ${
-                isLight ? 'border-black/5 text-gray-800' : 'border-white/5 text-gray-200'
+              className={`text-left py-3 text-sm uppercase tracking-widest font-semibold hover:text-[#dfb776] border-b ${
+                isLight ? 'border-black/10 text-gray-900' : 'border-white/10 text-white'
               }`}
             >
               CONTACT
@@ -617,45 +601,46 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 handleNavClick('admin');
               }}
-              className={`text-left py-2.5 px-3 text-xs uppercase tracking-widest rounded-xs flex items-center justify-between font-mono transition-all cursor-pointer ${
+              className={`text-left py-3 px-4 text-xs uppercase tracking-widest rounded-sm flex items-center justify-between font-mono transition-all cursor-pointer ${
                 currentPage === 'admin'
-                  ? 'bg-[#dfb776]/20 text-[#dfb776] border border-[#dfb776] font-semibold shadow-md ring-1 ring-[#dfb776]/40'
+                  ? 'bg-[#dfb776]/20 text-[#dfb776] border border-[#dfb776] font-semibold shadow-md'
                   : 'text-[#dfb776] hover:text-white bg-[#dfb776]/10 border border-[#dfb776]/30'
               }`}
             >
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#dfb776]" />
+                <ShieldCheck className="w-4 h-4 text-[#dfb776]" />
                 <span>ADMIN LEADS CRM (/admin)</span>
               </div>
               <span className="text-[10px] font-mono font-bold text-[#dfb776]">
                 {currentPage === 'admin' ? '● ACTIVE' : '→'}
               </span>
             </button>
+          </div>
 
-            <div className="pt-2 flex flex-col gap-3">
-              <a
-                href="tel:+917358222445"
-                className={`flex items-center justify-center gap-2 text-xs font-mono py-2 border ${
-                  isLight ? 'border-black/10 text-gray-800' : 'border-white/10 text-gray-300'
-                }`}
-              >
-                <Phone className="w-3.5 h-3.5 text-[#dfb776]" />
-                <span>+91 73582 22445</span>
-              </a>
+          {/* Bottom Actions */}
+          <div className="pt-4 flex flex-col gap-3 shrink-0">
+            <a
+              href="tel:+917358222445"
+              className={`flex items-center justify-center gap-2 text-xs font-mono py-3 rounded-sm border transition-all ${
+                isLight ? 'border-black/15 text-gray-900 hover:border-black/30' : 'border-white/15 text-gray-200 hover:border-white/30'
+              }`}
+            >
+              <Phone className="w-4 h-4 text-[#dfb776]" />
+              <span>+91 73582 22445</span>
+            </a>
 
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenContact();
-                }}
-                className="w-full py-3 bg-[#dfb776] hover:bg-[#c59b4c] text-[#0b0c0e] text-xs font-semibold tracking-widest uppercase text-center transition-colors"
-              >
-                BOOK APPOINTMENT
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenContact();
+              }}
+              className="w-full py-3.5 bg-[#dfb776] hover:bg-[#c5a880] text-[#0b0c0e] text-xs font-bold tracking-[0.2em] uppercase text-center transition-colors rounded-sm shadow-xl cursor-pointer"
+            >
+              BOOK PRIVATE TOUR ↗
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };

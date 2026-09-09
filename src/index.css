@@ -67,7 +67,11 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Lenis smooth scrolling rules */
+/* Lenis smooth scrolling rules & GPU hardware acceleration */
+html {
+  scroll-behavior: auto !important;
+}
+
 html.lenis, html.lenis body {
   height: auto;
 }
@@ -86,6 +90,11 @@ html.lenis, html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* GPU hardware acceleration for smooth 60fps scrolling */
+canvas, video {
+  transform: translateZ(0);
 }
 
 /* ==========================================================================
@@ -112,11 +121,19 @@ body.theme-light ::-webkit-scrollbar-thumb:hover {
 }
 
 /* Surface backgrounds for light mode */
+body.theme-light,
+body.theme-light #root,
+body.theme-light main,
 body.theme-light .bg-\[\#0b0c0e\],
 body.theme-light section.bg-\[\#0b0c0e\],
 body.theme-light div.bg-\[\#0b0c0e\],
 body.theme-light footer.bg-\[\#07080a\],
-body.theme-light .bg-\[\#07080a\] {
+body.theme-light .bg-\[\#07080a\],
+body.theme-light .bg-\[\#08090c\],
+body.theme-light section.bg-\[\#08090c\],
+body.theme-light .bg-\[\#090a0d\],
+body.theme-light .bg-\[\#050608\],
+body.theme-light .bg-\[\#0a0b0e\] {
   background-color: #f8f9fb !important;
 }
 
@@ -141,26 +158,26 @@ body.theme-light .bg-white\/\[0\.08\] {
   background-color: #f1f5f9 !important;
 }
 
-/* Gradient overrides */
-body.theme-light .from-\[\#0b0c0e\],
-body.theme-light .from-\[\#07080a\] {
+/* Surface gradient overrides for non-photo elements */
+body.theme-light main .from-\[\#0b0c0e\]:not(:has(img)),
+body.theme-light main .from-\[\#07080a\]:not(:has(img)),
+body.theme-light main .from-\[\#08090c\]:not(:has(img)) {
   --tw-gradient-from: #f8f9fb var(--tw-gradient-from-position) !important;
 }
-body.theme-light .to-\[\#0b0c0e\],
-body.theme-light .to-\[\#07080a\] {
+body.theme-light main .to-\[\#0b0c0e\]:not(:has(img)),
+body.theme-light main .to-\[\#07080a\]:not(:has(img)),
+body.theme-light main .to-\[\#08090c\]:not(:has(img)) {
   --tw-gradient-to: #f8f9fb var(--tw-gradient-to-position) !important;
 }
-body.theme-light .via-\[\#0b0c0e\],
-body.theme-light .via-\[\#07080a\] {
+body.theme-light main .via-\[\#0b0c0e\]:not(:has(img)),
+body.theme-light main .via-\[\#07080a\]:not(:has(img)),
+body.theme-light main .via-\[\#08090c\]:not(:has(img)) {
   --tw-gradient-via: #f8f9fb var(--tw-gradient-via-position) !important;
 }
-body.theme-light .from-\[\#0e1014\],
-body.theme-light .from-\[\#121418\] {
-  --tw-gradient-from: #ffffff var(--tw-gradient-from-position) !important;
-}
-body.theme-light .to-\[\#0e1014\],
-body.theme-light .to-\[\#121418\] {
-  --tw-gradient-to: #ffffff var(--tw-gradient-to-position) !important;
+
+/* Ensure images remain crisp, high contrast, and sharp in Light Mode */
+body.theme-light img {
+  filter: contrast(1.03) brightness(1.02);
 }
 
 /* Text color overrides */
@@ -241,19 +258,39 @@ body.theme-light .glass-dark {
   color: #121418 !important;
 }
 
-/* Solid gold buttons high contrast */
-body.theme-light .bg-\[\#dfb776\],
-body.theme-light button.bg-\[\#dfb776\],
-body.theme-light a.bg-\[\#dfb776\] {
+/* Solid gold buttons high contrast in both themes */
+button.bg-\[\#dfb776\],
+a.bg-\[\#dfb776\],
+.bg-\[\#dfb776\] {
+  background-color: #dfb776 !important;
   color: #0b0c0e !important;
 }
 
-body.theme-light .bg-\[\#dfb776\] *,
-body.theme-light button.bg-\[\#dfb776\] * {
+button.bg-\[\#dfb776\] *,
+a.bg-\[\#dfb776\] *,
+.bg-\[\#dfb776\] * {
   color: #0b0c0e !important;
 }
 
-body.theme-light .text-\[\#dfb776\] {
+/* Secondary outline buttons in Light Mode */
+body.theme-light button.border-white\/15,
+body.theme-light button.border-white\/20,
+body.theme-light button.border-white\/25,
+body.theme-light a.border-white\/15,
+body.theme-light a.border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #121418 !important;
+}
+
+body.theme-light button.border-white\/15 *,
+body.theme-light button.border-white\/20 *,
+body.theme-light button.border-white\/25 *,
+body.theme-light a.border-white\/15 * {
+  color: #121418 !important;
+}
+
+/* Gold text override in Light Mode (except inside solid gold buttons or dark cards) */
+body.theme-light .text-\[\#dfb776\]:not(.bg-\[\#dfb776\]):not(.bg-\[\#dfb776\] *):not(.dark-overlay-card *):not([data-dark-card] *):not(button.bg-black *):not(.bg-black\/60 *):not(.bg-black\/70 *) {
   color: #9b6f1e !important;
 }
 
@@ -276,33 +313,84 @@ body.theme-light .shadow-xl {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Preserve text color inside dark photo overlays, image cards, and dark buttons in Light mode */
-body.theme-light [class*="from-black"] *,
-body.theme-light [class*="via-black"] *,
-body.theme-light [class*="to-black"] *,
-body.theme-light .bg-black\/60 *,
-body.theme-light .bg-black\/70 *,
-body.theme-light .bg-black\/80 *,
-body.theme-light .bg-black\/90 *,
-body.theme-light .bg-black\/95 * {
-  color: inherit;
+/* ==========================================================================
+   PRESERVE TEXT CONTRAST ON DARK PHOTO OVERLAYS & HERO BANNERS IN LIGHT MODE
+   ========================================================================== */
+
+/* Ensure clean, crisp typography without dark text shadows in Day Mode */
+body.theme-light h1,
+body.theme-light h2,
+body.theme-light h3,
+body.theme-light h4,
+body.theme-light h5,
+body.theme-light h6,
+body.theme-light p,
+body.theme-light span,
+body.theme-light button,
+body.theme-light a {
+  text-shadow: none !important;
 }
 
-body.theme-light [class*="from-black"] .text-white,
-body.theme-light [class*="via-black"] .text-white,
-body.theme-light [class*="to-black"] .text-white,
-body.theme-light .bg-black\/60 .text-white,
-body.theme-light .bg-black\/70 .text-white,
-body.theme-light .bg-black\/80 .text-white,
-body.theme-light .bg-black\/90 .text-white,
-body.theme-light .bg-black\/95 .text-white {
+/* Direct class for dark photo cards & banners */
+body.theme-light .dark-overlay-card,
+body.theme-light .dark-overlay-card h1,
+body.theme-light .dark-overlay-card h2,
+body.theme-light .dark-overlay-card h3,
+body.theme-light .dark-overlay-card h4,
+body.theme-light .dark-overlay-card .text-white,
+body.theme-light [data-dark-card],
+body.theme-light [data-dark-card] h1,
+body.theme-light [data-dark-card] h2,
+body.theme-light [data-dark-card] h3,
+body.theme-light [data-dark-card] h4,
+body.theme-light [data-dark-card] .text-white {
+  color: #ffffff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+body.theme-light .dark-overlay-card p,
+body.theme-light .dark-overlay-card .text-gray-200,
+body.theme-light .dark-overlay-card .text-gray-300,
+body.theme-light .dark-overlay-card .text-gray-400,
+body.theme-light [data-dark-card] p,
+body.theme-light [data-dark-card] .text-gray-200,
+body.theme-light [data-dark-card] .text-gray-300,
+body.theme-light [data-dark-card] .text-gray-400 {
+  color: #e2e8f0 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.theme-light .dark-overlay-card .text-\[\#dfb776\],
+body.theme-light [data-dark-card] .text-\[\#dfb776\] {
+  color: #dfb776 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Semi-transparent dark badges on photo cards stay dark with white text */
+body.theme-light .dark-overlay-card .bg-black\/60,
+body.theme-light .dark-overlay-card .bg-black\/70,
+body.theme-light .dark-overlay-card .bg-black\/80,
+body.theme-light [data-dark-card] .bg-black\/60,
+body.theme-light [data-dark-card] .bg-black\/70,
+body.theme-light [data-dark-card] .bg-black\/80 {
+  background-color: rgba(0, 0, 0, 0.75) !important;
   color: #ffffff !important;
 }
-
-body.theme-light [class*="from-black"] .text-gray-300,
-body.theme-light [class*="from-black"] .text-gray-200,
-body.theme-light [class*="from-black"] .text-gray-400 {
-  color: #e2e8f0 !important;
+body.theme-light .dark-overlay-card .bg-black\/60 *,
+body.theme-light .dark-overlay-card .bg-black\/70 *,
+body.theme-light .dark-overlay-card .bg-black\/80 *,
+body.theme-light [data-dark-card] .bg-black\/60 *,
+body.theme-light [data-dark-card] .bg-black\/70 *,
+body.theme-light [data-dark-card] .bg-black\/80 * {
+  color: inherit;
+}
+body.theme-light .dark-overlay-card .bg-black\/60 .text-\[\#dfb776\],
+body.theme-light .dark-overlay-card .bg-black\/70 .text-\[\#dfb776\],
+body.theme-light .dark-overlay-card .bg-black\/80 .text-\[\#dfb776\],
+body.theme-light [data-dark-card] .bg-black\/60 .text-\[\#dfb776\],
+body.theme-light [data-dark-card] .bg-black\/70 .text-\[\#dfb776\],
+body.theme-light [data-dark-card] .bg-black\/80 .text-\[\#dfb776\] {
+  color: #dfb776 !important;
 }
 
 /* Solid dark/colored buttons in light mode stay white text */
@@ -313,6 +401,12 @@ body.theme-light a.bg-black {
 body.theme-light button.bg-black *,
 body.theme-light a.bg-black * {
   color: #ffffff !important;
+}
+
+/* Direct Concierge channels inside white card */
+body.theme-light #contact-section .bg-black\/40 {
+  background-color: #f8fafc !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Outer modal backdrops remain dark translucent overlay */
@@ -355,9 +449,18 @@ body.theme-light .text-blue-400 {
 body.theme-light .text-\[\#0ea5e9\] {
   color: #0284c7 !important;
 }
-body.theme-light .text-purple-300,
-body.theme-light .text-purple-400 {
-  color: #6b21a8 !important;
+/* Mobile Full-Height Overlay Rules */
+.mobile-menu-overlay {
+  height: 100vh !important;
+  height: 100dvh !important;
+}
+body.theme-light .mobile-menu-overlay {
+  background-color: #ffffff !important;
+  color: #121418 !important;
+}
+body:not(.theme-light) .mobile-menu-overlay {
+  background-color: #0b0c0e !important;
+  color: #ffffff !important;
 }
 body.theme-light .text-emerald-300,
 body.theme-light .text-emerald-400 {

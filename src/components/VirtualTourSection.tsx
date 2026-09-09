@@ -7,7 +7,7 @@ interface VirtualTourSectionProps {
 
 export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVirtualTour }) => {
   return (
-    <section id="virtual-tour" className="py-20 sm:py-28 bg-[#0b0c0e] text-white relative overflow-hidden border-t border-white/10">
+    <section id="virtual-tour" className="py-10 sm:py-14 bg-[#0b0c0e] text-white relative overflow-hidden border-t border-white/10">
       {/* Background Architectural Blueprint Line Art */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.05] flex items-center justify-center">
         <svg
@@ -34,7 +34,7 @@ export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVi
 
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
         {/* Section Title */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
             <span>INTERACTIVE SPATIAL EXPERIENCE</span>
@@ -45,7 +45,7 @@ export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVi
           </h2>
 
           <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
-            Take a virtual tour of our craftsmanship and see how we bring dreams to life at MYSA Luxe Villas.
+            Explore our vision for luxury gated villa living, architectural design, and peaceful coastal home environments.
           </p>
         </div>
 
@@ -53,12 +53,12 @@ export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVi
         <div className="max-w-4xl mx-auto">
           <div
             onClick={onOpenVirtualTour}
-            className="group relative rounded-sm overflow-hidden shadow-2xl bg-[#121418] cursor-pointer border border-white/10 hover:border-[#dfb776]/50 transform hover:-translate-y-1 transition-all duration-500"
+            className="group relative rounded-sm overflow-hidden shadow-2xl bg-[#121418] cursor-pointer border border-white/10 hover:border-[#dfb776]/50 transform hover:-translate-y-1 transition-all duration-500 dark-overlay-card"
           >
             {/* High-res interior video poster image */}
             <img
-              src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1400&q=80"
-              alt="Unifra Building Dreams Architectural Tour"
+              src="/images/mysa3d/LIVING-VIEW1.jpg"
+              alt="Unifra Architectural Villa Showcase & Cinematic Film"
               className="w-full h-[320px] sm:h-[460px] lg:h-[520px] object-cover group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
@@ -78,23 +78,23 @@ export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVi
 
             {/* Top Bar Badges */}
             <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center gap-2">
-              <span className="px-3 py-1 rounded-sm bg-black/70 backdrop-blur-md text-white text-[10px] font-mono tracking-wider border border-white/10 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span>4K HDR 360° TOUR</span>
+              <span className="px-3 py-1 rounded-sm bg-red-600 text-white text-[10px] font-mono tracking-wider font-semibold flex items-center gap-1.5 shadow-lg">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span>OFFICIAL YOUTUBE VILLA FILM</span>
               </span>
               <span className="px-3 py-1 rounded-sm bg-black/70 backdrop-blur-md text-gray-300 text-[10px] font-mono tracking-wider border border-white/10 hidden sm:flex items-center gap-1.5">
-                <Move className="w-3 h-3 text-[#dfb776]" />
-                <span>Interactive Panoramic Pan</span>
+                <Sparkles className="w-3 h-3 text-[#dfb776]" />
+                <span>UNIFRA LIFESTYLE</span>
               </span>
             </div>
 
             {/* Bottom Caption Overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white text-left">
               <h3 className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white mb-1">
-                Unifra: Building Dreams
+                Unifra Architectural Vision & Cinematic Villa Showcase
               </h3>
               <p className="text-gray-300 text-xs sm:text-sm font-light">
-                See our premium villas and architectural excellence in real-time interactive 360°.
+                Watch the official full-length architectural video film showcasing Unifra's design philosophy and peaceful gated community living.
               </p>
             </div>
           </div>

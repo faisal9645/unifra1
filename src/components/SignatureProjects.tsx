@@ -52,17 +52,17 @@ export const SignatureProjects: React.FC<SignatureProjectsProps> = ({
   };
 
   return (
-    <section id="projects" className="py-20 sm:py-28 bg-[#0b0c0e] text-white border-t border-white/10">
+    <section id="projects" className="py-10 sm:py-14 bg-[#0b0c0e] text-white border-t border-white/10">
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Section Header matching screenshot 6: CURATED COLLECTIONS | Signature Developments */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-14 gap-6 pb-6 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-6 pb-6 border-b border-white/10">
           <div>
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#dfb776] mb-3 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
-              <span>CURATED COLLECTIONS</span>
+              <span>EXCLUSIVE VILLA COMMUNITIES</span>
             </div>
             <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight">
-              Signature <span className="italic font-serif-luxury text-[#dfb776]">Developments</span>
+              Signature <span className="italic font-serif-luxury text-[#dfb776]">Villa Enclaves</span>
             </h2>
           </div>
 

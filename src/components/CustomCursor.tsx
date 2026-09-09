@@ -38,20 +38,17 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
 
     const onMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(prev => (prev ? prev : true));
 
       // Inspect target to see if it has special cursor text or is interactive
       const target = e.target as HTMLElement | null;
       if (target) {
         const interactiveEl = target.closest('a, button, [role="button"], input, textarea, select, .cursor-pointer, [data-cursor]');
-        if (interactiveEl) {
-          setIsHovered(true);
-          const customText = interactiveEl.getAttribute('data-cursor');
-          setCursorText(customText || null);
-        } else {
-          setIsHovered(false);
-          setCursorText(null);
-        }
+        const nextHovered = !!interactiveEl;
+        const nextText = interactiveEl ? interactiveEl.getAttribute('data-cursor') || null : null;
+
+        setIsHovered(prev => (prev !== nextHovered ? nextHovered : prev));
+        setCursorText(prev => (prev !== nextText ? nextText : prev));
       }
     };
 

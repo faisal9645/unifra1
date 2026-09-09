@@ -204,7 +204,7 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
               <div className="p-3.5 rounded-sm bg-black/40 border border-white/10 flex items-center gap-3.5">
                 <div className="w-12 h-12 rounded-sm overflow-hidden bg-black flex-shrink-0 border border-white/10">
                   <img
-                    src={project?.imageUrl || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=400&q=80'}
+                    src={project?.imageUrl || '/images/mysa3d/02A.jpg'}
                     alt={activeProjectName}
                     className="w-full h-full object-cover"
                   />

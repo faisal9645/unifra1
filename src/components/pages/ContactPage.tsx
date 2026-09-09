@@ -34,27 +34,29 @@ export const ContactPage: React.FC = () => {
   return (
     <div className="pt-24 pb-20 bg-[#0b0c0e] text-[#f3f4f6]">
       {/* 1. Hero Banner */}
-      <section className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
-        <div className="relative rounded-sm overflow-hidden min-h-[380px] sm:min-h-[460px] flex items-center justify-center p-8 sm:p-14 shadow-2xl border border-white/10">
+      <section className="relative w-full overflow-hidden mb-20">
+        <div className="relative min-h-[380px] sm:min-h-[460px] flex items-center justify-center p-8 sm:p-14 shadow-2xl border-y border-white/10 dark-overlay-card">
           <img
-            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1800&q=80"
-            alt="Contact Unifra Front Porch"
+            src="/images/mysa3d/BAX00768.jpg"
+            alt="MYSA Lotus Gate Entrance & Portico"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/60" />
 
-          <div className="relative z-10 text-center max-w-3xl text-white">
-            <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
-              <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
-              <span>PRIVATE INQUIRIES & ADVISORY</span>
-            </div>
+          <div className="relative z-10 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 text-center text-white">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
+                <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
+                <span>PRIVATE INQUIRIES & ADVISORY</span>
+              </div>
 
-            <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight mb-4 text-white">
-              Contact <span className="italic font-serif-luxury text-[#dfb776]">Unifra</span>
-            </h1>
-            <p className="text-xs sm:text-base text-gray-300 font-light leading-relaxed">
-              Ready to buy your dream home? Get in touch with our expert team today.
-            </p>
+              <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight mb-4 text-white">
+                Contact <span className="italic font-serif-luxury text-[#dfb776]">Unifra</span>
+              </h1>
+              <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">
+                Ready to buy your dream home? Get in touch with our expert team today.
+              </p>
+            </div>
           </div>
         </div>
       </section>

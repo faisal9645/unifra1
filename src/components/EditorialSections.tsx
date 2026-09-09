@@ -34,70 +34,70 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
 
   return (
     <div className="bg-[#0b0c0e] text-white">
-      {/* SECTION 1: PHILOSOPHY / INTRO (Screenshot 7: A DIFFERENT KIND OF DEVELOPER) */}
-      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
+      {/* SECTION 1: PHILOSOPHY / INTRO (EXCLUSIVE GATED COMMUNITIES) */}
+      <section className="py-10 sm:py-14 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-3">
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
-              <span>A DIFFERENT KIND OF DEVELOPER</span>
+              <span>EXCLUSIVE GATED COMMUNITIES</span>
             </div>
           </div>
 
           <div className="lg:col-span-5">
             <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight leading-[1.14]">
-              Homes that hold<br />
+              Homes crafted for<br />
               <span className="italic font-serif-luxury text-[#dfb776]">
-                your becoming.
+                peaceful & happy living.
               </span>
             </h2>
           </div>
 
           <div className="lg:col-span-4 space-y-6">
             <p className="text-gray-300 text-xs sm:text-sm font-light leading-relaxed">
-              At Unifra, we believe a home should do more than look beautiful. It should make space for your rituals, your people, and the life still unfolding.
+              At Unifra, we develop private gated villa enclaves along Chennai's East Coast Road — where 24/7 security, serene coastal surroundings, lush greenery, and private amenities create an extraordinary living experience for your family.
             </p>
 
             <button
               onClick={() => handleNavigate('about-story')}
               className="inline-flex items-center gap-2 text-xs font-mono tracking-[0.2em] text-[#dfb776] hover:text-white uppercase transition-colors cursor-pointer group"
             >
-              <span>WHAT WE BELIEVE</span>
+              <span>EXPLORE OUR COMMUNITIES</span>
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
           </div>
         </div>
       </section>
 
-      {/* SECTION 2: 01 THE FLAGSHIP RESIDENCE / Meet MYSA (Screenshot 7) */}
-      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
+      {/* SECTION 2: 01 UNIFRA VISION & LIFESTYLE */}
+      <section className="py-10 sm:py-14 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2 flex items-center gap-2">
               <span className="font-mono text-gray-500">01</span>
-              <span>THE FLAGSHIP RESIDENCE</span>
+              <span>UNIFRA VISION & LIFESTYLE</span>
             </div>
             <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight">
-              Meet <span className="italic font-serif-luxury text-[#dfb776]">MYSA.</span>
+              Inspiring <span className="italic font-serif-luxury text-[#dfb776]">Villa Architecture.</span>
             </h2>
           </div>
 
           <div className="text-[10px] sm:text-[11px] font-mono tracking-widest text-gray-400 uppercase">
-            SIX CONTEMPORARY VILLAS ON CHENNAI'S ECR
+            CRAFTING CHENNAI'S FINEST COASTAL VILLA COMMUNITIES
           </div>
         </div>
 
         {/* Flagship Feature Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Main Visual: Twilight Pool & Villa Façade */}
+          {/* Main Visual */}
           <div
-            onClick={() => handleNavigate('mysa-detail')}
+            onClick={() => handleNavigate('projects')}
             className="lg:col-span-7 relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 min-h-[380px] sm:min-h-[480px] cursor-pointer"
           >
             <img
-              src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80"
-              alt="MYSA Exterior Architecture & Infinity Pool"
+              src="/images/mysa3d/BAX00768.jpg"
+              alt="Unifra Luxury Gated Villa Architecture & Lifestyle"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="lazy"
             />
@@ -106,7 +106,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
             {/* Tag Badge at bottom left */}
             <div className="absolute bottom-6 left-6">
               <span className="px-3 py-1 bg-black/70 backdrop-blur-md border border-white/15 text-white text-[10px] font-mono tracking-widest uppercase rounded-sm">
-                MYSA / EXTERIOR
+                UNIFRA / LIFESTYLE INSPIRATION
               </span>
             </div>
           </div>
@@ -115,19 +115,19 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
           <div className="lg:col-span-5 bg-[#121418] border border-white/10 p-8 sm:p-10 rounded-sm flex flex-col justify-between">
             <div className="space-y-4">
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#dfb776]">
-                MYSA LUXE VILLAS / 2024
+                THE FUTURE OF GATED LIVING
               </div>
 
               <p className="text-gray-300 text-xs sm:text-sm font-light leading-relaxed">
-                A low-density collection where warm light, open skies, and considered proportions come together. Six private residences, each with an infinity plunge pool and its own rhythm.
+                Unifra is dedicated to designing forward-thinking gated villa communities across East Coast Road and OMR. We blend Scandinavian-inspired clean lines, biophilic green courtyard gardens, 24/7 manned security, and premium structural engineering to build serene, joyful sanctuaries for families.
               </p>
 
               <div className="pt-2">
                 <button
-                  onClick={() => handleNavigate('mysa-detail')}
+                  onClick={() => handleNavigate('projects')}
                   className="inline-flex items-center gap-2 text-xs font-mono tracking-[0.2em] text-[#dfb776] hover:text-white uppercase transition-colors cursor-pointer group"
                 >
-                  <span>VIEW THE RESIDENCE</span>
+                  <span>EXPLORE OUR VILLA PORTFOLIO</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </button>
               </div>
@@ -136,61 +136,61 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
             {/* 4 Stat Metrics Box */}
             <div className="grid grid-cols-2 gap-4 pt-8 mt-8 border-t border-white/10">
               <div className="space-y-1">
-                <div className="font-serif-luxury text-3xl font-bold text-white">06</div>
+                <div className="font-serif-luxury text-3xl font-bold text-white">24/7</div>
                 <div className="text-[10px] font-mono tracking-wider text-gray-400 uppercase">
-                  PRIVATE VILLAS
+                  MANNED GATED SECURITY
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="font-serif-luxury text-3xl font-bold text-white">2,879</div>
+                <div className="font-serif-luxury text-3xl font-bold text-white">100%</div>
                 <div className="text-[10px] font-mono tracking-wider text-gray-400 uppercase">
-                  SQ. FT. CRAFTED
+                  INDEPENDENT TITLES
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="font-serif-luxury text-3xl font-bold text-white">4-5</div>
+                <div className="font-serif-luxury text-3xl font-bold text-white">ECR & OMR</div>
                 <div className="text-[10px] font-mono tracking-wider text-gray-400 uppercase">
-                  BHK RESIDENCES
+                  PRIME COASTAL LOCATIONS
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="font-serif-luxury text-3xl font-bold text-[#dfb776]">₹3.25 Cr+</div>
+                <div className="font-serif-luxury text-3xl font-bold text-[#dfb776]">PREMIER</div>
                 <div className="text-[10px] font-mono tracking-wider text-gray-400 uppercase">
-                  STARTING FROM
+                  LUXURY QUALITY
                 </div>
               </div>
             </div>
 
             {/* Location Footnote */}
             <div className="pt-6 mt-6 border-t border-white/10 text-[9px] font-mono tracking-widest text-gray-500 uppercase flex items-center justify-between">
-              <span>VETTUVANKENI, EAST COAST ROAD</span>
+              <span>EAST COAST ROAD & OMR CORRIDOR</span>
               <span>CHENNAI, TAMIL NADU</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: 02 THE UNIFRA WAY / Designed around your life (Screenshot 7) */}
-      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
+      {/* SECTION 3: 02 THE UNIFRA WAY / Designed around your life */}
+      <section className="py-10 sm:py-14 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="text-left mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2 flex items-center gap-2">
             <span className="font-mono text-gray-500">02</span>
-            <span>THE UNIFRA WAY</span>
+            <span>THE UNIFRA ADVANTAGE</span>
           </div>
           <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight mb-2">
-            Designed around <span className="italic font-serif-luxury text-[#dfb776]">your life.</span>
+            Built for your family’s <span className="italic font-serif-luxury text-[#dfb776]">peace and happiness.</span>
           </h2>
           <div className="text-[10px] sm:text-[11px] font-mono tracking-widest text-gray-400 uppercase">
-            EVERY DETAIL INTENTIONALLY MADE TO LAST
+            THE PREMIER GATED VILLA EXPERIENCE IN CHENNAI
           </div>
         </div>
 
-        {/* 3 Diamond Geometric Pillars Cards matching Screenshot 7 */}
+        {/* 3 Diamond Geometric Pillars Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 01: Architecture */}
+          {/* Card 01: Gated Security & Privacy */}
           <div
             onClick={() => handleNavigate('about-story')}
             className="group bg-[#121418] border border-white/10 hover:border-[#dfb776]/50 p-8 sm:p-9 rounded-sm flex flex-col justify-between transition-all duration-300 cursor-pointer shadow-xl relative"
@@ -207,11 +207,11 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
               </div>
 
               <h3 className="font-serif-luxury text-2xl font-bold text-white mb-3 group-hover:text-[#dfb776] transition-colors">
-                Architecture
+                24/7 Gated Security
               </h3>
 
               <p className="text-gray-400 text-xs sm:text-[13px] font-light leading-relaxed">
-                Quietly bold forms, drawn around the way you want to live. Zero common walls and harmonious natural illumination.
+                Manned access portals, smart CCTV surveillance, zero common walls, and absolute peace of mind for your loved ones.
               </p>
             </div>
 
@@ -222,7 +222,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
             </div>
           </div>
 
-          {/* Card 02: Bespoke interiors */}
+          {/* Card 02: Peaceful Coastal Living */}
           <div
             onClick={() => handleNavigate('about-story')}
             className="group bg-[#121418] border border-white/10 hover:border-[#dfb776]/50 p-8 sm:p-9 rounded-sm flex flex-col justify-between transition-all duration-300 cursor-pointer shadow-xl relative"
@@ -239,11 +239,11 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
               </div>
 
               <h3 className="font-serif-luxury text-2xl font-bold text-white mb-3 group-hover:text-[#dfb776] transition-colors">
-                Bespoke interiors
+                Peaceful Coastal Living
               </h3>
 
               <p className="text-gray-400 text-xs sm:text-[13px] font-light leading-relaxed">
-                Material palettes and details that feel entirely, unmistakably yours. Imported Italian marble, teakwood joinery, and German fittings.
+                Quiet sea breeze, sunlit garden courtyards, private infinity plunge pools, and green spaces designed for joyful daily living.
               </p>
             </div>
 
@@ -254,7 +254,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
             </div>
           </div>
 
-          {/* Card 03: Turnkey delivery */}
+          {/* Card 03: Independent Villa Ownership */}
           <div
             onClick={() => handleNavigate('about-story')}
             className="group bg-[#121418] border border-white/10 hover:border-[#dfb776]/50 p-8 sm:p-9 rounded-sm flex flex-col justify-between transition-all duration-300 cursor-pointer shadow-xl relative"
@@ -271,11 +271,11 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
               </div>
 
               <h3 className="font-serif-luxury text-2xl font-bold text-white mb-3 group-hover:text-[#dfb776] transition-colors">
-                Turnkey delivery
+                Independent Villa Ownership
               </h3>
 
               <p className="text-gray-400 text-xs sm:text-[13px] font-light leading-relaxed">
-                One considered journey from first sketch to the key in your hand. Flawless execution backed by 100% legal clarity.
+                100% clear titles, independent land ownership, bespoke interior choices, and hassle-free professional estate management.
               </p>
             </div>
 
@@ -288,8 +288,8 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
         </div>
       </section>
 
-      {/* SECTION 4: THE UNIFRA STANDARD (Screenshot 6: Luxury Re-imagined Without Compromise) */}
-      <section className="py-20 sm:py-32 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
+      {/* SECTION 4: THE UNIFRA STANDARD (Luxury Gated Living Without Compromise) */}
+      <section className="py-10 sm:py-14 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Copy & 6 Feature Badges */}
           <div className="lg:col-span-6 space-y-6">
@@ -300,47 +300,47 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
               </div>
 
               <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight leading-[1.12]">
-                Luxury Re-imagined<br />
+                Gated Community Living<br />
                 <span className="italic font-serif-luxury text-[#dfb776]">Without Compromise</span>
               </h2>
             </div>
 
             <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xl">
-              Every Unifra Home is a masterpiece of architectural discipline. We don't just build villas; we curate environments that empower your lifestyle and preserve your legacy.
+              Every Unifra villa community is engineered for security, family wellness, and long-term value. We don't just sell villas; we deliver secure, peaceful, and happy neighborhoods.
             </p>
 
             {/* 6 Feature Badges in 2 columns */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 pt-4">
-              {/* 1. Supreme Privacy */}
+              {/* 1. 24/7 Gated Security */}
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-white">
                   <Shield className="w-4 h-4 text-[#dfb776]" />
-                  <h4 className="font-serif-luxury text-base font-bold">Supreme Privacy</h4>
+                  <h4 className="font-serif-luxury text-base font-bold">24/7 Gated Security</h4>
                 </div>
                 <p className="text-[11px] text-gray-400 leading-relaxed uppercase tracking-wider font-mono">
-                  ARCHITECTED WITH ZERO COMMON WALLS TO ENSURE ABSOLUTE ACOUSTIC AND VISUAL SECLUSION.
+                  MANNED ACCESS PORTALS AND SMART CCTV FOR TOTAL PEACE OF MIND.
                 </p>
               </div>
 
-              {/* 2. Swedish-Inspired Design */}
+              {/* 2. Serene Green Enclaves */}
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2 text-white">
+                  <Leaf className="w-4 h-4 text-[#dfb776]" />
+                  <h4 className="font-serif-luxury text-base font-bold">Serene Green Enclaves</h4>
+                </div>
+                <p className="text-[11px] text-gray-400 leading-relaxed uppercase tracking-wider font-mono">
+                  LUSH LANDSCAPING, QUIET COASTAL BREEZE, AND CLEAN FAMILY ENVIRONMENT.
+                </p>
+              </div>
+
+              {/* 3. Private Luxury Amenities */}
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-white">
                   <Sparkles className="w-4 h-4 text-[#dfb776]" />
-                  <h4 className="font-serif-luxury text-base font-bold">Swedish-Inspired Design</h4>
+                  <h4 className="font-serif-luxury text-base font-bold">Private Luxury Amenities</h4>
                 </div>
                 <p className="text-[11px] text-gray-400 leading-relaxed uppercase tracking-wider font-mono">
-                  CONTEMPORARY AESTHETICS BLENDED WITH FUNCTIONAL LUXURY AND ORGANIC MATERIALS.
-                </p>
-              </div>
-
-              {/* 3. Masterful Craftsmanship */}
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 text-white">
-                  <PenTool className="w-4 h-4 text-[#dfb776]" />
-                  <h4 className="font-serif-luxury text-base font-bold">Masterful Craftsmanship</h4>
-                </div>
-                <p className="text-[11px] text-gray-400 leading-relaxed uppercase tracking-wider font-mono">
-                  UTILIZING TOP-TIER ITALIAN MARBLE, BURMA TEAK, AND PRECISION GERMAN FITTINGS.
+                  INDIVIDUAL PLUNGE POOLS, ROOFTOP DECKS, AND DOUBLE-HEIGHT LIVING ROOMS.
                 </p>
               </div>
 
@@ -383,8 +383,8 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-sm overflow-hidden bg-[#121418] border border-white/10 shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"
-                alt="Unifra Standard Living Room"
+                src="/images/mysa3d/LIVING-VIEW1.jpg"
+                alt="MYSA Double-Height Living Atrium"
                 className="w-full h-[450px] sm:h-[540px] object-cover"
                 loading="lazy"
               />
@@ -405,13 +405,13 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 5: THE UNIFRA PERSPECTIVE (Screenshot 7: The luxury of enough) */}
-      <section className="py-20 sm:py-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
+      <section className="py-10 sm:py-14 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Photo 1: Double-height window living room */}
           <div className="lg:col-span-4 relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 h-[380px] sm:h-[460px]">
             <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
-              alt="The Material - Natural Light"
+              src="/images/mysa3d/03.jpg"
+              alt="The Material - Natural Light & Granite Balcony"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
@@ -446,8 +446,8 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
           {/* Photo 2: Tactile Luxury Detail */}
           <div className="lg:col-span-4 relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 h-[380px] sm:h-[460px]">
             <img
-              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80"
-              alt="The Detail - Texture & Marble"
+              src="/images/mysa3d/first-floor-bedroom.jpg"
+              alt="The Detail - Texture & Wood Slat Joinery"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
@@ -477,11 +477,11 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
 
         {/* Asymmetrical 3-Image Grid matching screenshot 6 */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          {/* Left tall card: The Blue Oasis */}
-          <div className="lg:col-span-5 relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 min-h-[420px] lg:min-h-[540px]">
+          {/* Left tall card: The Living Salon */}
+          <div className="lg:col-span-5 relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 min-h-[420px] lg:min-h-[540px] dark-overlay-card">
             <img
-              src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1000&q=80"
-              alt="The Blue Oasis Infinity Pool"
+              src="/images/mysa3d/BAX09923.jpg"
+              alt="The Living Salon - MYSA Finished Residence Interior"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="lazy"
             />
@@ -489,10 +489,10 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
 
             <div className="absolute bottom-6 left-6 right-6">
               <h3 className="font-serif-luxury text-2xl font-bold text-white mb-1">
-                The Blue Oasis
+                The Living Salon
               </h3>
               <p className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#dfb776]">
-                TEMPERATURE-CONTROLLED INFINITY POOLS WITH PANORAMIC ECR VIEWS.
+                ARTISANAL SOLID TEAK FURNISHINGS, FLOATING MEDIA WALL & RECESSED COVE ILLUMINATION.
               </p>
             </div>
           </div>
@@ -500,10 +500,10 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
           {/* Right column: Two stacked wide cards */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             {/* Top wide card: Culinary Theater */}
-            <div className="relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 h-64 sm:h-72">
+            <div className="relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 h-64 sm:h-72 dark-overlay-card">
               <img
-                src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
-                alt="Culinary Theater Designer Kitchen"
+                src="/images/mysa3d/KITCHEN.jpg"
+                alt="Culinary Theater - MYSA Minimalist Kitchen Studio"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
               />
@@ -514,16 +514,16 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
                   Culinary Theater
                 </h3>
                 <p className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#dfb776]">
-                  CUSTOM DESIGNER KITCHENS FOR THE ULTIMATE HOST.
+                  WATERFALL QUARTZ ISLANDS & BLUM WALNUT TOUCH-TO-OPEN CABINETRY.
                 </p>
               </div>
             </div>
 
             {/* Bottom wide card: Sanctuary Within */}
-            <div className="relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 h-64 sm:h-72">
+            <div className="relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 h-64 sm:h-72 dark-overlay-card">
               <img
-                src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80"
-                alt="Sanctuary Within Master Suite"
+                src="/images/mysa3d/MASTER-BEDROOM5.jpg"
+                alt="Sanctuary Within - MYSA Master Loft Suite"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
               />
@@ -534,7 +534,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
                   Sanctuary Within
                 </h3>
                 <p className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#dfb776]">
-                  MASTER SUITES THAT BLEND INDOOR LUXURY WITH PRIVATE TERRACES.
+                  MASTER LOFT SUITE WITH EXPOSED TIMBER RAFTERS & CATHEDRAL VOLUME.
                 </p>
               </div>
             </div>
@@ -543,7 +543,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
       </section>
 
       {/* SECTION 7: DUAL TESTIMONIALS (Screenshot 7 Founder Quote + Screenshot 6 Resident Quote) */}
-      <section className="py-24 sm:py-32 bg-[#08090c] border-y border-white/10 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 sm:py-32 bg-[#08090c] border-y border-white/10 px-4 sm:px-6 lg:px-8 testimonial-section">
         <div className="max-w-5xl mx-auto space-y-16">
           {/* Founder Quote (Screenshot 7) */}
           <div className="text-center max-w-3xl mx-auto space-y-4">

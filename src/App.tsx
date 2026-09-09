@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, AppPage } from './components/Navbar';
+import { UnifraCompanyHero } from './components/UnifraCompanyHero';
 import { ThreeHeroVilla } from './components/ThreeHeroVilla';
-import { HeroOverlay } from './components/HeroOverlay';
 import { ThreeCarousel } from './components/ThreeCarousel';
 import { EditorialSections } from './components/EditorialSections';
 import { VirtualTourSection } from './components/VirtualTourSection';
@@ -35,33 +35,17 @@ import { MessageCircle, Phone, ArrowUp } from 'lucide-react';
 function AppContent() {
   const { scrollTo } = useLenis();
 
-  // Day / Night Theme state
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    try {
-      const saved = localStorage.getItem('unifra_theme');
-      if (saved === 'light' || saved === 'dark') return saved;
-    } catch {
-      // ignore
-    }
-    return 'dark';
-  });
+  // Permanent Dark Luxury Theme
+  const theme = 'dark';
 
   useEffect(() => {
-    if (theme === 'light') {
-      document.body.classList.add('theme-light');
-    } else {
-      document.body.classList.remove('theme-light');
-    }
+    document.body.classList.remove('theme-light');
     try {
-      localStorage.setItem('unifra_theme', theme);
+      localStorage.setItem('unifra_theme', 'dark');
     } catch {
       // ignore
     }
-  }, [theme]);
-
-  const handleToggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  };
+  }, []);
 
   // Page routing state
   const [currentPage, setCurrentPage] = useState<AppPage>('home');
@@ -69,7 +53,6 @@ function AppContent() {
   // Modal states
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isVirtualTourOpen, setIsVirtualTourOpen] = useState(false);
-  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
   const [selectedGalleryItem, setSelectedGalleryItem] = useState<GalleryItem | null>(null);
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null);
   const [selectedProjectForVisit, setSelectedProjectForVisit] = useState<ProjectItem | null>(null);
@@ -188,77 +171,29 @@ function AppContent() {
         onOpenContact={() => handleOpenConsultation()}
         onOpenVillaAccess={(source) => handleOpenVillaShowcase(null, source || 'Navbar Menu - Mysa Villas')}
         isVillaUnlocked={isVillaUnlocked}
-        theme={theme}
-        onToggleTheme={handleToggleTheme}
       />
 
       {/* 2. Main Body Content Based on Active Page */}
       <main className="relative">
         {currentPage === 'home' && (
           <>
-            {/* Hero Section with Real-Time 3D Interactive Villa (Fixed scroll-through) */}
-            <section id="hero" className={`relative w-full h-screen min-h-[650px] max-h-[1080px] transition-colors duration-500 ${theme === 'light' ? 'bg-[#ebf2f8]' : 'bg-[#0b0c0e]'}`}>
-              <ThreeHeroVilla
-                theme={theme}
-                onSelectHotspot={(hotspot) => setSelectedHotspot(hotspot)}
-                selectedHotspot={selectedHotspot}
-                onSelectGalleryItem={(item) => setSelectedGalleryItem(item)}
-              />
-              <HeroOverlay
-                theme={theme}
-                onExploreProjects={() => handleNavigatePage('mysa-detail')}
-                onOpenVirtualTour={() => setIsVirtualTourOpen(true)}
-                onNavigateOurStory={() => handleNavigatePage('about-story')}
-                selectedHotspot={selectedHotspot}
-                onCloseHotspot={() => setSelectedHotspot(null)}
-                onViewHotspotPhoto={(item) => setSelectedGalleryItem(item)}
-                onScrollDown={() => scrollToSection('dream-homes')}
-              />
-            </section>
+            {/* Hero Section: Unifra Company Brand Showcase */}
+            <UnifraCompanyHero
+              theme={theme}
+              onExploreProjects={() => handleNavigatePage('projects')}
+              onNavigateOurStory={() => handleNavigatePage('about-story')}
+              onBookTour={() => handleOpenConsultation()}
+            />
 
             {/* 3D Coverflow / Cylindrical Gallery: "A Glimpse of Our Dream Homes" */}
             <div id="dream-homes">
-              <ThreeCarousel onSelectImage={(item) => setSelectedGalleryItem(item)} />
+              <ThreeCarousel theme={theme} onSelectImage={(item) => setSelectedGalleryItem(item)} />
             </div>
 
             {/* Editorial Architectural Lifestyle Sections (Screenshot 7 & 6 combined) */}
             <EditorialSections
               onOpenConsultation={() => handleOpenConsultation()}
               onNavigatePage={handleNavigatePage}
-            />
-
-            {/* Virtual Tour Section with Blueprint Wireframe Background */}
-            <VirtualTourSection onOpenVirtualTour={() => setIsVirtualTourOpen(true)} />
-
-            {/* From Our Blog */}
-            <BlogSection onReadArticle={(post) => setSelectedBlogPost(post)} />
-
-            {/* Explore Our Signature Projects */}
-            <SignatureProjects
-              onScheduleVisit={(project) => {
-                if (project && (project.id === 'mysa' || project.id === 'mysa-villas')) {
-                  handleOpenVillaShowcase(project, 'Home Card - Schedule Visit');
-                } else {
-                  handleOpenConsultation(project);
-                }
-              }}
-              onDownloadBrochure={handleDownloadBrochure}
-              onSelectProject={(project) => {
-                if (project.id === 'mysa' || project.id === 'mysa-villas') {
-                  handleOpenVillaShowcase(project, 'Home Card - Select Project');
-                } else {
-                  handleOpenConsultation(project);
-                }
-              }}
-              onExploreShowcase={(project) => {
-                if (project.id === 'mysa' || project.id === 'mysa-villas') {
-                  handleOpenVillaShowcase(project, 'Home Card - Explore Showcase');
-                } else {
-                  handleOpenConsultation(project);
-                }
-              }}
-              isVillaUnlocked={isVillaUnlocked}
-              onViewAllProjects={() => handleNavigatePage('projects')}
             />
           </>
         )}
