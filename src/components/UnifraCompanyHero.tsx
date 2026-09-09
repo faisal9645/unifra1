@@ -92,6 +92,7 @@ export const UnifraCompanyHero: React.FC<UnifraCompanyHeroProps> = ({
       <div className="sticky top-0 w-full h-screen overflow-hidden">
 
         {/* ── VIDEO BACKGROUND ── */}
+        {/* Desktop video (hidden on mobile) */}
         <video
           ref={videoRef}
           src="/videos/scrollvideo.mp4"
@@ -101,7 +102,18 @@ export const UnifraCompanyHero: React.FC<UnifraCompanyHeroProps> = ({
           loop
           preload="auto"
           onCanPlay={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.8; }}
-          className="absolute inset-0 w-full h-full object-cover scale-[1.04]"
+          className="absolute inset-0 w-full h-full object-cover scale-[1.04] hidden md:block"
+        />
+        {/* Mobile‑friendly video */}
+        <video
+          src="/videos/mobile_friendly_v.mp4"
+          muted
+          playsInline
+          autoPlay
+          loop
+          preload="auto"
+          onCanPlay={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.65; }}
+          className="absolute inset-0 w-full h-full object-cover scale-[1.04] md:hidden"
         />
 
         {/* ── DARK OVERLAYS ── */}
