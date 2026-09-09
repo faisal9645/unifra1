@@ -96,7 +96,7 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
             className="lg:col-span-7 relative group rounded-sm overflow-hidden bg-[#121418] border border-white/10 min-h-[380px] sm:min-h-[480px] cursor-pointer"
           >
             <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+              src="https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=1600&q=80"
               alt="Unifra Luxury Gated Villa Architecture & Lifestyle"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="lazy"

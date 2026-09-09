@@ -135,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         isScrolled
           ? 'bg-[#0b0c0e]/95 backdrop-blur-xl border-b border-[#dfb776]/30 py-2.5 sm:py-3 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
-          : 'bg-gradient-to-b from-[#0b0c0e]/95 via-[#0b0c0e]/65 to-transparent backdrop-blur-sm py-4 sm:py-5.5'
+          : 'bg-transparent py-4 sm:py-5.5'
       }`}
     >
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
