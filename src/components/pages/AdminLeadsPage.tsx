@@ -385,7 +385,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
         </div>
       )}
 
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
         {/* Top Breadcrumb & Status Navigation */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
           <div className="flex items-center gap-3">

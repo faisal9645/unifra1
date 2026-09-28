@@ -403,6 +403,14 @@ body.theme-light a.bg-black * {
   color: #ffffff !important;
 }
 
+/* Solid charcoal surfaces (#1a1918 and its hover state) keep white text in light mode */
+body.theme-light .bg-\[\#1a1918\].text-white,
+body.theme-light .bg-\[\#2b2723\].text-white,
+body.theme-light .bg-\[\#1a1918\] .text-white,
+body.theme-light .bg-\[\#2b2723\] .text-white {
+  color: #ffffff !important;
+}
+
 /* Direct Concierge channels inside white card */
 body.theme-light #contact-section .bg-black\/40 {
   background-color: #f8fafc !important;

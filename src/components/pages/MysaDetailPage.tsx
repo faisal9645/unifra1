@@ -317,46 +317,46 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
   ];
 
   return (
-    <div className="pt-0 pb-20 bg-[#0b0c0e] text-[#f3f4f6] relative">
+    <div className="pt-0 pb-20 bg-[#faf8f5] text-[#1a1918] relative font-sans">
       {/* Floating Sticky Brochure Button on the Right */}
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40">
         <button
           onClick={onOpenBrochure}
-          className="bg-[#121418] hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] px-3.5 py-4 rounded-l-sm shadow-2xl flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest [writing-mode:vertical-rl] rotate-180 cursor-pointer transition-all border-l border-y border-white/20 hover:border-[#dfb776]"
+          className="bg-[#1a1918] hover:bg-[#2b2723] text-white hover:text-[#c59b67] px-3.5 py-4 rounded-l-sm shadow-2xl flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest [writing-mode:vertical-rl] rotate-180 cursor-pointer transition-all border-l border-y border-[#c59b67]/40"
         >
-          <FileText className="w-3.5 h-3.5 rotate-90 text-[#dfb776]" />
+          <FileText className="w-3.5 h-3.5 rotate-90 text-[#c59b67]" />
           <span>Brochure →</span>
         </button>
       </div>
 
       {/* 0. 4K Interactive Render Banner Carousel (Full Viewport Width & Height directly under Fixed Header) */}
       <ThreeHeroVilla
-        theme="dark"
+        theme="light"
         onOpenVirtualTour={onOpenVirtualTour}
         onExploreProjects={onOpenContact}
       />
 
       {/* Top Breadcrumb & VIP Access Status Bar */}
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 my-8 flex flex-wrap items-center justify-between gap-4">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 my-8 flex flex-wrap items-center justify-between gap-4">
         {onNavigateProjects && (
           <button
             onClick={onNavigateProjects}
-            className="inline-flex items-center gap-2 text-xs font-mono text-gray-400 hover:text-[#dfb776] uppercase tracking-wider transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs font-mono text-[#68625d] hover:text-[#1a1918] uppercase tracking-wider transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-3.5 h-3.5 text-[#c59b67]" />
             <span>Back to All Projects</span>
           </button>
         )}
         <div className="flex items-center gap-2.5 ml-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 text-[#dfb776] text-[10px] font-mono uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#dfb776] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-[#c59b67]/15 border border-[#c59b67]/40 text-[#c59b67] text-[10px] font-mono uppercase tracking-widest font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c59b67] animate-pulse" />
             <span>VIP CLIENT SHOWCASE UNLOCKED</span>
           </div>
 
           {onLockVilla && (
             <button
               onClick={onLockVilla}
-              className="px-2.5 py-1 rounded-sm border border-white/20 hover:border-amber-400 text-gray-300 hover:text-amber-300 text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded-sm border border-[#d8cebe] hover:border-[#1a1918] text-[#68625d] hover:text-[#1a1918] text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer"
               title="Lock villa to test the gate form again"
             >
               Lock & Re-test Gate
@@ -366,7 +366,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
           {onNavigateAdmin && (
             <button
               onClick={onNavigateAdmin}
-              className="px-2.5 py-1 rounded-sm border border-[#dfb776]/40 bg-[#dfb776]/10 hover:bg-[#dfb776]/20 text-[#dfb776] text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1.5"
+              className="px-2.5 py-1 rounded-sm border border-[#c59b67]/40 bg-[#c59b67]/10 hover:bg-[#c59b67]/20 text-[#c59b67] text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1.5"
             >
               <span>View Leads in /admin</span>
               <span className="text-[11px]">→</span>
@@ -376,34 +376,34 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </div>
 
       {/* 1. Header */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-16">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-16">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-3 flex items-center justify-center gap-2">
+            <span className="w-1.5 h-1.5 bg-[#c59b67] rounded-full" />
             <span>VETTUVANKENI, EAST COAST ROAD, CHENNAI</span>
           </div>
 
-          <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal text-white tracking-tight mb-6 leading-[1.1]">
-            MYSA Luxe Villas — A Deep Dive into <span className="italic font-serif-luxury text-[#dfb776]">Unparalleled Luxury</span>
+          <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1a1918] tracking-tight mb-6 leading-[1.1]">
+            MYSA Luxe Villas — A Deep Dive into <span className="italic font-serif-luxury text-[#c59b67]">Unparalleled Luxury</span>
           </h1>
 
-          <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed max-w-3xl mx-auto mb-8">
+          <p className="text-xs sm:text-sm text-[#68625d] font-light leading-relaxed max-w-3xl mx-auto mb-8">
             Discover 6 contemporary 4BHK Swedish-style villas in Vettuvankeni, Chennai, designed for a serene and inspired lifestyle. 'Mysa', a Swedish concept of cozy contentment, is at the heart of these homes, blending luxury with nature.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={onOpenContact}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-sm bg-[#dfb776] hover:bg-[#c5a880] text-[#0b0c0e] text-xs font-semibold uppercase tracking-wider transition-colors shadow-lg cursor-pointer"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-sm bg-[#1a1918] hover:bg-[#2b2723] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-md cursor-pointer font-mono"
             >
               <span>Schedule Private Viewing</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#c59b67]" />
             </button>
             <button
               onClick={onOpenVirtualTour}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-sm border border-white/20 text-white text-xs font-mono uppercase tracking-wider hover:border-[#dfb776] hover:text-[#dfb776] transition-colors shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-sm border border-[#d8cebe] text-[#1a1918] text-xs font-mono uppercase tracking-wider hover:border-[#1a1918] transition-colors shadow-xs cursor-pointer"
             >
-              <Eye className="w-4 h-4 text-[#dfb776]" />
+              <Eye className="w-4 h-4 text-[#c59b67]" />
               <span>Launch 3D Walkthrough</span>
             </button>
           </div>
@@ -413,28 +413,28 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
 
 
       {/* 3. Comprehensive MYSA Visual Architecture Gallery (All 11 Pictures) */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div className="text-left max-w-2xl">
-            <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2 flex items-center gap-2">
-              <Camera className="w-3.5 h-3.5 text-[#dfb776]" />
+            <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2 flex items-center gap-2">
+              <Camera className="w-3.5 h-3.5 text-[#c59b67]" />
               <span>THE ARCHITECTURAL VISUAL COLLECTION</span>
             </div>
-            <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-white tracking-tight mb-2">
-              MYSA Villas <span className="italic font-serif-luxury text-[#dfb776]">Photo Showcase</span>
+            <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#1a1918] tracking-tight mb-2">
+              MYSA Villas <span className="italic font-serif-luxury text-[#c59b67]">Photo Showcase</span>
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 font-light">
+            <p className="text-xs sm:text-sm text-[#68625d] font-light">
               Explore all 11 authentic photographs capturing the Scandinavian butterfly roof, cantilevered dark granite balcony, double-height great room, minimalist culinary studio, and master sanctuaries.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono text-gray-400">
-            <span className="px-2.5 py-1 rounded-xs bg-white/5 border border-white/10 text-[#dfb776]">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#68625d]">
+            <span className="px-2.5 py-1 rounded-xs bg-white border border-[#eae4db] text-[#c59b67] font-semibold">
               {filteredPhotos.length} / {MYSA_VILLA_PHOTOS.length} Photographs
             </span>
             <button
               onClick={() => setLightboxIndex(0)}
-              className="px-3 py-1 rounded-xs bg-[#dfb776] text-[#0b0c0e] font-semibold hover:bg-[#c5a880] transition-colors cursor-pointer uppercase tracking-wider"
+              className="px-3.5 py-1 rounded-xs bg-[#1a1918] text-white font-medium hover:bg-[#2b2723] transition-colors cursor-pointer uppercase tracking-wider"
             >
               Slideshow View
             </button>
@@ -442,7 +442,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-8 no-scrollbar border-b border-white/10 text-xs font-mono">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-8 no-scrollbar border-b border-[#eae4db] text-xs font-mono">
           {[
             { id: 'All', label: 'All Pictures (11)' },
             { id: 'Facade', label: 'Facade & Architecture' },
@@ -457,8 +457,8 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-3.5 py-2 rounded-sm uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
-                    : 'bg-[#121418] text-gray-400 hover:text-white hover:bg-white/5 border border-white/10'
+                    ? 'bg-[#1a1918] text-white font-medium shadow-sm'
+                    : 'bg-white text-[#68625d] hover:text-[#1a1918] border border-[#eae4db]'
                 }`}
               >
                 {cat.label}
@@ -474,31 +474,31 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
             return (
               <div
                 key={photo.id}
-                className="bg-[#121418] rounded-sm overflow-hidden border border-white/10 hover:border-[#dfb776]/60 transition-all flex flex-col shadow-xl group cursor-pointer"
+                className="bg-white rounded-[20px] overflow-hidden border border-[#eae4db] hover:border-[#c59b67] transition-all flex flex-col shadow-sm hover:shadow-xl group cursor-pointer"
                 onClick={() => setLightboxIndex(globalIdx !== -1 ? globalIdx : 0)}
               >
-                <div className="relative h-64 overflow-hidden bg-black">
+                <div className="relative h-64 overflow-hidden bg-[#eae5dc]">
                   <img
                     src={photo.imageUrl}
                     alt={photo.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
 
                   {/* Top tags */}
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                    <span className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-xs bg-black/75 backdrop-blur-md border border-white/20 text-[#dfb776]">
+                    <span className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-xs bg-white/90 backdrop-blur-md border border-white/40 text-[#1a1918] font-medium">
                       {photo.categoryLabel}
                     </span>
-                    <span className="text-[9px] font-mono px-2 py-0.5 rounded-xs bg-black/75 backdrop-blur-md border border-white/20 text-gray-300">
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded-xs bg-white/90 backdrop-blur-md border border-white/40 text-[#68625d]">
                       {photo.area}
                     </span>
                   </div>
 
                   {/* Hover prompt */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xs bg-[#dfb776] text-[#0b0c0e] text-xs font-mono uppercase tracking-wider font-semibold shadow-2xl scale-95 group-hover:scale-100 transition-transform">
-                      <Maximize2 className="w-3.5 h-3.5" />
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xs bg-[#1a1918] text-white text-xs font-mono uppercase tracking-wider font-medium shadow-2xl scale-95 group-hover:scale-100 transition-transform">
+                      <Maximize2 className="w-3.5 h-3.5 text-[#c59b67]" />
                       <span>View Full Resolution</span>
                     </span>
                   </div>
@@ -506,20 +506,20 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
 
                 <div className="p-5 flex-1 flex flex-col justify-between text-left">
                   <div>
-                    <h4 className="font-serif-luxury text-base sm:text-lg font-bold text-white group-hover:text-[#dfb776] transition-colors mb-1.5">
+                    <h4 className="font-serif-luxury text-base sm:text-lg font-bold text-[#1a1918] group-hover:text-[#c59b67] transition-colors mb-1.5">
                       {photo.title}
                     </h4>
-                    <p className="text-xs text-gray-400 font-light leading-relaxed line-clamp-2">
+                    <p className="text-xs text-[#68625d] font-light leading-relaxed line-clamp-2">
                       {photo.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/5 text-[10px] font-mono text-gray-400">
-                    <span className="flex items-center gap-1 text-gray-300">
-                      <MapPin className="w-3 h-3 text-[#dfb776]" />
+                  <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#f0ece4] text-[10px] font-mono text-[#8c827a]">
+                    <span className="flex items-center gap-1 text-[#68625d]">
+                      <MapPin className="w-3 h-3 text-[#c59b67]" />
                       <span>{photo.location}</span>
                     </span>
-                    <span className="text-[#dfb776] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                    <span className="text-[#c59b67] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 font-medium">
                       <span>Click to expand</span>
                       <span>→</span>
                     </span>
@@ -532,30 +532,30 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 4. Villa Floor Plans */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             LAYOUT BLUEPRINTS
           </div>
-          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-white tracking-tight mb-3">
-            Villa <span className="italic font-serif-luxury text-[#dfb776]">Floor Plans</span>
+          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#1a1918] tracking-tight mb-3">
+            Villa <span className="italic font-serif-luxury text-[#c59b67]">Floor Plans</span>
           </h2>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-[#68625d]">
             Explore the thoughtfully designed layouts of MYSA Luxe Villas, crafted for comfort and elegance.
           </p>
         </div>
 
         {/* Floor Plan Switcher Tabs */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex p-1 bg-[#121418] rounded-sm border border-white/10">
+          <div className="inline-flex p-1 bg-white rounded-full border border-[#eae4db] shadow-sm">
             {(['ground', 'first', 'second'] as const).map((key) => (
               <button
                 key={key}
                 onClick={() => setActiveFloorPlan(key)}
-                className={`px-4 sm:px-6 py-2 rounded-sm text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                className={`px-4 sm:px-6 py-2 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
                   activeFloorPlan === key
-                    ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'bg-[#1a1918] text-white font-medium shadow-sm'
+                    : 'text-[#68625d] hover:text-[#1a1918]'
                 }`}
               >
                 {key === 'ground' ? 'Ground Floor' : key === 'first' ? 'First Floor' : 'Second Floor'}
@@ -565,31 +565,31 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         </div>
 
         {/* Floor Plan Card */}
-        <div className="bg-[#121418] rounded-sm p-8 sm:p-12 border border-white/10 shadow-2xl grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="bg-white rounded-[24px] p-8 sm:p-12 border border-[#eae4db] shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="space-y-5 text-left">
             <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded-sm bg-[#dfb776]/10 text-[#dfb776] border border-[#dfb776]/30 text-xs font-mono font-semibold">
+              <span className="px-3 py-1 rounded-sm bg-[#c59b67]/10 text-[#c59b67] border border-[#c59b67]/30 text-xs font-mono font-semibold">
                 Total Area: {floorPlanData[activeFloorPlan].area}
               </span>
-              <span className="text-xs font-mono text-emerald-400 font-medium">100% Vastu Compliant</span>
+              <span className="text-xs font-mono text-emerald-700 font-medium">100% Vastu Compliant</span>
             </div>
 
-            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-white">
+            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1a1918]">
               {floorPlanData[activeFloorPlan].title}
             </h3>
 
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+            <p className="text-xs sm:text-sm text-[#68625d] leading-relaxed font-light">
               {floorPlanData[activeFloorPlan].description}
             </p>
 
             <div className="pt-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-gray-400 font-medium block mb-2">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#8c827a] font-medium block mb-2">
                 KEY ARCHITECTURAL HIGHLIGHTS:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {floorPlanData[activeFloorPlan].highlights.map((h, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-gray-300 bg-black/40 p-2.5 rounded-sm border border-white/10">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#dfb776] shrink-0" />
+                  <div key={i} className="flex items-center gap-2 text-xs text-[#1a1918] bg-[#fbf9f6] p-2.5 rounded-sm border border-[#eae4db]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#c59b67] shrink-0" />
                     <span>{h}</span>
                   </div>
                 ))}
@@ -599,54 +599,54 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
             <div className="pt-4 flex items-center gap-4">
               <button
                 onClick={onOpenBrochure}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-sm bg-[#dfb776] hover:bg-[#c5a880] text-[#0b0c0e] text-xs font-mono uppercase tracking-wider font-semibold transition-colors cursor-pointer shadow-md"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-sm bg-[#1a1918] hover:bg-[#2b2723] text-white text-xs font-mono uppercase tracking-wider font-semibold transition-colors cursor-pointer shadow-sm"
               >
-                <Download className="w-3.5 h-3.5" />
+                <Download className="w-3.5 h-3.5 text-[#c59b67]" />
                 <span>Download CAD Blueprint PDF</span>
               </button>
             </div>
           </div>
 
-          <div className="rounded-sm overflow-hidden border border-white/10 bg-[#0b0c0e] p-4 relative flex items-center justify-center min-h-[320px]">
+          <div className="rounded-[16px] overflow-hidden border border-[#eae4db] bg-[#fbf9f6] p-4 relative flex items-center justify-center min-h-[320px]">
             {/* Architectural Blueprint Vector Render */}
-            <div className="w-full aspect-[4/3] bg-gradient-to-br from-[#121418] to-[#0b0c0e] rounded-sm p-6 text-white font-mono text-[11px] relative overflow-hidden flex flex-col justify-between border border-white/10 shadow-2xl">
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                <span className="text-[#dfb776] tracking-widest uppercase font-bold text-[10px]">
+            <div className="w-full aspect-[4/3] bg-gradient-to-br from-[#f8f5f0] to-[#f0eae1] rounded-[12px] p-6 text-[#1a1918] font-mono text-[11px] relative overflow-hidden flex flex-col justify-between border border-[#eae4db] shadow-sm">
+              <div className="flex items-center justify-between border-b border-[#eae4db] pb-3">
+                <span className="text-[#c59b67] tracking-widest uppercase font-bold text-[10px]">
                   UNIFRA ARCHITECTURAL BLUEPRINT
                 </span>
-                <span className="text-gray-500 text-[10px]">SCALE 1:50 MM</span>
+                <span className="text-[#8c827a] text-[10px]">SCALE 1:50 MM</span>
               </div>
 
               <div className="grid grid-cols-3 gap-3 my-4">
-                <div className="border border-white/10 rounded-sm p-2.5 bg-white/5">
-                  <div className="text-[9px] text-[#dfb776] uppercase">Level</div>
-                  <div className="font-bold text-xs">{floorPlanData[activeFloorPlan].title}</div>
+                <div className="border border-[#eae4db] rounded-sm p-2.5 bg-white shadow-xs">
+                  <div className="text-[9px] text-[#c59b67] uppercase font-semibold">Level</div>
+                  <div className="font-bold text-xs text-[#1a1918]">{floorPlanData[activeFloorPlan].title}</div>
                 </div>
-                <div className="border border-white/10 rounded-sm p-2.5 bg-white/5">
-                  <div className="text-[9px] text-[#dfb776] uppercase">Built-Up</div>
-                  <div className="font-bold text-xs">{floorPlanData[activeFloorPlan].area}</div>
+                <div className="border border-[#eae4db] rounded-sm p-2.5 bg-white shadow-xs">
+                  <div className="text-[9px] text-[#c59b67] uppercase font-semibold">Built-Up</div>
+                  <div className="font-bold text-xs text-[#1a1918]">{floorPlanData[activeFloorPlan].area}</div>
                 </div>
-                <div className="border border-white/10 rounded-sm p-2.5 bg-white/5">
-                  <div className="text-[9px] text-[#dfb776] uppercase">Status</div>
-                  <div className="font-bold text-xs text-emerald-400">Approved</div>
+                <div className="border border-[#eae4db] rounded-sm p-2.5 bg-white shadow-xs">
+                  <div className="text-[9px] text-[#c59b67] uppercase font-semibold">Status</div>
+                  <div className="font-bold text-xs text-emerald-700">Approved</div>
                 </div>
               </div>
 
               {/* Graphical schematic lines */}
-              <div className="relative border border-dashed border-white/20 rounded-sm h-32 flex items-center justify-center p-2 text-center text-white/50 text-[10px]">
-                <div className="absolute inset-x-4 top-2 h-0.5 bg-[#dfb776]/20" />
-                <div className="absolute inset-y-4 left-1/3 w-0.5 bg-[#dfb776]/20" />
-                <div className="absolute inset-y-4 right-1/3 w-0.5 bg-[#dfb776]/20" />
+              <div className="relative border border-dashed border-[#d8cebe] rounded-sm h-32 flex items-center justify-center p-2 text-center text-[#8c827a] text-[10px]">
+                <div className="absolute inset-x-4 top-2 h-0.5 bg-[#c59b67]/20" />
+                <div className="absolute inset-y-4 left-1/3 w-0.5 bg-[#c59b67]/20" />
+                <div className="absolute inset-y-4 right-1/3 w-0.5 bg-[#c59b67]/20" />
                 <div className="space-y-1">
-                  <Compass className="w-6 h-6 mx-auto text-[#dfb776] mb-1 opacity-80" />
-                  <span className="text-white/80 font-sans font-medium block">
+                  <Compass className="w-6 h-6 mx-auto text-[#c59b67] mb-1 opacity-80" />
+                  <span className="text-[#1a1918] font-sans font-medium block">
                     {floorPlanData[activeFloorPlan].title} Schematic Layout
                   </span>
-                  <span className="text-gray-500">Click "Download CAD Blueprint PDF" for detailed dimensional drawings</span>
+                  <span className="text-[#8c827a]">Click "Download CAD Blueprint PDF" for detailed dimensional drawings</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-[9px] text-gray-400 pt-2 border-t border-white/10">
+              <div className="flex items-center justify-between text-[9px] text-[#8c827a] pt-2 border-t border-[#eae4db]">
                 <span className="font-mono">PROJECT: MYSA LUXE VILLAS</span>
                 <button
                   type="button"
@@ -655,7 +655,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
                     const idx = MYSA_VILLA_PHOTOS.findIndex(p => p.id === targetId);
                     setLightboxIndex(idx !== -1 ? idx : 0);
                   }}
-                  className="inline-flex items-center gap-1.5 text-[#dfb776] hover:underline cursor-pointer font-mono font-semibold"
+                  className="inline-flex items-center gap-1.5 text-[#c59b67] hover:text-[#1a1918] cursor-pointer font-mono font-semibold"
                 >
                   <Camera className="w-3 h-3" />
                   <span>View Actual Photograph →</span>
@@ -667,87 +667,87 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 5. World-Class Amenities */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             LUXURY COMFORTS
           </div>
-          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-white tracking-tight mb-3">
-            World-Class <span className="italic font-serif-luxury text-[#dfb776]">Amenities</span>
+          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#1a1918] tracking-tight mb-3">
+            World-Class <span className="italic font-serif-luxury text-[#c59b67]">Amenities</span>
           </h2>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-[#68625d]">
             Experience a lifestyle of convenience and luxury with amenities designed to elevate every moment.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-[#121418] rounded-sm p-6 border border-white/10 hover:border-[#dfb776]/50 transition-all flex items-start gap-4 shadow-xl">
-            <div className="w-12 h-12 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 flex items-center justify-center text-[#dfb776] shrink-0">
+          <div className="bg-white rounded-[20px] p-6 border border-[#eae4db] hover:border-[#c59b67] transition-all flex items-start gap-4 shadow-sm hover:shadow-md">
+            <div className="w-12 h-12 rounded-sm bg-[#c59b67]/10 border border-[#c59b67]/30 flex items-center justify-center text-[#c59b67] shrink-0">
               <Droplets className="w-6 h-6" />
             </div>
             <div className="text-left">
-              <h4 className="font-serif-luxury text-base font-bold text-white mb-1">Private Pools</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-light">
+              <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-1">Private Pools</h4>
+              <p className="text-xs text-[#68625d] leading-relaxed font-light">
                 Dedicated temperature-balanced lap pools in each individual villa with perimeter timber sun deck.
               </p>
             </div>
           </div>
 
-          <div className="bg-[#121418] rounded-sm p-6 border border-white/10 hover:border-[#dfb776]/50 transition-all flex items-start gap-4 shadow-xl">
-            <div className="w-12 h-12 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 flex items-center justify-center text-[#dfb776] shrink-0">
+          <div className="bg-white rounded-[20px] p-6 border border-[#eae4db] hover:border-[#c59b67] transition-all flex items-start gap-4 shadow-sm hover:shadow-md">
+            <div className="w-12 h-12 rounded-sm bg-[#c59b67]/10 border border-[#c59b67]/30 flex items-center justify-center text-[#c59b67] shrink-0">
               <Zap className="w-6 h-6" />
             </div>
             <div className="text-left">
-              <h4 className="font-serif-luxury text-base font-bold text-white mb-1">24/7 Power Backup</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-light">
+              <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-1">24/7 Power Backup</h4>
+              <p className="text-xs text-[#68625d] leading-relaxed font-light">
                 100% DG generator backup covering all central air-conditioners, elevators, and appliances automatically.
               </p>
             </div>
           </div>
 
-          <div className="bg-[#121418] rounded-sm p-6 border border-white/10 hover:border-[#dfb776]/50 transition-all flex items-start gap-4 shadow-xl">
-            <div className="w-12 h-12 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 flex items-center justify-center text-[#dfb776] shrink-0">
+          <div className="bg-white rounded-[20px] p-6 border border-[#eae4db] hover:border-[#c59b67] transition-all flex items-start gap-4 shadow-sm hover:shadow-md">
+            <div className="w-12 h-12 rounded-sm bg-[#c59b67]/10 border border-[#c59b67]/30 flex items-center justify-center text-[#c59b67] shrink-0">
               <Sparkles className="w-6 h-6" />
             </div>
             <div className="text-left">
-              <h4 className="font-serif-luxury text-base font-bold text-white mb-1">Smart Home Automation</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-light">
+              <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-1">Smart Home Automation</h4>
+              <p className="text-xs text-[#68625d] leading-relaxed font-light">
                 Integrated app-controlled mood lighting, digital smart door locks, and video door surveillance.
               </p>
             </div>
           </div>
 
-          <div className="bg-[#121418] rounded-sm p-6 border border-white/10 hover:border-[#dfb776]/50 transition-all flex items-start gap-4 shadow-xl">
-            <div className="w-12 h-12 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 flex items-center justify-center text-[#dfb776] shrink-0">
+          <div className="bg-white rounded-[20px] p-6 border border-[#eae4db] hover:border-[#c59b67] transition-all flex items-start gap-4 shadow-sm hover:shadow-md">
+            <div className="w-12 h-12 rounded-sm bg-[#c59b67]/10 border border-[#c59b67]/30 flex items-center justify-center text-[#c59b67] shrink-0">
               <Layers className="w-6 h-6" />
             </div>
             <div className="text-left">
-              <h4 className="font-serif-luxury text-base font-bold text-white mb-1">Landscaped Gardens</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-light">
+              <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-1">Landscaped Gardens</h4>
+              <p className="text-xs text-[#68625d] leading-relaxed font-light">
                 Curated botanical courtyard gardens with native tropical flora and automatic drip irrigation.
               </p>
             </div>
           </div>
 
-          <div className="bg-[#121418] rounded-sm p-6 border border-white/10 hover:border-[#dfb776]/50 transition-all flex items-start gap-4 shadow-xl">
-            <div className="w-12 h-12 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 flex items-center justify-center text-[#dfb776] shrink-0">
+          <div className="bg-white rounded-[20px] p-6 border border-[#eae4db] hover:border-[#c59b67] transition-all flex items-start gap-4 shadow-sm hover:shadow-md">
+            <div className="w-12 h-12 rounded-sm bg-[#c59b67]/10 border border-[#c59b67]/30 flex items-center justify-center text-[#c59b67] shrink-0">
               <Shield className="w-6 h-6" />
             </div>
             <div className="text-left">
-              <h4 className="font-serif-luxury text-base font-bold text-white mb-1">Biometric Security</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-light">
+              <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-1">Biometric Security</h4>
+              <p className="text-xs text-[#68625d] leading-relaxed font-light">
                 Manned gated entry with computerized visitor verification, boom barriers, and HD infrared CCTV coverage.
               </p>
             </div>
           </div>
 
-          <div className="bg-[#121418] rounded-sm p-6 border border-white/10 hover:border-[#dfb776]/50 transition-all flex items-start gap-4 shadow-xl">
-            <div className="w-12 h-12 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 flex items-center justify-center text-[#dfb776] shrink-0">
+          <div className="bg-white rounded-[20px] p-6 border border-[#eae4db] hover:border-[#c59b67] transition-all flex items-start gap-4 shadow-sm hover:shadow-md">
+            <div className="w-12 h-12 rounded-sm bg-[#c59b67]/10 border border-[#c59b67]/30 flex items-center justify-center text-[#c59b67] shrink-0">
               <Zap className="w-6 h-6" />
             </div>
             <div className="text-left">
-              <h4 className="font-serif-luxury text-base font-bold text-white mb-1">EV Charging Stations</h4>
-              <p className="text-xs text-gray-400 leading-relaxed font-light">
+              <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-1">EV Charging Stations</h4>
+              <p className="text-xs text-[#68625d] leading-relaxed font-light">
                 High-speed dedicated fast-charging wallbox provisions in every covered private two-car portico.
               </p>
             </div>
@@ -756,15 +756,15 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 6. Detailed Specifications */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             TECHNICAL SPECIFICATIONS
           </div>
-          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-white tracking-tight mb-3">
-            Detailed <span className="italic font-serif-luxury text-[#dfb776]">Specifications</span>
+          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#1a1918] tracking-tight mb-3">
+            Detailed <span className="italic font-serif-luxury text-[#c59b67]">Specifications</span>
           </h2>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-[#68625d]">
             Engineered using only certified premium tier-1 materials and international building standards.
           </p>
         </div>
@@ -786,8 +786,8 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
               onClick={() => setActiveSpecCategory(cat.key)}
               className={`px-4 sm:px-6 py-2 rounded-sm text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
                 activeSpecCategory === cat.key
-                  ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
-                  : 'bg-[#121418] text-gray-400 hover:text-white border border-white/10'
+                  ? 'bg-[#1a1918] text-white font-medium shadow-sm'
+                  : 'bg-white text-[#68625d] hover:text-[#1a1918] border border-[#eae4db]'
               }`}
             >
               {cat.label}
@@ -796,25 +796,25 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         </div>
 
         {/* Active Specification List */}
-        <div className="bg-[#121418] rounded-sm p-8 sm:p-10 border border-white/10 shadow-2xl max-w-4xl mx-auto">
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-            <h3 className="font-serif-luxury text-xl font-bold text-white">
+        <div className="bg-white rounded-[24px] p-8 sm:p-10 border border-[#eae4db] shadow-sm max-w-4xl mx-auto">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#eae4db]">
+            <h3 className="font-serif-luxury text-xl font-bold text-[#1a1918]">
               {specCategories[activeSpecCategory].title}
             </h3>
-            <span className="text-[10px] font-mono text-[#dfb776] font-semibold uppercase tracking-wider">Tier-1 Certified</span>
+            <span className="text-[10px] font-mono text-[#c59b67] font-semibold uppercase tracking-wider">Tier-1 Certified</span>
           </div>
 
           <div className="space-y-3">
             {specCategories[activeSpecCategory].items.map((item, idx) => (
               <div
                 key={idx}
-                className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-sm bg-black/40 border border-white/10 gap-2"
+                className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-sm bg-[#fbf9f6] border border-[#eae4db] gap-2"
               >
                 <div className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-[#dfb776] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-white">{item.label}</span>
+                  <Check className="w-4 h-4 text-[#c59b67] shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold text-[#1a1918]">{item.label}</span>
                 </div>
-                <span className="text-xs sm:text-sm text-gray-400 text-left sm:text-right max-w-md font-light">
+                <span className="text-xs sm:text-sm text-[#68625d] text-left sm:text-right max-w-md font-light">
                   {item.value}
                 </span>
               </div>
@@ -824,144 +824,144 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 7. Project Status */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             TIMELINE
           </div>
-          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-white tracking-tight mb-3">
-            Project <span className="italic font-serif-luxury text-[#dfb776]">Status</span>
+          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#1a1918] tracking-tight mb-3">
+            Project <span className="italic font-serif-luxury text-[#c59b67]">Status</span>
           </h2>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-[#68625d]">
             Follow the journey of MYSA Luxe Villas from foundation to finish.
           </p>
         </div>
 
         {/* 5 Milestone Timeline */}
-        <div className="bg-[#121418] rounded-sm p-8 sm:p-12 border border-white/10 shadow-2xl max-w-5xl mx-auto">
+        <div className="bg-white rounded-[24px] p-8 sm:p-12 border border-[#eae4db] shadow-sm max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 relative">
             {/* Step 1 */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center font-bold mb-3 shadow">
+              <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 flex items-center justify-center font-bold mb-3 shadow-xs">
                 <Check className="w-5 h-5" />
               </div>
-              <h4 className="text-xs font-bold text-white mb-1">Foundation & Structure</h4>
-              <span className="text-[10px] font-mono text-emerald-400 font-semibold uppercase">100% Complete</span>
+              <h4 className="text-xs font-bold text-[#1a1918] mb-1">Foundation & Structure</h4>
+              <span className="text-[10px] font-mono text-emerald-700 font-semibold uppercase">100% Complete</span>
             </div>
 
             {/* Step 2 */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center font-bold mb-3 shadow">
+              <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 flex items-center justify-center font-bold mb-3 shadow-xs">
                 <Check className="w-5 h-5" />
               </div>
-              <h4 className="text-xs font-bold text-white mb-1">Blockwork & Plastering</h4>
-              <span className="text-[10px] font-mono text-emerald-400 font-semibold uppercase">100% Complete</span>
+              <h4 className="text-xs font-bold text-[#1a1918] mb-1">Blockwork & Plastering</h4>
+              <span className="text-[10px] font-mono text-emerald-700 font-semibold uppercase">100% Complete</span>
             </div>
 
             {/* Step 3 */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full bg-[#dfb776] text-[#0b0c0e] flex items-center justify-center font-bold mb-3 shadow-lg shadow-[#dfb776]/20 animate-pulse">
+              <div className="w-12 h-12 rounded-full bg-[#c59b67] text-white flex items-center justify-center font-bold mb-3 shadow-md shadow-[#c59b67]/30 animate-pulse">
                 <Zap className="w-5 h-5" />
               </div>
-              <h4 className="text-xs font-bold text-white mb-1">Electrical & Plumbing</h4>
-              <span className="text-[10px] font-mono text-[#dfb776] font-semibold uppercase">In Progress (85%)</span>
+              <h4 className="text-xs font-bold text-[#1a1918] mb-1">Electrical & Plumbing</h4>
+              <span className="text-[10px] font-mono text-[#c59b67] font-semibold uppercase">In Progress (85%)</span>
             </div>
 
             {/* Step 4 */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full bg-black/40 border border-white/10 text-gray-500 flex items-center justify-center font-bold mb-3">
+              <div className="w-12 h-12 rounded-full bg-[#f4f0eb] border border-[#eae4db] text-[#8c827a] flex items-center justify-center font-bold mb-3">
                 <Clock className="w-5 h-5" />
               </div>
-              <h4 className="text-xs font-bold text-gray-400 mb-1">Finishing Touches</h4>
-              <span className="text-[10px] font-mono text-gray-500 font-semibold uppercase">Q3 2025</span>
+              <h4 className="text-xs font-bold text-[#8c827a] mb-1">Finishing Touches</h4>
+              <span className="text-[10px] font-mono text-[#8c827a] font-semibold uppercase">Q3 2025</span>
             </div>
 
             {/* Step 5 */}
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full bg-black/40 border border-white/10 text-gray-500 flex items-center justify-center font-bold mb-3">
+              <div className="w-12 h-12 rounded-full bg-[#f4f0eb] border border-[#eae4db] text-[#8c827a] flex items-center justify-center font-bold mb-3">
                 <Clock className="w-5 h-5" />
               </div>
-              <h4 className="text-xs font-bold text-gray-400 mb-1">Handover</h4>
-              <span className="text-[10px] font-mono text-gray-500 font-semibold uppercase">Q4 2025</span>
+              <h4 className="text-xs font-bold text-[#8c827a] mb-1">Handover</h4>
+              <span className="text-[10px] font-mono text-[#8c827a] font-semibold uppercase">Q4 2025</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* 8. Location Advantage */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-[#121418] rounded-sm p-8 sm:p-12 border border-white/10 shadow-2xl">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-white rounded-[24px] p-8 sm:p-12 border border-[#eae4db] shadow-sm">
           <div className="space-y-4 text-left">
-            <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776]">
+            <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67]">
               SURROUNDINGS
             </div>
-            <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-white tracking-tight">
-              Location <span className="italic font-serif-luxury text-[#dfb776]">Advantage</span>
+            <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#1a1918] tracking-tight">
+              Location <span className="italic font-serif-luxury text-[#c59b67]">Advantage</span>
             </h2>
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+            <p className="text-xs sm:text-sm text-[#68625d] leading-relaxed font-light">
               Situated in the serene locale of Vettuvankeni, MYSA Luxe Villas offer the perfect balance of peaceful coastal living and convenient urban access.
             </p>
 
             <div className="space-y-3 pt-2">
-              <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-300">
-                <MapPin className="w-4 h-4 text-[#dfb776] shrink-0" />
-                <span><strong className="text-white">3 Mins:</strong> Prarthana Beach & ECR Drive-In</span>
+              <div className="flex items-center gap-3 text-xs sm:text-sm text-[#68625d]">
+                <MapPin className="w-4 h-4 text-[#c59b67] shrink-0" />
+                <span><strong className="text-[#1a1918]">3 Mins:</strong> Prarthana Beach & ECR Drive-In</span>
               </div>
-              <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-300">
-                <MapPin className="w-4 h-4 text-[#dfb776] shrink-0" />
-                <span><strong className="text-white">8 Mins:</strong> The British International School & Gateway International</span>
+              <div className="flex items-center gap-3 text-xs sm:text-sm text-[#68625d]">
+                <MapPin className="w-4 h-4 text-[#c59b67] shrink-0" />
+                <span><strong className="text-[#1a1918]">8 Mins:</strong> The British International School & Gateway International</span>
               </div>
-              <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-300">
-                <MapPin className="w-4 h-4 text-[#dfb776] shrink-0" />
-                <span><strong className="text-white">12 Mins:</strong> Thiruvanmiyur & TIDEL IT Park OMR</span>
+              <div className="flex items-center gap-3 text-xs sm:text-sm text-[#68625d]">
+                <MapPin className="w-4 h-4 text-[#c59b67] shrink-0" />
+                <span><strong className="text-[#1a1918]">12 Mins:</strong> Thiruvanmiyur & TIDEL IT Park OMR</span>
               </div>
-              <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-300">
-                <MapPin className="w-4 h-4 text-[#dfb776] shrink-0" />
-                <span><strong className="text-white">18 Mins:</strong> Adyar, Boat Club & Apollo Hospital</span>
+              <div className="flex items-center gap-3 text-xs sm:text-sm text-[#68625d]">
+                <MapPin className="w-4 h-4 text-[#c59b67] shrink-0" />
+                <span><strong className="text-[#1a1918]">18 Mins:</strong> Adyar, Boat Club & Apollo Hospital</span>
               </div>
             </div>
           </div>
 
           {/* Location Map Visual */}
-          <div className="rounded-sm overflow-hidden shadow-2xl h-72 sm:h-96 relative bg-black/40 border border-white/10">
+          <div className="rounded-[16px] overflow-hidden shadow-sm h-72 sm:h-96 relative bg-[#eae5dc] border border-[#eae4db]">
             <img
               src="https://images.unsplash.com/photo-1524813686514-a57563d77d66?auto=format&fit=crop&w=1200&q=80"
               alt="Chennai ECR Coastline Map"
-              className="w-full h-full object-cover opacity-75"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0e] via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 text-white text-left">
-              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-[#dfb776] mb-1">
+              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-[#c59b67] mb-1">
                 <MapPin className="w-3.5 h-3.5" />
                 <span>Vettuvankeni, Chennai</span>
               </div>
               <h4 className="font-serif-luxury text-xl font-normal text-white">ECR Coastal Sanctuary</h4>
-              <p className="text-xs text-gray-400 mt-1 font-light">Peaceful seaside serenity within minutes of Chennai city center.</p>
+              <p className="text-xs text-white/80 mt-1 font-light">Peaceful seaside serenity within minutes of Chennai city center.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* 8.5. Official MYSA YouTube Walkthrough & Cinematic Film Section */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 mb-20">
-        <div className="bg-[#121418] rounded-sm border border-white/10 overflow-hidden shadow-2xl p-6 sm:p-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4 border-b border-white/10 pb-6">
-            <div>
-              <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2 flex items-center gap-2">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-20">
+        <div className="bg-white rounded-[24px] border border-[#eae4db] overflow-hidden shadow-sm p-6 sm:p-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4 border-b border-[#eae4db] pb-6">
+            <div className="text-left">
+              <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
                 <span>OFFICIAL YOUTUBE VILLA FILM</span>
               </div>
-              <h2 className="font-serif-luxury text-2xl sm:text-4xl font-normal text-white tracking-tight">
-                MYSA Luxe Villas — <span className="italic font-serif-luxury text-[#dfb776]">Official Walkthrough Video</span>
+              <h2 className="font-serif-luxury text-2xl sm:text-4xl font-normal text-[#1a1918] tracking-tight">
+                MYSA Luxe Villas — <span className="italic font-serif-luxury text-[#c59b67]">Official Walkthrough Video</span>
               </h2>
             </div>
-            <p className="text-xs font-mono text-gray-400 max-w-md">
+            <p className="text-xs font-mono text-[#68625d] max-w-md text-left md:text-right">
               Watch the full-length architectural video tour of MYSA Luxe Villas on East Coast Road, showcasing double-height living spaces, master loft suites, and private poolside decks.
             </p>
           </div>
 
           {/* YouTube Video Player Container */}
-          <div className="relative w-full aspect-video bg-black rounded-sm overflow-hidden border border-white/10 shadow-2xl">
+          <div className="relative w-full aspect-video bg-[#eae5dc] rounded-[16px] overflow-hidden border border-[#eae4db] shadow-md">
             <iframe
               src="https://www.youtube.com/embed/XuMGAoSu3HE?rel=0&modestbranding=1"
               title="MYSA Luxe Villas Official Walkthrough & Cinematic Film"
@@ -971,7 +971,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
             />
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 mt-4 px-2 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-4 px-2 text-[10px] font-mono text-[#8c827a] uppercase tracking-widest">
             <div>MYSA LUXE VILLAS • VETTUVANKENI ECR</div>
             <div className="flex items-center gap-4">
               <span>HD 1080P ARCHITECTURAL FILM</span>
@@ -983,41 +983,41 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 9. Frequently Asked Questions */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="text-center mb-12">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-2">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             COMMON INQUIRIES
           </div>
-          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-white tracking-tight mb-3">
-            Frequently Asked <span className="italic font-serif-luxury text-[#dfb776]">Questions</span>
+          <h2 className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#1a1918] tracking-tight mb-3">
+            Frequently Asked <span className="italic font-serif-luxury text-[#c59b67]">Questions</span>
           </h2>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-[#68625d]">
             Everything you need to know about purchasing a MYSA Luxe Villa.
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-3 max-w-3xl mx-auto">
           {faqItems.map((faq, index) => {
             const isOpen = openFaqIndex === index;
             return (
               <div
                 key={index}
-                className="bg-[#121418] rounded-sm border border-white/10 overflow-hidden transition-all shadow-xl"
+                className="bg-white rounded-[16px] border border-[#eae4db] overflow-hidden transition-all shadow-xs"
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-white/5 transition-colors"
+                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#faf8f5] transition-colors"
                 >
-                  <span className="font-serif-luxury text-sm sm:text-base text-white">
+                  <span className="font-serif-luxury text-sm sm:text-base text-[#1a1918]">
                     {faq.question}
                   </span>
-                  <div className="w-7 h-7 rounded-sm border border-white/15 flex items-center justify-center shrink-0 text-gray-400">
-                    {isOpen ? <ChevronUp className="w-4 h-4 text-[#dfb776]" /> : <ChevronDown className="w-4 h-4" />}
+                  <div className="w-7 h-7 rounded-full border border-[#eae4db] flex items-center justify-center shrink-0 text-[#68625d]">
+                    {isOpen ? <ChevronUp className="w-4 h-4 text-[#c59b67]" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/10 bg-black/30 font-light text-left">
+                  <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-[#68625d] leading-relaxed border-t border-[#f0ece4] bg-[#fbf9f6] font-light text-left">
                     {faq.answer}
                   </div>
                 )}
@@ -1028,23 +1028,16 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 10. Bottom CTA Banner */}
-      <section className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
-        <div className="relative rounded-sm overflow-hidden p-8 sm:p-14 text-white shadow-2xl min-h-[300px] flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10 dark-overlay-card">
-          <img
-            src="/images/mysa3d/mysa.jpg"
-            alt="MYSA Villa Banner"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
-
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
+        <div className="relative rounded-[32px] overflow-hidden p-8 sm:p-14 text-[#1a1918] bg-[#f4f0eb] border border-[#e5ded4] shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="relative z-10 max-w-2xl text-center md:text-left">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#dfb776] font-semibold mb-2 block">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#c59b67] font-semibold mb-2 block">
               LIMITED AVAILABILITY • 3 OF 6 VILLAS REMAINING
             </span>
-            <h3 className="font-serif-luxury text-3xl sm:text-4xl font-normal mb-3 leading-tight text-white">
+            <h3 className="font-serif-luxury text-3xl sm:text-4xl font-normal mb-3 leading-tight text-[#1a1918]">
               Interested in MYSA Luxe Villas?
             </h3>
-            <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#68625d] font-light leading-relaxed">
               Contact us today to schedule a private viewing and learn more about this exclusive project — and receive detailed brochure information.
             </p>
           </div>
@@ -1052,7 +1045,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
           <div className="relative z-10 shrink-0">
             <button
               onClick={onOpenContact}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-[#dfb776] text-[#0b0c0e] font-semibold text-xs font-mono uppercase tracking-wider hover:bg-[#c5a880] transition-all shadow-xl cursor-pointer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-[#1a1918] text-white font-semibold text-xs font-mono uppercase tracking-wider hover:bg-[#2b2723] transition-all shadow-sm cursor-pointer"
             >
               <span>Get in Touch →</span>
             </button>

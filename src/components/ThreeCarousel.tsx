@@ -31,27 +31,27 @@ export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ theme = 'dark', on
     <section
       id="gallery"
       className={`py-10 sm:py-14 relative overflow-hidden border-t transition-colors duration-500 ${
-        isLight ? 'bg-[#f8f9fb] text-[#121418] border-black/10' : 'bg-[#0b0c0e] text-white border-white/10'
+        isLight ? 'bg-[#faf8f5] text-[#1a1918] border-[#eae4db]' : 'bg-[#0b0c0e] text-white border-white/10'
       }`}
     >
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <div className={`text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] mb-3 flex items-center justify-center gap-2 ${
-            isLight ? 'text-[#9b6f1e] font-semibold' : 'text-[#dfb776]'
+            isLight ? 'text-[#c59b67] font-semibold' : 'text-[#dfb776]'
           }`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-[#9b6f1e]' : 'bg-[#dfb776]'}`} />
+            <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-[#c59b67]' : 'bg-[#dfb776]'}`} />
             <span>FEATURED VILLA LIFESTYLE</span>
           </div>
 
           <h2 className={`font-serif-luxury text-3xl sm:text-5xl font-normal tracking-tight mb-4 ${
-            isLight ? 'text-gray-950' : 'text-white'
+            isLight ? 'text-[#1a1918]' : 'text-white'
           }`}>
-            A Glimpse of Our <span className={`italic font-serif-luxury ${isLight ? 'text-[#9b6f1e]' : 'text-[#dfb776]'}`}>Dream Homes</span>
+            A Glimpse of Our <span className={`italic font-serif-luxury ${isLight ? 'text-[#c59b67]' : 'text-[#dfb776]'}`}>Dream Homes</span>
           </h2>
 
-          <p className={`text-xs sm:text-sm leading-relaxed max-w-xl mx-auto ${
-            isLight ? 'text-gray-700' : 'text-gray-400'
+          <p className={`text-xs sm:text-sm leading-relaxed max-w-xl mx-auto font-light ${
+            isLight ? 'text-[#68625d]' : 'text-gray-400'
           }`}>
             Experience the peace, 24/7 gated security, and luxury of Chennai’s premier independent villa communities.
           </p>
@@ -65,11 +65,13 @@ export const ThreeCarousel: React.FC<ThreeCarouselProps> = ({ theme = 'dark', on
                   setSelectedCategory(cat);
                   setCurrentIndex(0);
                 }}
-                className={`px-3.5 py-1.5 rounded-sm text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-full text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
+                    ? isLight
+                      ? 'bg-[#1a1918] text-white font-semibold shadow-sm'
+                      : 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
                     : isLight
-                      ? 'bg-white text-gray-800 hover:text-black border border-black/15 hover:border-black/30 shadow-xs'
+                      ? 'bg-white text-[#68625d] hover:text-[#1a1918] border border-[#d8cebe]'
                       : 'bg-[#121418] text-gray-400 hover:text-white border border-white/10'
                 }`}
               >

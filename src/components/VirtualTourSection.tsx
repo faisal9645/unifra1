@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Sparkles, Compass, Eye, Volume2, Move } from 'lucide-react';
+import { Play, Sparkles } from 'lucide-react';
 
 interface VirtualTourSectionProps {
   onOpenVirtualTour: () => void;
@@ -7,13 +7,13 @@ interface VirtualTourSectionProps {
 
 export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVirtualTour }) => {
   return (
-    <section id="virtual-tour" className="py-10 sm:py-14 bg-[#0b0c0e] text-white relative overflow-hidden border-t border-white/10">
+    <section id="virtual-tour" className="py-14 sm:py-20 bg-[#faf8f5] text-[#1a1918] relative overflow-hidden border-t border-[#eae4db]">
       {/* Background Architectural Blueprint Line Art */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.05] flex items-center justify-center">
+      <div className="absolute inset-0 pointer-events-none opacity-20 flex items-center justify-center">
         <svg
           viewBox="0 0 1000 700"
-          className="w-full h-full max-w-5xl object-contain stroke-[#dfb776] fill-none"
-          strokeWidth="1.2"
+          className="w-full h-full max-w-5xl object-contain stroke-[#c59b67] fill-none"
+          strokeWidth="0.8"
         >
           {/* Villa Blueprint Isometric Lines */}
           <polygon points="500,80 850,220 850,560 500,420" />
@@ -32,20 +32,20 @@ export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVi
         </svg>
       </div>
 
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 relative z-10">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 relative z-10">
         {/* Section Title */}
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#dfb776] mb-3 flex items-center justify-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#dfb776] rounded-full" />
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-3 flex items-center justify-center gap-2">
+            <span className="w-1.5 h-1.5 bg-[#c59b67] rounded-full" />
             <span>INTERACTIVE SPATIAL EXPERIENCE</span>
           </div>
 
-          <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-white tracking-tight mb-4">
-            Experience <span className="italic font-serif-luxury text-[#dfb776]">Unifra</span>
+          <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-[#1a1918] tracking-tight mb-4">
+            Experience <span className="italic font-serif-luxury text-[#c59b67]">Unifra</span>
           </h2>
 
-          <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
-            Explore our vision for luxury gated villa living, architectural design, and peaceful coastal home environments.
+          <p className="text-[#68625d] text-xs sm:text-sm leading-relaxed max-w-xl mx-auto font-light">
+            Explore our vision for luxury gated villa living, architectural discipline, and peaceful coastal home environments.
           </p>
         </div>
 
@@ -53,54 +53,56 @@ export const VirtualTourSection: React.FC<VirtualTourSectionProps> = ({ onOpenVi
         <div className="max-w-4xl mx-auto">
           <div
             onClick={onOpenVirtualTour}
-            className="group relative rounded-sm overflow-hidden shadow-2xl bg-[#121418] cursor-pointer border border-white/10 hover:border-[#dfb776]/50 transform hover:-translate-y-1 transition-all duration-500 dark-overlay-card"
+            className="group relative rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl bg-white cursor-pointer border border-[#eae4db] hover:border-[#c59b67] transform hover:-translate-y-1 transition-all duration-500"
           >
             {/* High-res interior video poster image */}
-            <img
-              src="/images/mysa3d/LIVING-VIEW1.jpg"
-              alt="Unifra Architectural Villa Showcase & Cinematic Film"
-              className="w-full h-[320px] sm:h-[460px] lg:h-[520px] object-cover group-hover:scale-105 transition-transform duration-700"
-              loading="lazy"
-            />
+            <div className="relative h-[340px] sm:h-[480px] lg:h-[540px] overflow-hidden">
+              <img
+                src="/images/mysa3d/LIVING-VIEW1.jpg"
+                alt="Unifra Architectural Villa Showcase & Cinematic Film"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
 
-            {/* Dark gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/20" />
+              {/* Lighting gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-            {/* Play Button in Center */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="relative flex items-center justify-center">
-                <div className="absolute -inset-4 rounded-full bg-[#dfb776]/20 animate-ping opacity-75" />
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#dfb776] text-[#0b0c0e] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110">
-                  <Play className="w-6 h-6 sm:w-7 sm:h-7 ml-1 fill-current" />
+              {/* Play Button in Center */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute -inset-4 rounded-full bg-white/30 animate-ping opacity-75" />
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-[#1a1918] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-[#1a1918] group-hover:text-white">
+                    <Play className="w-6 h-6 sm:w-7 sm:h-7 ml-1 fill-current" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Top Bar Badges */}
-            <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center gap-2">
-              <span className="px-3 py-1 rounded-sm bg-red-600 text-white text-[10px] font-mono tracking-wider font-semibold flex items-center gap-1.5 shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                <span>OFFICIAL YOUTUBE VILLA FILM</span>
-              </span>
-              <span className="px-3 py-1 rounded-sm bg-black/70 backdrop-blur-md text-gray-300 text-[10px] font-mono tracking-wider border border-white/10 hidden sm:flex items-center gap-1.5">
-                <Sparkles className="w-3 h-3 text-[#dfb776]" />
-                <span>UNIFRA LIFESTYLE</span>
-              </span>
-            </div>
+              {/* Top Bar Badges */}
+              <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center gap-2">
+                <span className="px-3 py-1 rounded-full bg-red-600 text-white text-[10px] font-mono tracking-wider font-semibold flex items-center gap-1.5 shadow-md">
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                  <span>OFFICIAL YOUTUBE VILLA FILM</span>
+                </span>
+                <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[#1a1918] text-[10px] font-mono tracking-wider border border-[#eae4db] hidden sm:flex items-center gap-1.5 shadow-sm">
+                  <Sparkles className="w-3 h-3 text-[#c59b67]" />
+                  <span>UNIFRA LIFESTYLE</span>
+                </span>
+              </div>
 
-            {/* Bottom Caption Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white text-left">
-              <h3 className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white mb-1">
-                Unifra Architectural Vision & Cinematic Villa Showcase
-              </h3>
-              <p className="text-gray-300 text-xs sm:text-sm font-light">
-                Watch the official full-length architectural video film showcasing Unifra's design philosophy and peaceful gated community living.
-              </p>
+              {/* Bottom Caption Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white text-left">
+                <h3 className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white mb-1.5 drop-shadow">
+                  Unifra Architectural Vision & Cinematic Villa Showcase
+                </h3>
+                <p className="text-white/80 text-xs sm:text-sm font-light drop-shadow">
+                  Watch the official full-length architectural video film showcasing Unifra's design philosophy and peaceful gated community living.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Quick specs pill bar beneath */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mt-6 px-4 text-[10px] sm:text-[11px] font-mono text-gray-500 uppercase tracking-widest">
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-6 px-4 text-[10px] sm:text-[11px] font-mono text-[#8c827a] uppercase tracking-widest">
             <div>360° SPATIAL WALKTHROUGH READY</div>
             <div className="flex items-center gap-4">
               <span>DOLBY ATMOS AUDIO</span>

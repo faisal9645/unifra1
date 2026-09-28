@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, AppPage } from './components/Navbar';
+import { UnifraEditorialTemplate } from './components/UnifraEditorialTemplate';
 import { UnifraCompanyHero } from './components/UnifraCompanyHero';
 import { ThreeHeroVilla } from './components/ThreeHeroVilla';
 import { ThreeCarousel } from './components/ThreeCarousel';
@@ -35,13 +36,13 @@ import { MessageCircle, Phone, ArrowUp } from 'lucide-react';
 function AppContent() {
   const { scrollTo } = useLenis();
 
-  // Permanent Dark Luxury Theme
-  const theme = 'dark';
+  // Editorial Ivory Luxury Theme
+  const theme = 'light';
 
   useEffect(() => {
-    document.body.classList.remove('theme-light');
+    document.body.classList.add('theme-light');
     try {
-      localStorage.setItem('unifra_theme', 'dark');
+      localStorage.setItem('unifra_theme', 'light');
     } catch {
       // ignore
     }
@@ -160,9 +161,9 @@ function AppContent() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0b0c0e] text-[#f3f4f6] font-sans antialiased selection:bg-[#dfb776]/30 selection:text-white">
+    <div className="relative min-h-screen bg-[#faf8f5] text-[#1a1918] font-sans antialiased selection:bg-[#c59b67]/25 selection:text-[#1a1918]">
       {/* Precision Luxury Custom Cursor */}
-      <CustomCursor accentColor="#dfb776" />
+      <CustomCursor accentColor="#c59b67" />
 
       {/* 1. Global Navigation Bar */}
       <Navbar
@@ -176,26 +177,20 @@ function AppContent() {
       {/* 2. Main Body Content Based on Active Page */}
       <main className="relative">
         {currentPage === 'home' && (
-          <>
-            {/* Hero Section: Unifra Company Brand Showcase */}
-            <UnifraCompanyHero
-              theme={theme}
-              onExploreProjects={() => handleNavigatePage('projects')}
-              onNavigateOurStory={() => handleNavigatePage('about-story')}
-              onBookTour={() => handleOpenConsultation()}
-            />
-
-            {/* 3D Coverflow / Cylindrical Gallery: "A Glimpse of Our Dream Homes" */}
-            <div id="dream-homes">
-              <ThreeCarousel theme={theme} onSelectImage={(item) => setSelectedGalleryItem(item)} />
-            </div>
-
-            {/* Editorial Architectural Lifestyle Sections (Screenshot 7 & 6 combined) */}
-            <EditorialSections
-              onOpenConsultation={() => handleOpenConsultation()}
-              onNavigatePage={handleNavigatePage}
-            />
-          </>
+          <UnifraEditorialTemplate
+            onOpenConsultation={() => handleOpenConsultation()}
+            onNavigatePage={handleNavigatePage}
+            onOpenVillaAccess={(source) => handleOpenVillaShowcase(null, source || 'Editorial Home — Mysa Villas')}
+            onSelectProject={(project) => {
+              if (project.id === 'mysa' || project.id === 'mysa-villas') {
+                handleOpenVillaShowcase(project, 'Editorial Home — Select Card');
+              } else {
+                setSelectedProjectForVisit(project);
+                setIsConsultationOpen(true);
+              }
+            }}
+            isVillaUnlocked={isVillaUnlocked}
+          />
         )}
 
         {currentPage === 'about-story' && (
@@ -294,7 +289,7 @@ function AppContent() {
         {showScrollTop && (
           <button
             onClick={() => scrollTo(0, { duration: 1.2 })}
-            className="w-10 h-10 rounded-sm bg-[#121418] backdrop-blur border border-white/20 text-gray-300 shadow-lg flex items-center justify-center hover:border-[#dfb776] hover:text-[#dfb776] transition-all cursor-pointer"
+            className="w-10 h-10 rounded-full bg-white/95 backdrop-blur-md border border-[#d8cebe] text-[#1a1918] shadow-lg flex items-center justify-center hover:border-[#c59b67] hover:text-[#c59b67] hover:bg-[#f4f0eb] transition-all cursor-pointer"
             title="Scroll to top"
           >
             <ArrowUp className="w-4 h-4" />

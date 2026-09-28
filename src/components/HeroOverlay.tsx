@@ -31,7 +31,7 @@ export const HeroOverlay: React.FC<HeroOverlayProps> = ({
       <div className="h-16" />
 
       {/* Center Grid: Left Title & CTAs (Screenshot 7 & 6), Right Architectural Spec HUD Card */}
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 my-auto pt-8 sm:pt-12">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 my-auto pt-8 sm:pt-12">
         {/* Left Column matching screenshot 7 & 6 */}
         <div className="max-w-2xl text-left">
           {/* Eyebrow */}
@@ -274,7 +274,7 @@ export const HeroOverlay: React.FC<HeroOverlayProps> = ({
       )}
 
       {/* Bottom Bar: "SCROLL TO DISCOVER", "EAST COAST ROAD / VETTUVANKENI", and Concierge Actions */}
-      <div className={`w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 flex flex-col sm:flex-row items-center justify-between border-t pt-4 mt-auto gap-3 ${
+      <div className={`w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 flex flex-col sm:flex-row items-center justify-between border-t pt-4 mt-auto gap-3 ${
         isLight ? 'border-black/15' : 'border-white/10'
       }`}>
         <div className="flex items-center gap-3">

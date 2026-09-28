@@ -144,31 +144,31 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
   const activeLocation = project ? project.location : 'Vettuvankeni, ECR Chennai';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-[#121418] rounded-sm shadow-2xl border border-[#dfb776]/40 overflow-hidden text-[#f3f4f6]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl bg-[#faf8f5] rounded-[24px] shadow-2xl border border-[#eae4db] overflow-hidden text-[#1a1918]">
         {/* Subtle decorative glow */}
-        <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#dfb776]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#c59b67]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Modal Header */}
-        <div className="bg-[#0b0c0e] p-6 sm:p-7 flex items-start justify-between border-b border-white/10 relative z-10">
+        <div className="bg-[#f4f0eb] p-6 sm:p-7 flex items-start justify-between border-b border-[#eae4db] relative z-10">
           <div className="text-left">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm bg-[#dfb776]/15 border border-[#dfb776]/40 text-[#dfb776] text-[10px] font-mono uppercase tracking-widest font-semibold">
-                <KeyRound className="w-3 h-3 text-[#dfb776]" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm bg-[#c59b67]/15 border border-[#c59b67]/40 text-[#c59b67] text-[10px] font-mono uppercase tracking-widest font-semibold">
+                <KeyRound className="w-3 h-3 text-[#c59b67]" />
                 <span>EXCLUSIVE VILLA SHOWCASE ACCESS</span>
               </span>
             </div>
-            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-white">
+            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#1a1918]">
               Unlock {activeProjectName}
             </h3>
-            <p className="text-gray-400 text-xs mt-1.5 font-light leading-relaxed max-w-md">
+            <p className="text-[#68625d] text-xs mt-1.5 font-light leading-relaxed max-w-md">
               Submit your details to gain instant access to architectural floorplans, high-res galleries, unit availability, and pricing schedules.
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 rounded-sm border border-white/10 hover:border-[#dfb776] text-gray-400 hover:text-white transition-colors cursor-pointer flex-shrink-0 ml-3"
+            className="p-2 rounded-sm border border-[#d8cebe] hover:border-[#1a1918] text-[#68625d] hover:text-[#1a1918] transition-colors cursor-pointer flex-shrink-0 ml-3"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
@@ -179,30 +179,30 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
         <div className="p-6 sm:p-7 max-h-[78vh] overflow-y-auto relative z-10">
           {isGranted ? (
             <div className="text-center py-10 space-y-4 animate-in fade-in zoom-in duration-300">
-              <div className="w-16 h-16 rounded-full bg-[#dfb776]/20 border border-[#dfb776] text-[#dfb776] flex items-center justify-center mx-auto shadow-xl">
+              <div className="w-16 h-16 rounded-full bg-[#c59b67]/20 border border-[#c59b67] text-[#c59b67] flex items-center justify-center mx-auto shadow-md">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#dfb776] block mb-1">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#c59b67] block mb-1">
                   ACCESS GRANTED
                 </span>
-                <h4 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-white">
+                <h4 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#1a1918]">
                   Welcome to {activeProjectName}
                 </h4>
               </div>
-              <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#68625d] max-w-md mx-auto leading-relaxed font-light">
                 Your credentials have been verified. Opening the full architectural showcase and floorplans...
               </p>
-              <div className="pt-2 flex items-center justify-center gap-2 text-xs font-mono text-[#dfb776]">
-                <span className="w-2 h-2 rounded-full bg-[#dfb776] animate-ping" />
+              <div className="pt-2 flex items-center justify-center gap-2 text-xs font-mono text-[#c59b67]">
+                <span className="w-2 h-2 rounded-full bg-[#c59b67] animate-ping" />
                 <span>Redirecting to Villa Showcase...</span>
               </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 text-left">
               {/* Project Preview Badge */}
-              <div className="p-3.5 rounded-sm bg-black/40 border border-white/10 flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-sm overflow-hidden bg-black flex-shrink-0 border border-white/10">
+              <div className="p-3.5 rounded-sm bg-white border border-[#eae4db] flex items-center gap-3.5 shadow-xs">
+                <div className="w-12 h-12 rounded-sm overflow-hidden bg-[#eae5dc] flex-shrink-0 border border-[#eae4db]">
                   <img
                     src={project?.imageUrl || '/images/mysa3d/02A.jpg'}
                     alt={activeProjectName}
@@ -210,14 +210,14 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
                   />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-white text-xs font-semibold truncate font-serif-luxury">
+                  <div className="text-[#1a1918] text-xs font-semibold truncate font-serif-luxury">
                     {activeProjectName}
                   </div>
-                  <div className="text-[11px] text-[#dfb776] flex items-center gap-1 font-mono truncate">
+                  <div className="text-[11px] text-[#c59b67] flex items-center gap-1 font-mono truncate">
                     <MapPin className="w-3 h-3 shrink-0" />
                     <span>{activeLocation}</span>
                   </div>
-                  <div className="text-[10px] text-gray-400 font-light mt-0.5">
+                  <div className="text-[10px] text-[#8c827a] font-light mt-0.5">
                     4 & 5 BHK Swedish Coastal Villas • 3 of 6 Available
                   </div>
                 </div>
@@ -225,43 +225,43 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
 
               {/* What You'll Unlock Pills */}
               <div className="grid grid-cols-3 gap-2 py-1">
-                <div className="p-2 rounded-sm bg-[#0b0c0e] border border-white/5 text-center">
-                  <div className="text-[9px] font-mono text-gray-400 uppercase tracking-wider">FLOORPLANS</div>
-                  <div className="text-[11px] text-[#dfb776] font-semibold mt-0.5">G + 2 Layouts</div>
+                <div className="p-2 rounded-sm bg-white border border-[#eae4db] text-center">
+                  <div className="text-[9px] font-mono text-[#8c827a] uppercase tracking-wider">FLOORPLANS</div>
+                  <div className="text-[11px] text-[#1a1918] font-semibold mt-0.5">G + 2 Layouts</div>
                 </div>
-                <div className="p-2 rounded-sm bg-[#0b0c0e] border border-white/5 text-center">
-                  <div className="text-[9px] font-mono text-gray-400 uppercase tracking-wider">PRICING</div>
-                  <div className="text-[11px] text-[#dfb776] font-semibold mt-0.5">From ₹5.85 Cr*</div>
+                <div className="p-2 rounded-sm bg-white border border-[#eae4db] text-center">
+                  <div className="text-[9px] font-mono text-[#8c827a] uppercase tracking-wider">PRICING</div>
+                  <div className="text-[11px] text-[#c59b67] font-semibold mt-0.5">From ₹5.85 Cr*</div>
                 </div>
-                <div className="p-2 rounded-sm bg-[#0b0c0e] border border-white/5 text-center">
-                  <div className="text-[9px] font-mono text-gray-400 uppercase tracking-wider">PROGRESS</div>
-                  <div className="text-[11px] text-[#dfb776] font-semibold mt-0.5">Live On-Site</div>
+                <div className="p-2 rounded-sm bg-white border border-[#eae4db] text-center">
+                  <div className="text-[9px] font-mono text-[#8c827a] uppercase tracking-wider">PROGRESS</div>
+                  <div className="text-[11px] text-[#1a1918] font-semibold mt-0.5">Live On-Site</div>
                 </div>
               </div>
 
               {errorMessage && (
-                <div className="p-2.5 rounded-sm bg-red-950/50 border border-red-500/40 text-red-300 text-xs">
+                <div className="p-2.5 rounded-sm bg-red-50 border border-red-200 text-red-700 text-xs">
                   {errorMessage}
                 </div>
               )}
 
               {/* Notice that Phone & Email are mainly required */}
-              <div className="p-3 rounded-sm bg-[#dfb776]/10 border border-[#dfb776]/30 flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-[#dfb776] shrink-0 mt-0.5" />
-                <div className="text-[11px] text-gray-300 font-light leading-snug">
-                  <span className="font-semibold text-white">Direct Verification:</span> Enter your <span className="text-[#dfb776] font-semibold">Phone Number</span> and <span className="text-[#dfb776] font-semibold">Email Address</span> below to immediately unlock the villa page, architectural plans, and view stored records in <span className="font-mono text-[#dfb776]">/admin</span>.
+              <div className="p-3 rounded-sm bg-[#f4f0eb] border border-[#eae4db] flex items-start gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-[#c59b67] shrink-0 mt-0.5" />
+                <div className="text-[11px] text-[#68625d] font-light leading-snug">
+                  <span className="font-semibold text-[#1a1918]">Direct Verification:</span> Enter your <span className="text-[#1a1918] font-semibold">Phone Number</span> and <span className="text-[#1a1918] font-semibold">Email Address</span> below to immediately unlock the villa page, architectural plans, and view stored records in <span className="font-mono text-[#c59b67]">/admin</span>.
                 </div>
               </div>
 
               {/* Primary Fields: Phone Number & Email Address (Mainly Required) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono tracking-widest uppercase text-[#dfb776] font-semibold flex items-center justify-between">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-[#1a1918] font-semibold flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
-                      <Phone className="w-3 h-3 text-[#dfb776]" />
+                      <Phone className="w-3 h-3 text-[#c59b67]" />
                       <span>PHONE NUMBER *</span>
                     </span>
-                    <span className="text-[9px] text-[#dfb776]/80 lowercase font-mono">required</span>
+                    <span className="text-[9px] text-[#8c827a] lowercase font-mono">required</span>
                   </label>
                   <input
                     type="tel"
@@ -269,17 +269,17 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
                     placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded-sm border border-[#dfb776]/40 focus:outline-none focus:border-[#dfb776] bg-[#0b0c0e] text-white text-xs font-mono placeholder:text-gray-600 transition-colors shadow-inner"
+                    className="w-full px-3 py-2.5 rounded-sm border border-[#d8cebe] focus:outline-none focus:border-[#1a1918] bg-white text-[#1a1918] text-xs font-mono placeholder:text-[#8c827a] transition-colors shadow-xs"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono tracking-widest uppercase text-[#dfb776] font-semibold flex items-center justify-between">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-[#1a1918] font-semibold flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
-                      <Mail className="w-3 h-3 text-[#dfb776]" />
+                      <Mail className="w-3 h-3 text-[#c59b67]" />
                       <span>EMAIL ADDRESS *</span>
                     </span>
-                    <span className="text-[9px] text-[#dfb776]/80 lowercase font-mono">required</span>
+                    <span className="text-[9px] text-[#8c827a] lowercase font-mono">required</span>
                   </label>
                   <input
                     type="email"
@@ -287,7 +287,7 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
                     placeholder="name@domain.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded-sm border border-[#dfb776]/40 focus:outline-none focus:border-[#dfb776] bg-[#0b0c0e] text-white text-xs placeholder:text-gray-600 transition-colors shadow-inner"
+                    className="w-full px-3 py-2.5 rounded-sm border border-[#d8cebe] focus:outline-none focus:border-[#1a1918] bg-white text-[#1a1918] text-xs placeholder:text-[#8c827a] transition-colors shadow-xs"
                   />
                 </div>
               </div>
@@ -295,31 +295,31 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
               {/* Secondary Fields: Name & City */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono tracking-widest uppercase text-gray-400 flex items-center justify-between">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-[#68625d] flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
-                      <User className="w-3 h-3 text-gray-400" />
+                      <User className="w-3 h-3 text-[#8c827a]" />
                       <span>FULL NAME</span>
                     </span>
-                    <span className="text-[9px] text-gray-500 lowercase font-mono">optional</span>
+                    <span className="text-[9px] text-[#8c827a] lowercase font-mono">optional</span>
                   </label>
                   <input
                     type="text"
                     placeholder="E.g. Siddharth Rao (Optional)"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded-sm border border-white/15 focus:outline-none focus:border-[#dfb776] bg-[#0b0c0e] text-white text-xs placeholder:text-gray-600 transition-colors"
+                    className="w-full px-3 py-2.5 rounded-sm border border-[#d8cebe] focus:outline-none focus:border-[#1a1918] bg-white text-[#1a1918] text-xs placeholder:text-[#8c827a] transition-colors"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
-                    <Building className="w-3 h-3 text-gray-400" />
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-[#68625d] flex items-center gap-1.5">
+                    <Building className="w-3 h-3 text-[#8c827a]" />
                     <span>CURRENT CITY</span>
                   </label>
                   <select
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded-sm border border-white/15 focus:outline-none focus:border-[#dfb776] bg-[#0b0c0e] text-white text-xs cursor-pointer transition-colors"
+                    className="w-full px-3 py-2.5 rounded-sm border border-[#d8cebe] focus:outline-none focus:border-[#1a1918] bg-white text-[#1a1918] text-xs cursor-pointer transition-colors"
                   >
                     <option value="Chennai">Chennai (Local Resident)</option>
                     <option value="Bengaluru">Bengaluru / Karnataka</option>
@@ -336,8 +336,8 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
 
               {/* Timeline for Purchase */}
               <div className="space-y-1.5">
-                <label className="text-[10px] font-mono tracking-widest uppercase text-gray-300 flex items-center gap-1.5">
-                  <Clock className="w-3 h-3 text-[#dfb776]" />
+                <label className="text-[10px] font-mono tracking-widest uppercase text-[#68625d] flex items-center gap-1.5">
+                  <Clock className="w-3 h-3 text-[#c59b67]" />
                   <span>ESTIMATED PURCHASE TIMELINE</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
@@ -353,8 +353,8 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
                       onClick={() => setFormData({ ...formData, timeline: option })}
                       className={`p-2 rounded-sm border text-center transition-all cursor-pointer ${
                         formData.timeline === option
-                          ? 'border-[#dfb776] bg-[#dfb776]/15 text-[#dfb776] font-semibold'
-                          : 'border-white/10 bg-[#0b0c0e] text-gray-400 hover:text-white hover:border-white/25'
+                          ? 'border-[#1a1918] bg-[#1a1918] text-white font-semibold'
+                          : 'border-[#eae4db] bg-white text-[#68625d] hover:text-[#1a1918] hover:border-[#d8cebe]'
                       }`}
                     >
                       {option}
@@ -364,8 +364,8 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
               </div>
 
               {/* Confidentiality Notice */}
-              <div className="pt-2 flex items-center gap-2 text-[11px] text-gray-400 font-light">
-                <Shield className="w-3.5 h-3.5 text-[#dfb776] shrink-0" />
+              <div className="pt-2 flex items-center gap-2 text-[11px] text-[#8c827a] font-light">
+                <Shield className="w-3.5 h-3.5 text-[#c59b67] shrink-0" />
                 <span>Your information remains strictly confidential with Unifra Private Client Advisory.</span>
               </div>
 
@@ -373,11 +373,11 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full mt-2 py-4 rounded-sm bg-[#dfb776] hover:bg-[#c5a880] text-[#0b0c0e] text-xs font-mono uppercase tracking-[0.2em] font-bold transition-all duration-300 shadow-2xl cursor-pointer flex items-center justify-center gap-2 group disabled:opacity-50"
+                className="w-full mt-2 py-4 rounded-sm bg-[#1a1918] hover:bg-[#2b2723] text-white text-xs font-mono uppercase tracking-[0.2em] font-semibold transition-all duration-300 shadow-md cursor-pointer flex items-center justify-center gap-2 group disabled:opacity-50"
               >
-                <Eye className="w-4 h-4" />
+                <Eye className="w-4 h-4 text-[#c59b67]" />
                 <span>{isSubmitting ? 'VERIFYING DETAILS...' : 'UNLOCK & VIEW VILLA SHOWCASE'}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#c59b67]" />
               </button>
             </form>
           )}

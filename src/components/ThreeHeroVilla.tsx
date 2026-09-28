@@ -63,7 +63,7 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
     <section
       id="hero"
       className={`relative w-full h-screen min-h-[680px] lg:min-h-[740px] flex flex-col justify-between pt-20 sm:pt-24 pb-0 overflow-hidden transition-colors duration-500 ${
-        isLight ? 'bg-[#ebf2f8]' : 'bg-[#0b0c0e]'
+        isLight ? 'bg-[#faf8f5]' : 'bg-[#0b0c0e]'
       }`}
     >
       {/* Background 4K Architectural Render - Full View Edge-to-Edge */}
@@ -96,7 +96,7 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
       <div className={`relative z-20 w-full border-b backdrop-blur-md shrink-0 transition-colors ${
         isLight ? 'bg-white/80 border-black/10 text-gray-900' : 'bg-black/40 border-white/10 text-white'
       }`}>
-        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-3">
+        <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-3">
           {/* Left: Render Category & Index */}
           <div className="flex items-center gap-2.5">
             <span className="w-2 h-2 rounded-full bg-[#dfb776] animate-pulse" />
@@ -166,7 +166,7 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
       </div>
 
       {/* 2. MAIN CENTER BODY: Editorial Typography & Signature HUD Card (Container aligned, fill height) */}
-      <div className="relative z-10 flex-1 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-4 sm:py-6 lg:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center overflow-y-auto">
+      <div className="relative z-10 flex-1 w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 py-4 sm:py-6 lg:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center overflow-y-auto">
         {/* Left Column: Brand Typography & CTAs */}
         <div key={currentItem.id} className="lg:col-span-7 xl:col-span-7 text-left max-w-2xl animate-in fade-in duration-500">
           {/* Eyebrow */}
@@ -337,8 +337,10 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
       </div>
 
       {/* 3. BOTTOM STRIP: 11 Authentic 4K Render Thumbnails & Sub-footer (Pinned at bottom edge) */}
-      <div className="relative z-20 w-full bg-black/60 backdrop-blur-md border-t border-white/10 py-3 sm:py-4 shrink-0 mt-auto">
-        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-3">
+      <div className={`relative z-20 w-full backdrop-blur-md border-t py-3 sm:py-4 shrink-0 mt-auto transition-colors ${
+        isLight ? 'bg-[#faf8f5]/95 border-[#eae4db] text-[#1a1918]' : 'bg-black/60 border-white/10 text-white'
+      }`}>
+        <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 space-y-3">
           {/* Horizontal Thumbnail Switcher Strip */}
           <div className="flex items-center gap-2.5 overflow-x-auto pb-1 scrollbar-none">
             {GALLERY_ITEMS.map((item, idx) => {

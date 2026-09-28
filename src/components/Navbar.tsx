@@ -33,14 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      let scrolled = false;
-      if (currentPage === 'home') {
-        // On home page, header shrinks ONLY AFTER scroll-world 3D animation is completed (past 1.85x window height)
-        const scrollWorldHeight = window.innerHeight * 1.85;
-        scrolled = window.scrollY > scrollWorldHeight;
-      } else {
-        scrolled = window.scrollY > 40;
-      }
+      const scrolled = window.scrollY > 40;
       setIsScrolled(prev => (prev !== scrolled ? scrolled : prev));
     };
 
@@ -66,58 +59,43 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
-      if (projectsTimerRef.current) clearTimeout(projectsTimerRef.current);
-      if (aboutTimerRef.current) clearTimeout(aboutTimerRef.current);
     };
   }, []);
 
+  const handleProjectsToggle = () => {
+    if (projectsTimerRef.current) clearTimeout(projectsTimerRef.current);
+    setProjectsDropdownOpen(prev => !prev);
+    setAboutDropdownOpen(false);
+  };
+
+  const handleAboutToggle = () => {
+    if (aboutTimerRef.current) clearTimeout(aboutTimerRef.current);
+    setAboutDropdownOpen(prev => !prev);
+    setProjectsDropdownOpen(false);
+  };
+
   const handleProjectsMouseEnter = () => {
-    if (projectsTimerRef.current) {
-      clearTimeout(projectsTimerRef.current);
-      projectsTimerRef.current = null;
-    }
+    if (projectsTimerRef.current) clearTimeout(projectsTimerRef.current);
     setProjectsDropdownOpen(true);
+    setAboutDropdownOpen(false);
   };
 
   const handleProjectsMouseLeave = () => {
-    if (projectsTimerRef.current) clearTimeout(projectsTimerRef.current);
-    // 350ms grace timeout prevents sudden disappearing when moving down across boundaries
     projectsTimerRef.current = setTimeout(() => {
       setProjectsDropdownOpen(false);
-    }, 350);
-  };
-
-  const handleProjectsToggle = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (projectsTimerRef.current) {
-      clearTimeout(projectsTimerRef.current);
-      projectsTimerRef.current = null;
-    }
-    setProjectsDropdownOpen(prev => !prev);
+    }, 250);
   };
 
   const handleAboutMouseEnter = () => {
-    if (aboutTimerRef.current) {
-      clearTimeout(aboutTimerRef.current);
-      aboutTimerRef.current = null;
-    }
+    if (aboutTimerRef.current) clearTimeout(aboutTimerRef.current);
     setAboutDropdownOpen(true);
+    setProjectsDropdownOpen(false);
   };
 
   const handleAboutMouseLeave = () => {
-    if (aboutTimerRef.current) clearTimeout(aboutTimerRef.current);
     aboutTimerRef.current = setTimeout(() => {
       setAboutDropdownOpen(false);
-    }, 350);
-  };
-
-  const handleAboutToggle = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (aboutTimerRef.current) {
-      clearTimeout(aboutTimerRef.current);
-      aboutTimerRef.current = null;
-    }
-    setAboutDropdownOpen(prev => !prev);
+    }, 250);
   };
 
   const handleNavClick = (page: AppPage) => {
@@ -128,26 +106,26 @@ export const Navbar: React.FC<NavbarProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isLight = false;
+  const isLight = true;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? 'bg-[#0b0c0e]/95 backdrop-blur-xl border-b border-[#dfb776]/30 py-2.5 sm:py-3 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
+          ? 'bg-[#faf8f5]/92 backdrop-blur-xl border-b border-[#eae4db] py-3 sm:py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.04)]'
           : 'bg-transparent py-4 sm:py-5.5'
       }`}
     >
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
         <div className="flex items-center justify-between">
-          {/* Logo matching screenshot 7 & 6 combination: Gold "U" monogram + "UNIFRA" */}
+          {/* Logo matching editorial luxury template */}
           <button
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-2.5 sm:gap-3 text-left group cursor-pointer focus:outline-none"
           >
             {/* Monogram U Badge */}
             <div
-              className={`border border-[#dfb776] bg-[#dfb776]/10 flex items-center justify-center text-[#dfb776] group-hover:bg-[#dfb776] group-hover:text-[#0b0c0e] transition-all duration-300 rounded-xs ${
+              className={`border border-[#c59b67] bg-[#c59b67]/10 flex items-center justify-center text-[#c59b67] group-hover:bg-[#1a1918] group-hover:text-white group-hover:border-[#1a1918] transition-all duration-300 rounded-xs ${
                 isScrolled ? 'w-7 h-7 sm:w-8 sm:h-8' : 'w-9 h-9 sm:w-10 sm:h-10'
               }`}
             >
@@ -162,14 +140,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <div className="flex flex-col">
               <span
-                className={`font-serif-luxury font-bold tracking-[0.22em] uppercase group-hover:text-[#dfb776] transition-all duration-300 leading-none text-white ${
+                className={`font-serif-luxury font-bold tracking-[0.22em] uppercase transition-all duration-300 leading-none text-[#1a1918] group-hover:text-[#c59b67] ${
                   isScrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'
                 }`}
               >
                 UNIFRA
               </span>
               <span
-                className={`font-mono tracking-[0.32em] text-[#dfb776] uppercase transition-all duration-300 overflow-hidden ${
+                className={`font-mono tracking-[0.32em] text-[#c59b67] uppercase transition-all duration-300 overflow-hidden ${
                   isScrolled
                     ? 'max-h-0 opacity-0 mt-0 text-[0px]'
                     : 'max-h-4 opacity-100 mt-1 text-[6.5px] sm:text-[7.5px]'
@@ -436,18 +414,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 isLight ? 'text-gray-700 hover:text-[#9b6f1e]' : 'text-gray-300 hover:text-[#dfb776]'
               }`}
             >
-              <Phone className="w-3.5 h-3.5 text-[#dfb776]" />
+              <Phone className={`w-3.5 h-3.5 ${isLight ? 'text-[#c59b67]' : 'text-[#dfb776]'}`} />
               <span>+91 73582 22445</span>
             </a>
 
             <button
               onClick={onOpenContact}
-              className={`border border-[#dfb776] hover:border-[#dfb776] bg-[#dfb776] hover:bg-[#c59b4c] text-[#0b0c0e] font-semibold tracking-[0.2em] uppercase rounded-sm transition-all duration-300 cursor-pointer shadow-md flex items-center gap-1.5 ${
-                isScrolled ? 'px-3 py-1.5 text-[10px]' : 'px-4 py-2 text-[10px] sm:text-[11px]'
+              className={`bg-[#1a1918] hover:bg-[#2b2723] text-white font-medium tracking-[0.2em] uppercase rounded-sm transition-all duration-300 cursor-pointer shadow-sm flex items-center gap-2 ${
+                isScrolled ? 'px-3.5 py-2 text-[10px]' : 'px-4 sm:px-5 py-2.5 text-[10px] sm:text-[11px]'
               }`}
             >
               <span>BOOK A PRIVATE TOUR</span>
-              <span className="text-[12px]">↗</span>
+              <span className="text-[11px] text-[#c59b67]">↗</span>
             </button>
           </div>
 
@@ -473,27 +451,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             ? 'opacity-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 -translate-y-4 pointer-events-none'
         } ${
-          isLight ? 'bg-white text-gray-900' : 'bg-[#0b0c0e] text-white'
+          isLight ? 'bg-[#faf8f5] text-[#1a1918]' : 'bg-[#0b0c0e] text-white'
         }`}
       >
         {/* Top Header inside Mobile Menu Drawer */}
         <div className={`px-4 sm:px-8 py-4 sm:py-5 border-b flex items-center justify-between shrink-0 ${
-          isLight ? 'border-black/10' : 'border-white/10'
+          isLight ? 'border-[#eae4db]' : 'border-white/10'
         }`}>
           <button
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-3 text-left group cursor-pointer focus:outline-none"
           >
-            <div className="w-9 h-9 border border-[#dfb776] bg-[#dfb776]/10 flex items-center justify-center text-[#dfb776]">
+            <div className="w-9 h-9 border border-[#c59b67] bg-[#c59b67]/10 flex items-center justify-center text-[#c59b67]">
               <span className="font-serif-luxury text-xl font-bold leading-none">U</span>
             </div>
             <div className="flex flex-col">
               <span className={`font-serif-luxury text-lg font-bold tracking-[0.22em] uppercase ${
-                isLight ? 'text-[#121418]' : 'text-white'
+                isLight ? 'text-[#1a1918]' : 'text-white'
               }`}>
                 UNIFRA
               </span>
-              <span className="text-[6.5px] font-mono tracking-[0.32em] text-[#dfb776] uppercase">
+              <span className="text-[6.5px] font-mono tracking-[0.32em] text-[#c59b67] uppercase">
                 LEGACY OF LUXURY LIVING
               </span>
             </div>
@@ -502,7 +480,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => setMobileMenuOpen(false)}
             className={`p-2 rounded-full border transition-all cursor-pointer ${
-              isLight ? 'border-black/15 text-gray-800 hover:bg-black/5' : 'border-white/15 text-white hover:bg-white/10'
+              isLight ? 'border-[#d8cebe] text-[#1a1918] hover:bg-black/5' : 'border-white/15 text-white hover:bg-white/10'
             }`}
             aria-label="Close menu"
           >
@@ -659,7 +637,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenContact();
               }}
-              className="w-full py-3.5 bg-[#dfb776] hover:bg-[#c5a880] text-[#0b0c0e] text-xs font-bold tracking-[0.2em] uppercase text-center transition-colors rounded-sm shadow-xl cursor-pointer"
+              className="w-full py-4 bg-[#1a1918] hover:bg-[#2b2723] text-white text-xs font-mono tracking-[0.2em] uppercase text-center transition-colors rounded-sm shadow-sm cursor-pointer"
             >
               BOOK PRIVATE TOUR ↗
             </button>
