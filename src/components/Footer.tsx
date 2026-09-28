@@ -45,11 +45,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigatePage, onOpenContact })
       <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 relative z-10">
         {/* Main Grid matching editorial screenshot */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-[#eae4db]">
-          {/* Column 1: Giant UNIFRA. Serif Brand & Philosophy */}
+          {/* Column 1: Official UNIFRA Brand Logo & Philosophy */}
           <div className="lg:col-span-4 space-y-5 text-left">
-            <h2 className="font-serif-luxury text-4xl sm:text-5xl font-bold tracking-[0.08em] text-[#1a1918]">
-              UNIFRA.
-            </h2>
+            <button
+              onClick={() => handleLinkClick('home')}
+              className="cursor-pointer focus:outline-none block group text-left"
+              aria-label="Unifra - Creating Desires"
+            >
+              <img
+                src="/images/unifra-logo-horizontal.png"
+                alt="Unifra Properties - Creating Desires"
+                className="h-11 sm:h-13 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              />
+            </button>
 
             <p className="text-[#68625d] text-xs sm:text-sm font-light leading-relaxed max-w-sm">
               Architectural villas and beachfront sanctuaries crafted for discerning collectors of rare living along Chennai's East Coast Road.

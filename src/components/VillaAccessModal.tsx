@@ -151,19 +151,28 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
 
         {/* Modal Header */}
         <div className="bg-[#f4f0eb] p-6 sm:p-7 flex items-start justify-between border-b border-[#eae4db] relative z-10">
-          <div className="text-left">
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm bg-[#c59b67]/15 border border-[#c59b67]/40 text-[#c59b67] text-[10px] font-mono uppercase tracking-widest font-semibold">
-                <KeyRound className="w-3 h-3 text-[#c59b67]" />
-                <span>EXCLUSIVE VILLA SHOWCASE ACCESS</span>
-              </span>
+          <div className="text-left flex items-start gap-3.5 sm:gap-4">
+            <div className="w-11 h-11 rounded-xs border border-[#c59b67]/30 bg-[#c59b67]/10 p-1 flex items-center justify-center shrink-0">
+              <img
+                src="/images/unifra-emblem.png"
+                alt="Unifra Insignia"
+                className="w-full h-full object-contain"
+              />
             </div>
-            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#1a1918]">
-              Unlock {activeProjectName}
-            </h3>
-            <p className="text-[#68625d] text-xs mt-1.5 font-light leading-relaxed max-w-md">
-              Submit your details to gain instant access to architectural floorplans, high-res galleries, unit availability, and pricing schedules.
-            </p>
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm bg-[#c59b67]/15 border border-[#c59b67]/40 text-[#c59b67] text-[10px] font-mono uppercase tracking-widest font-semibold">
+                  <KeyRound className="w-3 h-3 text-[#c59b67]" />
+                  <span>EXCLUSIVE VILLA SHOWCASE ACCESS</span>
+                </span>
+              </div>
+              <h3 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#1a1918]">
+                Unlock {activeProjectName}
+              </h3>
+              <p className="text-[#68625d] text-xs mt-1.5 font-light leading-relaxed max-w-md">
+                Submit your details to gain instant access to architectural floorplans, high-res galleries, unit availability, and pricing schedules.
+              </p>
+            </div>
           </div>
 
           <button
@@ -179,8 +188,12 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
         <div className="p-6 sm:p-7 max-h-[78vh] overflow-y-auto relative z-10">
           {isGranted ? (
             <div className="text-center py-10 space-y-4 animate-in fade-in zoom-in duration-300">
-              <div className="w-16 h-16 rounded-full bg-[#c59b67]/20 border border-[#c59b67] text-[#c59b67] flex items-center justify-center mx-auto shadow-md">
-                <CheckCircle2 className="w-8 h-8" />
+              <div className="w-20 h-20 rounded-md bg-[#c59b67]/10 border border-[#c59b67]/40 p-2.5 flex items-center justify-center mx-auto shadow-md">
+                <img
+                  src="/images/unifra-emblem.png"
+                  alt="Unifra Insignia"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#c59b67] block mb-1">

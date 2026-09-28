@@ -118,44 +118,19 @@ export const Navbar: React.FC<NavbarProps> = ({
     >
       <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
         <div className="flex items-center justify-between">
-          {/* Logo matching editorial luxury template */}
+          {/* Official Unifra Brand Logo */}
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-2.5 sm:gap-3 text-left group cursor-pointer focus:outline-none"
+            className="flex items-center text-left group cursor-pointer focus:outline-none py-1"
+            aria-label="Unifra - Creating Desires"
           >
-            {/* Monogram U Badge */}
-            <div
-              className={`border border-[#c59b67] bg-[#c59b67]/10 flex items-center justify-center text-[#c59b67] group-hover:bg-[#1a1918] group-hover:text-white group-hover:border-[#1a1918] transition-all duration-300 rounded-xs ${
-                isScrolled ? 'w-7 h-7 sm:w-8 sm:h-8' : 'w-9 h-9 sm:w-10 sm:h-10'
+            <img
+              src="/images/unifra-logo-horizontal.png"
+              alt="Unifra Properties - Creating Desires"
+              className={`w-auto object-contain transition-all duration-300 group-hover:opacity-90 ${
+                isScrolled ? 'h-8 sm:h-9' : 'h-10 sm:h-12'
               }`}
-            >
-              <span
-                className={`font-serif-luxury font-bold leading-none transition-all duration-300 ${
-                  isScrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'
-                }`}
-              >
-                U
-              </span>
-            </div>
-
-            <div className="flex flex-col">
-              <span
-                className={`font-serif-luxury font-bold tracking-[0.22em] uppercase transition-all duration-300 leading-none text-[#1a1918] group-hover:text-[#c59b67] ${
-                  isScrolled ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'
-                }`}
-              >
-                UNIFRA
-              </span>
-              <span
-                className={`font-mono tracking-[0.32em] text-[#c59b67] uppercase transition-all duration-300 overflow-hidden ${
-                  isScrolled
-                    ? 'max-h-0 opacity-0 mt-0 text-[0px]'
-                    : 'max-h-4 opacity-100 mt-1 text-[6.5px] sm:text-[7.5px]'
-                }`}
-              >
-                LEGACY OF LUXURY LIVING
-              </span>
-            </div>
+            />
           </button>
 
           {/* Desktop Nav Links (Clean header navigation: PROJECTS, ABOUT US, LIFESTYLE, CONTACT) */}
@@ -460,21 +435,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         }`}>
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 text-left group cursor-pointer focus:outline-none"
+            className="flex items-center text-left group cursor-pointer focus:outline-none py-1"
+            aria-label="Unifra - Creating Desires"
           >
-            <div className="w-9 h-9 border border-[#c59b67] bg-[#c59b67]/10 flex items-center justify-center text-[#c59b67]">
-              <span className="font-serif-luxury text-xl font-bold leading-none">U</span>
-            </div>
-            <div className="flex flex-col">
-              <span className={`font-serif-luxury text-lg font-bold tracking-[0.22em] uppercase ${
-                isLight ? 'text-[#1a1918]' : 'text-white'
-              }`}>
-                UNIFRA
-              </span>
-              <span className="text-[6.5px] font-mono tracking-[0.32em] text-[#c59b67] uppercase">
-                LEGACY OF LUXURY LIVING
-              </span>
-            </div>
+            <img
+              src="/images/unifra-logo-horizontal.png"
+              alt="Unifra Properties - Creating Desires"
+              className="h-9 sm:h-10 w-auto object-contain"
+            />
           </button>
 
           <button

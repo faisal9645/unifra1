@@ -22,9 +22,13 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
         <div className="max-w-[1380px] mx-auto bg-[#fbf9f6] rounded-[32px] p-8 sm:p-14 lg:p-16 border border-[#eae4db] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-sm">
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-[#c59b67]" />
+              <img
+                src="/images/unifra-emblem.png"
+                alt="Unifra Insignia"
+                className="w-5 h-5 object-contain"
+              />
               <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#8c827a] font-medium">
-                THE UNIFRA HERITAGE
+                THE UNIFRA HERITAGE • CREATING DESIRES
               </span>
             </div>
             <h1 className="font-serif-luxury text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#1a1918] leading-[1.08]">
@@ -113,6 +117,13 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
 
       {/* 3. Get to know us */}
       <section className="max-w-4xl mx-auto px-6 sm:px-10 mb-24 text-center">
+        <div className="flex justify-center mb-6">
+          <img
+            src="/images/unifra-logo-tight.png"
+            alt="Unifra - Creating Desires"
+            className="h-24 sm:h-32 w-auto object-contain opacity-95"
+          />
+        </div>
         <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
           PHILOSOPHY
         </div>
