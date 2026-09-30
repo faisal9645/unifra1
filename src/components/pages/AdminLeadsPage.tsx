@@ -964,7 +964,7 @@ export const AdminLeadsPage: React.FC<{
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="border-b border-white/10 bg-[#0b0c0e]/90 text-[10px] font-mono uppercase tracking-widest text-gray-400">
-                        <th className="py-3.5 px-4 w-10">
+                        <th className="py-2 px-2 w-10">
                           <input
                             type="checkbox"
                             checked={selectedLeadIds.length === filteredLeads.length && filteredLeads.length > 0}
@@ -972,13 +972,13 @@ export const AdminLeadsPage: React.FC<{
                             className="rounded-xs accent-[#dfb776] cursor-pointer"
                           />
                         </th>
-                        <th className="py-3.5 px-4">Client Details</th>
-                        <th className="py-3.5 px-4">Contact Info</th>
-                        <th className="py-3.5 px-4">Location / Urgency</th>
-                        <th className="py-3.5 px-4">Interest</th>
-                        <th className="py-3.5 px-4">Assigned Agent</th>
-                        <th className="py-3.5 px-4">Status</th>
-                        <th className="py-3.5 px-4 text-right">Actions</th>
+                        <th className="py-2 px-2">Client Details</th>
+                        <th className="py-2 px-2">Contact Info</th>
+                        <th className="py-2 px-2">Location / Urgency</th>
+                        <th className="py-2 px-2">Interest</th>
+                        <th className="py-2 px-2">Assigned Agent</th>
+                        <th className="py-2 px-2">Status</th>
+                        <th className="py-2 px-2 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5 text-xs">
@@ -994,7 +994,7 @@ export const AdminLeadsPage: React.FC<{
                             }`}
                           >
                             {/* Checkbox */}
-                            <td className="py-4 px-4 align-top">
+                            <td className="py-2.5 px-2 align-top">
                               <input
                                 type="checkbox"
                                 checked={isSelected}
@@ -1004,12 +1004,12 @@ export const AdminLeadsPage: React.FC<{
                             </td>
 
                             {/* Client Name & Tags */}
-                            <td className="py-4 px-4 align-top">
+                            <td className="py-2.5 px-2 align-top">
                               <div
                                 onClick={() => setInspectLead(lead)}
                                 className="font-semibold text-white group-hover:text-[#dfb776] transition-colors cursor-pointer flex items-center gap-1.5"
                               >
-                                <span>{lead.name}</span>
+                                <span className="truncate max-w-[100px] sm:max-w-[130px]">{lead.name}</span>
                                 <Eye className="w-3 h-3 text-[#dfb776] opacity-0 group-hover:opacity-100 transition-opacity" />
                               </div>
                               <div className="text-[10px] text-gray-500 font-mono mt-0.5">
@@ -1040,12 +1040,13 @@ export const AdminLeadsPage: React.FC<{
                             </td>
 
                             {/* Contact Info */}
-                            <td className="py-4 px-4 align-top space-y-1">
+                            <td className="py-2.5 px-2 align-top space-y-1">
                               <div className="flex items-center gap-1.5 font-mono text-gray-200">
                                 <Mail className="w-3 h-3 text-[#dfb776] shrink-0" />
                                 <a
                                   href={`mailto:${lead.email}`}
-                                  className="hover:text-[#dfb776] hover:underline underline-offset-2"
+                                  className="hover:text-[#dfb776] hover:underline underline-offset-2 truncate max-w-[100px] sm:max-w-[130px]"
+                                  title={lead.email}
                                 >
                                   {lead.email}
                                 </a>
@@ -1062,7 +1063,8 @@ export const AdminLeadsPage: React.FC<{
                                 <Phone className="w-3 h-3 text-[#dfb776] shrink-0" />
                                 <a
                                   href={`tel:${cleanPhone}`}
-                                  className="hover:text-[#dfb776] hover:underline underline-offset-2"
+                                  className="hover:text-[#dfb776] hover:underline underline-offset-2 truncate max-w-[90px] sm:max-w-[120px]"
+                                  title={lead.phone}
                                 >
                                   {lead.phone}
                                 </a>
@@ -1097,10 +1099,10 @@ export const AdminLeadsPage: React.FC<{
                             </td>
 
                             {/* Location / Timeline */}
-                            <td className="py-4 px-4 align-top">
+                            <td className="py-2.5 px-2 align-top">
                               <div className="text-gray-300 font-medium flex items-center gap-1">
                                 <MapPin className="w-3 h-3 text-[#dfb776] shrink-0" />
-                                <span>{lead.city}</span>
+                                <span className="truncate max-w-[80px] sm:max-w-[110px]" title={lead.city}>{lead.city}</span>
                               </div>
                               <div className="text-[10px] font-mono text-gray-400 mt-1">
                                 Timeline: <span className="text-[#dfb776] font-semibold">{lead.timeline}</span>
@@ -1120,8 +1122,8 @@ export const AdminLeadsPage: React.FC<{
                             </td>
 
                             {/* Interest */}
-                            <td className="py-4 px-4 align-top">
-                              <div className="text-white font-medium text-xs truncate max-w-[180px]">
+                            <td className="py-2.5 px-2 align-top">
+                              <div className="text-white font-medium text-xs truncate max-w-[120px] sm:max-w-[140px]">
                                 {lead.interestedUnit || 'MYSA Luxe Villas'}
                               </div>
                               <div className="inline-flex items-center gap-1 text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 mt-1 rounded-xs bg-white/5 border border-white/10 text-gray-400">
@@ -1130,7 +1132,7 @@ export const AdminLeadsPage: React.FC<{
                             </td>
 
                             {/* Assigned Agent */}
-                            <td className="py-4 px-4 align-top">
+                            <td className="py-2.5 px-2 align-top">
                               <select
                                 value={lead.assignedAgent || 'Unassigned'}
                                 onChange={(e) => {
@@ -1139,7 +1141,7 @@ export const AdminLeadsPage: React.FC<{
                                   showToast(`Assigned ${lead.name} to ${e.target.value}`);
                                   loadData();
                                 }}
-                                className="px-2 py-1 rounded-xs text-[10px] font-mono border border-white/15 bg-[#0b0c0e] text-gray-300 focus:outline-none focus:border-[#dfb776] cursor-pointer"
+                                className="w-[100px] sm:w-[130px] truncate px-2 py-1 rounded-xs text-[10px] font-mono border border-white/15 bg-[#0b0c0e] text-gray-300 focus:outline-none focus:border-[#dfb776] cursor-pointer"
                               >
                                 <option value="Unassigned">Unassigned</option>
                                 {AGENT_OPTIONS.map((a) => (
@@ -1149,11 +1151,11 @@ export const AdminLeadsPage: React.FC<{
                             </td>
 
                             {/* Status Dropdown */}
-                            <td className="py-4 px-4 align-top">
+                            <td className="py-2.5 px-2 align-top">
                               <select
                                 value={lead.status}
                                 onChange={(e) => handleStatusChange(lead.id, e.target.value as LeadStatus)}
-                                className={`px-2 py-1 rounded-xs text-[10px] font-mono uppercase tracking-wider font-semibold border bg-[#0b0c0e] focus:outline-none cursor-pointer ${
+                                className={`w-[90px] sm:w-[120px] truncate px-2 py-1 rounded-xs text-[10px] font-mono uppercase tracking-wider font-semibold border bg-[#0b0c0e] focus:outline-none cursor-pointer ${
                                   lead.status === 'New Lead'
                                     ? 'border-amber-500/40 text-amber-400'
                                     : lead.status === 'Contacted'
@@ -1174,30 +1176,32 @@ export const AdminLeadsPage: React.FC<{
                             </td>
 
                             {/* Action Buttons */}
-                            <td className="py-4 px-4 align-top text-right space-x-1">
-                              <button
-                                onClick={() => setInspectLead(lead)}
-                                className="p-1.5 rounded-sm hover:bg-white/10 text-gray-400 hover:text-white transition-colors cursor-pointer"
-                                title="Inspect & Edit Profile"
-                              >
-                                <Eye className="w-3.5 h-3.5 text-[#dfb776]" />
-                              </button>
+                            <td className="py-2.5 px-2 align-top">
+                              <div className="flex items-center justify-end gap-1">
+                                <button
+                                  onClick={() => setInspectLead(lead)}
+                                  className="p-1.5 flex-shrink-0 rounded-sm hover:bg-white/10 text-gray-400 hover:text-white transition-colors cursor-pointer"
+                                  title="Inspect & Edit Profile"
+                                >
+                                  <Eye className="w-3.5 h-3.5 text-[#dfb776]" />
+                                </button>
 
-                              <button
-                                onClick={() => setVisitModalLead(lead)}
-                                className="p-1.5 rounded-sm hover:bg-emerald-500/20 text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer"
-                                title="Schedule VIP Site Visit"
-                              >
-                                <Calendar className="w-3.5 h-3.5" />
-                              </button>
+                                <button
+                                  onClick={() => setVisitModalLead(lead)}
+                                  className="p-1.5 flex-shrink-0 rounded-sm hover:bg-emerald-500/20 text-gray-400 hover:text-emerald-400 transition-colors cursor-pointer"
+                                  title="Schedule VIP Site Visit"
+                                >
+                                  <Calendar className="w-3.5 h-3.5" />
+                                </button>
 
-                              <button
-                                onClick={() => handleDelete(lead.id, lead.name)}
-                                className="p-1.5 rounded-sm hover:bg-red-500/20 text-gray-500 hover:text-red-400 transition-colors cursor-pointer"
-                                title="Delete Lead"
-                              >
-                                <Trash2 className="w-3.5 h-3.5" />
-                              </button>
+                                <button
+                                  onClick={() => handleDelete(lead.id, lead.name)}
+                                  className="p-1.5 flex-shrink-0 rounded-sm hover:bg-red-500/20 text-gray-500 hover:text-red-400 transition-colors cursor-pointer"
+                                  title="Delete Lead"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
                             </td>
                           </tr>
                         );
@@ -1212,8 +1216,13 @@ export const AdminLeadsPage: React.FC<{
                 <span>Showing {filteredLeads.length} of {leads.length} recorded leads</span>
                 <div className="flex items-center gap-3">
                   <button
-                    onClick={clearAllLeads}
-                    className="text-red-400 hover:text-red-300 transition-colors cursor-pointer text-[10px] uppercase tracking-wider"
+                    onClick={() => {
+                      if (window.confirm('Are you sure you want to permanently delete all leads?')) {
+                        clearAllLeads();
+                        showToast('All leads deleted successfully');
+                      }
+                    }}
+                    className="px-3 py-1.5 rounded-sm bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-colors cursor-pointer text-[10px] uppercase tracking-wider font-semibold"
                   >
                     Clear All Records
                   </button>

@@ -25,13 +25,13 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children, isLocked =
   useEffect(() => {
     // Create modern Lenis instance with luxury architectural easing
     const lenis = new Lenis({
-      duration: 0.95,
+      duration: 0.6,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.05,
-      touchMultiplier: 1.6,
+      wheelMultiplier: 1.3,
+      touchMultiplier: 2,
       autoResize: true,
       infinite: false
     });

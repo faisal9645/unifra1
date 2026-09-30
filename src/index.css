@@ -93,8 +93,16 @@ html.lenis, html.lenis body {
 }
 
 /* GPU hardware acceleration for smooth 60fps scrolling */
-canvas, video {
+canvas, video, img, .glass-panel, .glass-dark {
   transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Global antialiasing */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ==========================================================================

@@ -944,7 +944,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
           {/* Location Map Visual */}
           <div className="rounded-[16px] overflow-hidden shadow-sm h-72 sm:h-96 relative bg-[#eae5dc] border border-[#eae4db]">
             <img
-              src="https://images.unsplash.com/photo-1524813686514-a57563d77d66?auto=format&fit=crop&w=1200&q=80"
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
               alt="Chennai ECR Coastline Map"
               className="w-full h-full object-cover"
             />

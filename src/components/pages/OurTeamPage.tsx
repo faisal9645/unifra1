@@ -33,7 +33,7 @@ export const OurTeamPage: React.FC<OurTeamPageProps> = ({
       name: 'Thunku Abdel Rehman',
       role: 'General Manager',
       index: '03',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80',
+      image: 'https://ui-avatars.com/api/?name=Thunku+Abdel+Rehman&background=eae5dc&color=1a1918&size=800',
       bio: 'As General Manager, Thunku Abdel Rehman brings operational discipline and a client-first mindset to every Unifra engagement. From transparent communication to meticulous handovers, he ensures the home-buying journey remains seamless and deeply satisfying for every family.',
       linkedin: 'https://linkedin.com',
       email: 'info@unifra.in'
