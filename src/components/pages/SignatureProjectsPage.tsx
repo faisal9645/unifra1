@@ -20,7 +20,7 @@ export const SignatureProjectsPage: React.FC<SignatureProjectsPageProps> = ({
   isVillaUnlocked = false
 }) => {
   return (
-    <div className="pt-24 pb-20 bg-[#faf8f5] text-[#1a1918]">
+    <div className="pt-20 pb-12 bg-[#faf8f5] text-[#1a1918]">
       {/* Signature Villa Enclaves Component */}
       <SignatureProjects
         onScheduleVisit={(project) => {
@@ -41,7 +41,7 @@ export const SignatureProjectsPage: React.FC<SignatureProjectsPageProps> = ({
       />
 
       {/* Joint Venture Inquire Banner */}
-      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mt-12">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mt-8">
         <div className="bg-[#f4f0eb] text-[#1a1918] rounded-[24px] p-8 sm:p-12 border border-[#e5ded4] shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-left">
             <h3 className="font-serif-luxury text-2xl sm:text-3xl font-normal mb-2 text-[#1a1918]">

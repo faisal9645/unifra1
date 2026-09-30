@@ -9,6 +9,7 @@ import {
   ChevronUp,
   Shield,
   Zap,
+  BatteryCharging,
   Droplets,
   Layers,
   Sparkles,
@@ -317,7 +318,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
   ];
 
   return (
-    <div className="pt-0 pb-20 bg-[#faf8f5] text-[#1a1918] relative font-sans">
+    <div className="pt-0 pb-12 bg-[#faf8f5] text-[#1a1918] relative font-sans">
       {/* Floating Sticky Brochure Button on the Right */}
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40">
         <button
@@ -337,7 +338,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       />
 
       {/* Top Breadcrumb & VIP Access Status Bar */}
-      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 my-8 flex flex-wrap items-center justify-between gap-4">
+      <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mt-6 mb-10 flex flex-wrap items-center justify-between gap-4">
         {onNavigateProjects && (
           <button
             onClick={onNavigateProjects}
@@ -376,7 +377,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </div>
 
       {/* 1. Header */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-16">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-10">
         <div className="text-center max-w-4xl mx-auto">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-3 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#c59b67] rounded-full" />
@@ -407,13 +408,28 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
               <span>Launch 3D Walkthrough</span>
             </button>
           </div>
+
+          {/* Key facts strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#e8e1d6] border border-[#e8e1d6] rounded-sm overflow-hidden shadow-sm">
+            {[
+              { value: '06', label: 'Exclusive Villas' },
+              { value: '4,450–5,800', label: 'Sq.Ft. Built-Up' },
+              { value: '4 BHK', label: 'Swedish Design' },
+              { value: '100%', label: 'Private Pool & DG Backup' }
+            ].map((stat) => (
+              <div key={stat.label} className="bg-white px-3 py-4 text-center">
+                <div className="font-serif-luxury text-lg sm:text-xl font-bold text-[#1a1918]">{stat.value}</div>
+                <div className="text-[9px] font-mono uppercase tracking-wider text-[#8c827a] mt-0.5">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
 
 
       {/* 3. Comprehensive MYSA Visual Architecture Gallery (All 11 Pictures) */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div className="text-left max-w-2xl">
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2 flex items-center gap-2">
@@ -444,7 +460,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         {/* Filter Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-8 no-scrollbar border-b border-[#eae4db] text-xs font-mono">
           {[
-            { id: 'All', label: 'All Pictures (11)' },
+            { id: 'All', label: `All Pictures (${MYSA_VILLA_PHOTOS.length})` },
             { id: 'Facade', label: 'Facade & Architecture' },
             { id: 'Living', label: 'Living & Great Room' },
             { id: 'Master Suite', label: 'Suites & Sanctuaries' },
@@ -469,15 +485,16 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
 
         {/* Bento Grid of Villa Pictures */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPhotos.map((photo) => {
+          {filteredPhotos.map((photo, idx) => {
             const globalIdx = MYSA_VILLA_PHOTOS.findIndex(p => p.id === photo.id);
+            const isFeature = idx === 0;
             return (
               <div
                 key={photo.id}
-                className="bg-white rounded-[20px] overflow-hidden border border-[#eae4db] hover:border-[#c59b67] transition-all flex flex-col shadow-sm hover:shadow-xl group cursor-pointer"
+                className={`bg-white rounded-[20px] overflow-hidden border border-[#eae4db] hover:border-[#c59b67] transition-all flex flex-col shadow-sm hover:shadow-xl group cursor-pointer ${isFeature ? 'sm:col-span-2' : ''}`}
                 onClick={() => setLightboxIndex(globalIdx !== -1 ? globalIdx : 0)}
               >
-                <div className="relative h-64 overflow-hidden bg-[#eae5dc]">
+                <div className={`relative overflow-hidden bg-[#eae5dc] ${isFeature ? 'h-72 lg:h-96' : 'h-64'}`}>
                   <img
                     src={photo.imageUrl}
                     alt={photo.title}
@@ -532,7 +549,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 4. Villa Floor Plans */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             LAYOUT BLUEPRINTS
@@ -667,8 +684,8 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 5. World-Class Amenities */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             LUXURY COMFORTS
           </div>
@@ -743,7 +760,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
 
           <div className="bg-white rounded-[20px] p-6 border border-[#eae4db] hover:border-[#c59b67] transition-all flex items-start gap-4 shadow-sm hover:shadow-md">
             <div className="w-12 h-12 rounded-sm bg-[#c59b67]/10 border border-[#c59b67]/30 flex items-center justify-center text-[#c59b67] shrink-0">
-              <Zap className="w-6 h-6" />
+              <BatteryCharging className="w-6 h-6" />
             </div>
             <div className="text-left">
               <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-1">EV Charging Stations</h4>
@@ -756,7 +773,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 6. Detailed Specifications */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             TECHNICAL SPECIFICATIONS
@@ -824,8 +841,8 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 7. Project Status */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             TIMELINE
           </div>
@@ -840,8 +857,10 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
         {/* 5 Milestone Timeline */}
         <div className="bg-white rounded-[24px] p-8 sm:p-12 border border-[#eae4db] shadow-sm max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 relative">
+            {/* Connecting progress line (desktop) */}
+            <div className="hidden sm:block absolute top-6 left-[10%] right-[10%] h-px bg-gradient-to-r from-emerald-300 via-[#c59b67]/60 to-[#eae4db]" aria-hidden="true" />
             {/* Step 1 */}
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center relative z-10">
               <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 flex items-center justify-center font-bold mb-3 shadow-xs">
                 <Check className="w-5 h-5" />
               </div>
@@ -850,7 +869,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center relative z-10">
               <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 flex items-center justify-center font-bold mb-3 shadow-xs">
                 <Check className="w-5 h-5" />
               </div>
@@ -859,7 +878,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
             </div>
 
             {/* Step 3 */}
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center relative z-10">
               <div className="w-12 h-12 rounded-full bg-[#c59b67] text-white flex items-center justify-center font-bold mb-3 shadow-md shadow-[#c59b67]/30 animate-pulse">
                 <Zap className="w-5 h-5" />
               </div>
@@ -868,28 +887,28 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
             </div>
 
             {/* Step 4 */}
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center relative z-10">
               <div className="w-12 h-12 rounded-full bg-[#f4f0eb] border border-[#eae4db] text-[#8c827a] flex items-center justify-center font-bold mb-3">
                 <Clock className="w-5 h-5" />
               </div>
               <h4 className="text-xs font-bold text-[#8c827a] mb-1">Finishing Touches</h4>
-              <span className="text-[10px] font-mono text-[#8c827a] font-semibold uppercase">Q3 2025</span>
+              <span className="text-[10px] font-mono text-[#8c827a] font-semibold uppercase">Q4 2026</span>
             </div>
 
             {/* Step 5 */}
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center relative z-10">
               <div className="w-12 h-12 rounded-full bg-[#f4f0eb] border border-[#eae4db] text-[#8c827a] flex items-center justify-center font-bold mb-3">
                 <Clock className="w-5 h-5" />
               </div>
               <h4 className="text-xs font-bold text-[#8c827a] mb-1">Handover</h4>
-              <span className="text-[10px] font-mono text-[#8c827a] font-semibold uppercase">Q4 2025</span>
+              <span className="text-[10px] font-mono text-[#8c827a] font-semibold uppercase">Q1 2027</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* 8. Location Advantage */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-white rounded-[24px] p-8 sm:p-12 border border-[#eae4db] shadow-sm">
           <div className="space-y-4 text-left">
             <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67]">
@@ -943,7 +962,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 8.5. Official MYSA YouTube Walkthrough & Cinematic Film Section */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-20">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-12">
         <div className="bg-white rounded-[24px] border border-[#eae4db] overflow-hidden shadow-sm p-6 sm:p-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4 border-b border-[#eae4db] pb-6">
             <div className="text-left">
@@ -983,7 +1002,7 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
       </section>
 
       {/* 9. Frequently Asked Questions */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             COMMON INQUIRIES
@@ -1029,25 +1048,37 @@ export const MysaDetailPage: React.FC<MysaDetailPageProps> = ({
 
       {/* 10. Bottom CTA Banner */}
       <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
-        <div className="relative rounded-[32px] overflow-hidden p-8 sm:p-14 text-[#1a1918] bg-[#f4f0eb] border border-[#e5ded4] shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="relative rounded-[32px] overflow-hidden p-8 sm:p-14 bg-[#14120f] border border-[#2b251c] shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Ambient gold glows */}
+          <div className="absolute -top-28 -right-20 w-80 h-80 rounded-full bg-[#c59b67]/20 blur-3xl pointer-events-none" aria-hidden="true" />
+          <div className="absolute -bottom-28 -left-20 w-80 h-80 rounded-full bg-[#c59b67]/10 blur-3xl pointer-events-none" aria-hidden="true" />
+
           <div className="relative z-10 max-w-2xl text-center md:text-left">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#c59b67] font-semibold mb-2 block">
+            <span className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-[#dfb776] font-semibold mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#dfb776] animate-pulse" />
               LIMITED AVAILABILITY • 3 OF 6 VILLAS REMAINING
             </span>
-            <h3 className="font-serif-luxury text-3xl sm:text-4xl font-normal mb-3 leading-tight text-[#1a1918]">
-              Interested in MYSA Luxe Villas?
+            <h3 className="font-serif-luxury text-3xl sm:text-4xl font-normal mb-3 leading-tight text-white">
+              Interested in <span className="italic text-[#dfb776]">MYSA</span> Luxe Villas?
             </h3>
-            <p className="text-xs sm:text-sm text-[#68625d] font-light leading-relaxed">
+            <p className="text-xs sm:text-sm text-white/60 font-light leading-relaxed">
               Contact us today to schedule a private viewing and learn more about this exclusive project — and receive detailed brochure information.
             </p>
           </div>
 
-          <div className="relative z-10 shrink-0">
+          <div className="relative z-10 shrink-0 flex flex-col sm:flex-row md:flex-col gap-3">
             <button
               onClick={onOpenContact}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-[#1a1918] text-white font-semibold text-xs font-mono uppercase tracking-wider hover:bg-[#2b2723] transition-all shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-[#dfb776] text-[#14120f] font-semibold text-xs font-mono uppercase tracking-wider hover:bg-[#c5a880] transition-all shadow-lg cursor-pointer"
             >
               <span>Get in Touch →</span>
+            </button>
+            <button
+              onClick={onOpenBrochure}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-sm border border-white/20 text-white text-xs font-mono uppercase tracking-wider hover:border-[#dfb776] hover:text-[#dfb776] transition-all cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Download Brochure</span>
             </button>
           </div>
         </div>

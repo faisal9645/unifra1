@@ -8,16 +8,49 @@ import {
   CheckCircle2,
   ExternalLink,
   Navigation,
-  Building
+  Building,
+  Car,
+  CalendarDays,
+  User,
+  MessageSquare
 } from 'lucide-react';
 import { saveLead } from '../../utils/leadsStorage';
 
-export const ContactPage: React.FC = () => {
+interface ContactPageProps {
+  /** Preselects the "I'm interested in" field, e.g. when arriving from a project CTA. */
+  presetInterest?: string;
+}
+
+const INTEREST_OPTIONS = [
+  'Buying a MYSA Luxe Villa (ECR)',
+  'Scheduling an ECR Site Visit',
+  'Azure Enclave Oceanfront Mansions',
+  'Joint Venture / Turnkey Plot Build',
+  'Architectural Consultancy',
+  'General Inquiry'
+];
+
+const TIME_SLOTS = [
+  '11:00 AM — Morning',
+  '2:00 PM — Afternoon',
+  '4:30 PM — Golden Hour'
+];
+
+export const ContactPage: React.FC<ContactPageProps> = ({ presetInterest }) => {
+  const interestOptions =
+    presetInterest && !INTEREST_OPTIONS.includes(presetInterest)
+      ? [presetInterest, ...INTEREST_OPTIONS]
+      : INTEREST_OPTIONS;
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    interest: 'Buying a MYSA Luxe Villa',
+    interest: presetInterest || 'Buying a MYSA Luxe Villa (ECR)',
+    preferredDate: '',
+    preferredTime: TIME_SLOTS[0],
+    chauffeurPickUp: true,
+    pickupLocation: '',
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -28,13 +61,25 @@ export const ContactPage: React.FC = () => {
     if (!formData.name.trim() || !formData.phone.trim()) return;
 
     setSubmitting(true);
+    const wantsVisit = formData.interest === 'Scheduling an ECR Site Visit';
+    const notes = [
+      formData.message,
+      wantsVisit || formData.preferredDate
+        ? `Preferred visit: ${formData.preferredDate || 'flexible'} • ${formData.preferredTime}.`
+        : '',
+      formData.chauffeurPickUp && (wantsVisit || formData.preferredDate)
+        ? `Chauffeur pick-up: Yes${formData.pickupLocation ? ` (${formData.pickupLocation})` : ''}.`
+        : ''
+    ].filter(Boolean).join(' ');
+
     saveLead({
       name: formData.name,
       phone: formData.phone,
       email: formData.email.trim() || `${formData.name.toLowerCase().replace(/\s+/g, '')}@lead.unifra.in`,
       interestedUnit: formData.interest,
-      source: 'Contact Page Direct Form',
-      notes: formData.message
+      source: 'Contact Page — Unified Inquiry Form',
+      notes,
+      status: wantsVisit ? 'VIP Visit Scheduled' : 'New Lead'
     });
 
     setTimeout(() => {
@@ -43,23 +88,27 @@ export const ContactPage: React.FC = () => {
     }, 600);
   };
 
+  const inputCls =
+    'w-full px-4 py-3.5 rounded-sm border border-[#e5ded4] bg-[#faf8f5] focus:border-[#1a1918] outline-none text-sm text-[#1a1918] transition-all';
+  const labelCls = 'block text-[10px] font-mono font-semibold uppercase tracking-wider text-[#8c827a] mb-2';
+
   return (
-    <div className="pt-24 pb-20 bg-[#faf8f5] text-[#1a1918]">
+    <div className="pt-20 pb-12 bg-[#faf8f5] text-[#1a1918]">
       {/* 1. Hero Banner */}
-      <section className="relative w-full mb-16 px-6 sm:px-10 lg:px-12">
+      <section className="relative w-full mb-10 px-6 sm:px-10 lg:px-12">
         <div className="max-w-[1380px] mx-auto bg-[#fbf9f6] rounded-[32px] p-8 sm:p-14 lg:p-16 border border-[#eae4db] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-sm">
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-[#c59b67]" />
               <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#8c827a] font-medium">
-                PRIVATE INQUIRIES & ADVISORY
+                PRIVATE INQUIRIES, VISITS & ADVISORY
               </span>
             </div>
             <h1 className="font-serif-luxury text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#1a1918] leading-[1.08]">
               Contact <span className="italic font-serif-luxury text-[#c59b67]">Unifra.</span>
             </h1>
             <p className="text-base sm:text-lg text-[#68625d] font-light leading-relaxed max-w-xl">
-              Ready to explore coastal architectural living? Connect with our senior advisory team for private guided previews, bespoke architectural plans, and investment consultations.
+              One form for everything — general inquiries, private ECR site visits with chauffeur pick-up, villa purchases, joint ventures, and architectural consultancy.
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-6 text-xs font-mono text-[#8c827a]">
               <div><strong className="text-[#1a1918] text-sm block">Direct Line</strong> +91 73582 22445</div>
@@ -88,21 +137,21 @@ export const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Get In Touch Section */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
-        <div className="text-center max-w-3xl mx-auto mb-14">
+      {/* 2. Unified Form Section */}
+      <section id="inquiry-form" className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
-            CONSULTATION
+            ONE FORM • EVERY PURPOSE
           </div>
           <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-[#1a1918] tracking-tight mb-4">
-            Get <span className="italic font-serif-luxury text-[#c59b67]">In Touch</span>
+            Begin Your <span className="italic font-serif-luxury text-[#c59b67]">Journey</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#68625d] leading-relaxed font-light">
-            Whether you are exploring purchasing an exclusive villa or seeking architectural consultancy for your land parcel in Chennai, our team is at your disposal.
+            Tell us what you're looking for. Our senior advisory team responds within 2 business hours.
           </p>
         </div>
 
-        {/* Contact Form Card */}
+        {/* Unified Form Card */}
         <div className="max-w-3xl mx-auto bg-white rounded-[24px] p-8 sm:p-12 border border-[#eae4db] shadow-sm">
           {isSubmitted ? (
             <div className="text-center py-10 animate-in fade-in zoom-in-95 duration-400">
@@ -113,12 +162,26 @@ export const ContactPage: React.FC = () => {
                 Thank You, {formData.name || 'Valued Client'}!
               </h3>
               <p className="text-xs sm:text-sm text-[#68625d] max-w-md mx-auto mb-6 font-light">
-                Your inquiry regarding <strong className="text-[#1a1918]">{formData.interest}</strong> has been received by our leadership team. We will contact you at <strong className="text-[#c59b67] font-mono">{formData.phone}</strong> shortly.
+                Your inquiry regarding <strong className="text-[#1a1918]">{formData.interest}</strong> has been received.
+                {formData.preferredDate || formData.interest === 'Scheduling an ECR Site Visit'
+                  ? ` We will confirm your visit for ${formData.preferredDate || 'an upcoming day'} at ${formData.preferredTime.split(' — ')[0]} at `
+                  : ' We will contact you at '}
+                <strong className="text-[#c59b67] font-mono">{formData.phone}</strong> shortly.
               </p>
               <button
                 onClick={() => {
                   setIsSubmitted(false);
-                  setFormData({ name: '', phone: '', email: '', interest: 'Buying a MYSA Luxe Villa', message: '' });
+                  setFormData({
+                    name: '',
+                    phone: '',
+                    email: '',
+                    interest: 'Buying a MYSA Luxe Villa (ECR)',
+                    preferredDate: '',
+                    preferredTime: TIME_SLOTS[0],
+                    chauffeurPickUp: true,
+                    pickupLocation: '',
+                    message: ''
+                  });
                 }}
                 className="px-8 py-3.5 rounded-sm bg-[#1a1918] text-white text-xs font-mono uppercase tracking-wider font-medium hover:bg-[#2b2723] transition-colors cursor-pointer"
               >
@@ -127,10 +190,11 @@ export const ContactPage: React.FC = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6 text-left">
+              {/* Identity */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[10px] font-mono font-semibold uppercase tracking-wider text-[#8c827a] mb-2">
-                    Your Name *
+                  <label className={labelCls}>
+                    <span className="inline-flex items-center gap-1.5"><User className="w-3 h-3 text-[#c59b67]" /> Your Name *</span>
                   </label>
                   <input
                     type="text"
@@ -138,67 +202,117 @@ export const ContactPage: React.FC = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Anand Kumar"
-                    className="w-full px-4 py-3.5 rounded-sm border border-[#e5ded4] bg-[#faf8f5] focus:border-[#1a1918] outline-none text-sm text-[#1a1918] transition-all"
+                    className={inputCls}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-mono font-semibold uppercase tracking-wider text-[#8c827a] mb-2">
-                    Phone Number *
-                  </label>
+                  <label className={labelCls}>Phone Number *</label>
                   <input
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+91 98400 12345"
-                    className="w-full px-4 py-3.5 rounded-sm border border-[#e5ded4] bg-[#faf8f5] focus:border-[#1a1918] outline-none text-sm text-[#1a1918] transition-all font-mono"
+                    className={`${inputCls} font-mono`}
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[10px] font-mono font-semibold uppercase tracking-wider text-[#8c827a] mb-2">
-                    Email Address
-                  </label>
+                  <label className={labelCls}>Email Address</label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="name@company.com"
-                    className="w-full px-4 py-3.5 rounded-sm border border-[#e5ded4] bg-[#faf8f5] focus:border-[#1a1918] outline-none text-sm text-[#1a1918] transition-all font-mono"
+                    className={`${inputCls} font-mono`}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-mono font-semibold uppercase tracking-wider text-[#8c827a] mb-2">
-                    I'm interested in
-                  </label>
+                  <label className={labelCls}>I'm interested in</label>
                   <select
                     value={formData.interest}
                     onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                    className="w-full px-4 py-3.5 rounded-sm border border-[#e5ded4] bg-[#faf8f5] focus:border-[#1a1918] outline-none text-sm text-[#1a1918] transition-all"
+                    className={inputCls}
                   >
-                    <option value="Buying a MYSA Luxe Villa">Buying a MYSA Luxe Villa (ECR)</option>
-                    <option value="Scheduling an ECR Site Visit">Scheduling an ECR Site Visit</option>
-                    <option value="Azure Enclave Oceanfront">Azure Enclave Oceanfront Mansions</option>
-                    <option value="Joint Venture">Joint Venture / Turnkey Plot Build</option>
-                    <option value="Architectural Consultancy">Architectural Consultancy</option>
+                    {interestOptions.map((opt) => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
                   </select>
                 </div>
               </div>
 
+              {/* Visit scheduling (shown for site visit, optional otherwise) */}
+              <div className="rounded-[16px] border border-[#eae4db] bg-[#fbf9f6] p-5 sm:p-6 space-y-5">
+                <div className="flex items-center gap-2 text-[10px] font-mono font-semibold uppercase tracking-wider text-[#c59b67]">
+                  <CalendarDays className="w-3.5 h-3.5" />
+                  <span>Preferred Visit — Optional (or required for Site Visit requests)</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className={labelCls}>Preferred Date</label>
+                    <input
+                      type="date"
+                      value={formData.preferredDate}
+                      onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                      className={`${inputCls} font-mono`}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls}>Preferred Time</label>
+                    <select
+                      value={formData.preferredTime}
+                      onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                      className={inputCls}
+                    >
+                      {TIME_SLOTS.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <label className="flex items-center gap-3 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={formData.chauffeurPickUp}
+                    onChange={(e) => setFormData({ ...formData, chauffeurPickUp: e.target.checked })}
+                    className="w-4 h-4 accent-[#c59b67] cursor-pointer"
+                  />
+                  <span className="inline-flex items-center gap-1.5 text-xs text-[#1a1918]">
+                    <Car className="w-3.5 h-3.5 text-[#c59b67]" />
+                    Arrange complimentary chauffeur pick-up
+                  </span>
+                </label>
+
+                {formData.chauffeurPickUp && (
+                  <div>
+                    <label className={labelCls}>Pick-up Location</label>
+                    <input
+                      type="text"
+                      value={formData.pickupLocation}
+                      onChange={(e) => setFormData({ ...formData, pickupLocation: e.target.value })}
+                      placeholder="Residence, hotel, or Chennai International Airport"
+                      className={inputCls}
+                    />
+                  </div>
+                )}
+              </div>
+
               <div>
-                <label className="block text-[10px] font-mono font-semibold uppercase tracking-wider text-[#8c827a] mb-2">
-                  Message
+                <label className={labelCls}>
+                  <span className="inline-flex items-center gap-1.5"><MessageSquare className="w-3 h-3 text-[#c59b67]" /> Message</span>
                 </label>
                 <textarea
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us more about your inquiry, preferred villa size, or timeline..."
-                  className="w-full px-4 py-3.5 rounded-sm border border-[#e5ded4] bg-[#faf8f5] focus:border-[#1a1918] outline-none text-sm text-[#1a1918] transition-all font-light"
+                  className={`${inputCls} font-light`}
                 />
               </div>
 
@@ -209,7 +323,7 @@ export const ContactPage: React.FC = () => {
                   className="w-full py-4 rounded-sm bg-[#1a1918] hover:bg-[#2b2723] text-white font-medium text-xs font-mono tracking-[0.2em] uppercase shadow-sm flex items-center justify-center gap-2.5 transition-all cursor-pointer disabled:opacity-75"
                 >
                   <Send className="w-3.5 h-3.5 text-[#c59b67]" />
-                  <span>{submitting ? 'Sending Inquiry...' : 'Send Message'}</span>
+                  <span>{submitting ? 'Sending Inquiry...' : 'Submit Inquiry'}</span>
                 </button>
               </div>
             </form>

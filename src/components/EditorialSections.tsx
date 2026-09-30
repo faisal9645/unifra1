@@ -628,9 +628,9 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-white">Corporate Studio</div>
+                  <div className="text-xs font-semibold text-white">Corporate Office</div>
                   <div className="text-[11px] text-gray-400 font-light mt-0.5">
-                    122 East Coast Road, Vettuvankeni, Chennai – 600115
+                    4/11, G R Mansion, 2nd Floor, Srinivasa Rd, T. Nagar, Chennai – 600017
                   </div>
                 </div>
               </div>
@@ -655,8 +655,8 @@ export const EditorialSections: React.FC<EditorialSectionsProps> = ({
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-white">Private Inquiries</div>
-                  <a href="mailto:info@unifrahomes.com" className="text-[11px] text-[#dfb776] font-mono hover:underline mt-0.5 block">
-                    info@unifrahomes.com
+                  <a href="mailto:info@unifra.in" className="text-[11px] text-[#dfb776] font-mono hover:underline mt-0.5 block">
+                    info@unifra.in
                   </a>
                 </div>
               </div>

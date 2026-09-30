@@ -16,7 +16,6 @@ import {
 import { AppPage } from './Navbar';
 import { ProjectItem } from '../types';
 import { SIGNATURE_PROJECTS } from '../data/mockData';
-import { saveLead } from '../utils/leadsStorage';
 
 interface UnifraEditorialTemplateProps {
   onOpenConsultation: () => void;
@@ -33,35 +32,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
   onSelectProject,
   isVillaUnlocked = false
 }) => {
-  // Form submission state
-  const [formData, setFormData] = useState({
-    name: '',
-    emailOrPhone: '',
-    residence: 'MYSA Luxe Villas — ECR'
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [expandedSpec, setExpandedSpec] = useState<number | null>(0);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name.trim() || !formData.emailOrPhone.trim()) return;
-
-    const isEmail = formData.emailOrPhone.includes('@');
-    saveLead({
-      name: formData.name,
-      email: isEmail ? formData.emailOrPhone : `${formData.name.toLowerCase().replace(/\s+/g, '')}@lead.unifra.in`,
-      phone: isEmail ? '+91 98840 00000' : formData.emailOrPhone,
-      interestedUnit: formData.residence,
-      source: 'Editorial Homepage — Begin Your Journey Form',
-      notes: 'Requested private presentation from editorial home page.'
-    });
-
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', emailOrPhone: '', residence: 'MYSA Luxe Villas — ECR' });
-    }, 4000);
-  };
 
   const handleOpenMysa = () => {
     const mysa = SIGNATURE_PROJECTS.find(p => p.id === 'mysa-villas');
@@ -106,8 +77,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
       {/* =========================================================================
           SECTION 1: HERO — "Whispering Sanctuaries."
           ========================================================================= */}
-      <section className="relative min-h-screen pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden">
-        {/* Subtle architectural background orbital lines (matching reference) */}
+      <section className="relative pt-32 sm:pt-40 lg:pt-44 pb-16 sm:pb-24 lg:pb-32 overflow-hidden">        {/* Subtle architectural background orbital lines (matching reference) */}
         <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none opacity-35">
           <svg viewBox="0 0 800 800" fill="none" className="w-full h-full stroke-[#d8cebe]">
             <circle cx="400" cy="400" r="380" strokeWidth="0.8" strokeDasharray="4 6" />
@@ -128,7 +98,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="font-serif-luxury text-5xl sm:text-7xl xl:text-[88px] font-normal tracking-tight text-[#1a1918] leading-[1.04]">
+            <h1 className="font-serif-luxury text-[40px] sm:text-6xl lg:text-7xl xl:text-[76px] font-normal tracking-tight text-[#1a1918] leading-[1.04]">
               Whispering
               <br />
               <span className="italic font-serif-luxury text-[#c59b67] font-normal">
@@ -137,7 +107,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
             </h1>
 
             {/* Editorial description */}
-            <p className="text-[#68625d] text-base sm:text-lg font-light leading-relaxed max-w-lg">
+            <p className="text-[#68625d] text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-lg">
               Private coastal living nestled between the quiet serenity of Chennai's shoreline and world-class architectural discipline. Each residence is an enduring dialogue with nature.
             </p>
 
@@ -145,7 +115,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
             <div className="pt-2 flex flex-wrap items-center gap-4 sm:gap-6">
               <button
                 onClick={() => onNavigatePage('projects')}
-                className="bg-[#1a1918] hover:bg-[#2b2723] text-white px-8 py-4 text-xs font-medium tracking-[0.22em] uppercase transition-all duration-300 hover:shadow-lg hover:shadow-black/10 flex items-center gap-3 group cursor-pointer"
+                className="bg-[#1a1918] hover:bg-[#2b2723] text-white px-6 sm:px-8 py-3.5 sm:py-4 text-[11px] sm:text-xs font-medium tracking-[0.22em] uppercase transition-all duration-300 hover:shadow-lg hover:shadow-black/10 flex items-center gap-3 group cursor-pointer"
               >
                 <span>EXPLORE COLLECTION</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -153,7 +123,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
 
               <button
                 onClick={() => onOpenConsultation()}
-                className="text-[#1a1918] hover:text-[#c59b67] text-xs font-medium tracking-[0.2em] uppercase transition-colors flex items-center gap-2.5 py-4 cursor-pointer"
+                className="text-[#1a1918] hover:text-[#c59b67] text-[11px] sm:text-xs font-medium tracking-[0.2em] uppercase transition-colors flex items-center gap-2.5 py-3.5 sm:py-4 cursor-pointer"
               >
                 <div className="w-7 h-7 rounded-full border border-[#1a1918]/30 flex items-center justify-center group-hover:border-[#c59b67]">
                   <Play className="w-2.5 h-2.5 fill-[#1a1918] ml-0.5" />
@@ -166,7 +136,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
           {/* Right Column: Architectural Arch Window with Video */}
           <div className="lg:col-span-6 xl:col-span-7 flex justify-center lg:justify-end relative">
             {/* The Arch Window Container */}
-            <div className="relative w-full max-w-[540px] xl:max-w-[600px] h-[520px] sm:h-[640px] xl:h-[720px] rounded-t-[280px] rounded-b-[24px] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.12)] border border-[#eae4db] bg-[#eae5dc] group">
+            <div className="relative w-full max-w-[540px] xl:max-w-[600px] h-[440px] sm:h-[640px] xl:h-[720px] rounded-t-[240px] sm:rounded-t-[280px] rounded-b-[24px] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.12)] border border-[#eae4db] bg-[#eae5dc] group">
               {/* Desktop Video (hidden on mobile) */}
               <video
                 src="/videos/scrollvideo.mp4"
@@ -194,7 +164,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
 
               {/* Floating note card on bottom left of arch window */}
               <div className="absolute bottom-6 left-6 right-6 p-5 sm:p-6 bg-white/92 backdrop-blur-md rounded-lg border border-white/40 shadow-lg">
-                <p className="font-serif-luxury italic text-lg sm:text-xl text-[#1a1918] leading-snug">
+                <p className="font-serif-luxury italic text-base sm:text-xl text-[#1a1918] leading-snug">
                   "Where quiet luxury becomes your daily rhythm."
                 </p>
                 <span className="text-[10px] font-mono tracking-widest text-[#8c827a] uppercase mt-2 block">
@@ -209,20 +179,20 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
       {/* =========================================================================
           SECTION 2: "The Residences."
           ========================================================================= */}
-      <section id="residences" className="py-20 sm:py-32 bg-[#fbf9f6] border-t border-[#eee9e0]">
+      <section id="residences" className="py-10 sm:py-16 bg-[#fbf9f6] border-t border-[#eee9e0]">
         <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
           {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 space-y-3">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-3">
             <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#8c827a]">
               CURATED LIVING ON CHENNAI ECR
             </span>
-            <h2 className="font-serif-luxury text-4xl sm:text-6xl font-normal text-[#1a1918] tracking-tight">
+            <h2 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1a1918] tracking-tight">
               The Residences.
             </h2>
           </div>
 
           {/* Residence Cards Grid with Arched Tops */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-14 mb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-14 mb-10">
             {/* Card 1: Mysa Villas (Pool & Modern Facade matching reference) */}
             <div
               onClick={handleOpenMysa}
@@ -243,7 +213,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
 
               <div className="p-8 sm:p-10 flex items-center justify-between border-t border-[#f0ece4]">
                 <div>
-                  <h3 className="font-serif-luxury text-2xl sm:text-3xl text-[#1a1918] group-hover:text-[#c59b67] transition-colors">
+                  <h3 className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl text-[#1a1918] group-hover:text-[#c59b67] transition-colors">
                     Mysa Villas
                   </h3>
                   <p className="text-xs sm:text-sm text-[#766f68] font-light mt-1">
@@ -265,8 +235,13 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
                 <img
                   src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
                   alt="Azure Enclave Coastal Residence"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover blur-md scale-110 transition-all duration-700 ease-out"
                 />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="px-4 py-2 rounded-sm bg-white/92 backdrop-blur-md border border-[#e5ded4] text-[10px] font-mono tracking-[0.25em] uppercase text-[#1a1918] font-semibold">
+                    Details on Request
+                  </span>
+                </div>
                 <div className="absolute top-6 left-8">
                   <span className="px-3.5 py-1.5 bg-white/95 backdrop-blur-md text-[10px] font-mono tracking-widest uppercase text-[#1a1918] rounded-full border border-[#e5ded4]">
                     OCEANFRONT ESTATES
@@ -276,15 +251,15 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
 
               <div className="p-8 sm:p-10 flex items-center justify-between border-t border-[#f0ece4]">
                 <div>
-                  <h3 className="font-serif-luxury text-2xl sm:text-3xl text-[#1a1918] group-hover:text-[#c59b67] transition-colors">
+                  <h3 className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl text-[#1a1918]">
                     Azure Enclave
                   </h3>
                   <p className="text-xs sm:text-sm text-[#766f68] font-light mt-1">
-                    Akkarai, East Coast Road • 6,200 Sq.Ft. Mansions
+                    Akkarai, East Coast Road • Coming Soon
                   </p>
                 </div>
-                <div className="w-12 h-12 rounded-full border border-[#d8cebe] flex items-center justify-center group-hover:bg-[#1a1918] group-hover:text-white group-hover:border-[#1a1918] transition-all duration-300">
-                  <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <div className="w-12 h-12 rounded-full border border-[#d8cebe] bg-black/5 flex items-center justify-center transition-all duration-300">
+                  <ArrowUpRight className="w-5 h-5 text-[#8c827a]" />
                 </div>
               </div>
             </div>
@@ -293,7 +268,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
           {/* Wide Callout Banner (Matching reference screenshot) */}
           <div className="rounded-[24px] bg-[#f4f0eb] border border-[#e5ded4] p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-1.5 text-center md:text-left">
-              <h4 className="font-serif-luxury text-xl sm:text-2xl text-[#1a1918]">
+              <h4 className="font-serif-luxury text-lg sm:text-xl lg:text-2xl text-[#1a1918]">
                 Curate your own collection of private sanctuary residences.
               </h4>
               <p className="text-xs sm:text-sm text-[#766f68] font-light">
@@ -313,7 +288,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
       {/* =========================================================================
           SECTION 3: "Detailing the Sublime." (Materials & Architecture)
           ========================================================================= */}
-      <section className="py-20 sm:py-32 bg-[#faf8f5]">
+      <section className="py-10 sm:py-16 bg-[#faf8f5]">
         <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Arched Interior Window */}
           <div className="lg:col-span-6 xl:col-span-5">
@@ -332,7 +307,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
               <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#8c827a]">
                 MATERIALS & CRAFTSMANSHIP
               </span>
-              <h2 className="font-serif-luxury text-4xl sm:text-6xl font-normal text-[#1a1918] tracking-tight mt-2">
+              <h2 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1a1918] tracking-tight mt-2">
                 Detailing the
                 <br />
                 <span className="italic font-serif-luxury text-[#c59b67]">
@@ -354,7 +329,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
                       <span className="text-xs font-mono text-[#c59b67] font-semibold">
                         {spec.number}
                       </span>
-                      <h3 className="font-serif-luxury text-xl sm:text-2xl text-[#1a1918] group-hover:text-[#c59b67] transition-colors">
+                      <h3 className="font-serif-luxury text-lg sm:text-xl lg:text-2xl text-[#1a1918] group-hover:text-[#c59b67] transition-colors">
                         {spec.title}
                       </h3>
                     </div>
@@ -389,14 +364,14 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
       {/* =========================================================================
           SECTION 4: "Artistry in Living."
           ========================================================================= */}
-      <section className="py-20 sm:py-32 bg-[#fbf9f6] border-t border-[#eee9e0]">
+      <section className="py-10 sm:py-16 bg-[#fbf9f6] border-t border-[#eee9e0]">
         <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Narrative & Metrics */}
           <div className="lg:col-span-5 space-y-6 sm:space-y-8">
             <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#8c827a]">
               THE SANCTUARY EXPERIENCE
             </span>
-            <h2 className="font-serif-luxury text-4xl sm:text-6xl font-normal text-[#1a1918] tracking-tight">
+            <h2 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1a1918] tracking-tight">
               Artistry in
               <br />
               <span className="italic font-serif-luxury text-[#c59b67]">
@@ -411,7 +386,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
             {/* Metrics */}
             <div className="grid grid-cols-2 gap-8 pt-4 border-t border-[#e5ded4]">
               <div>
-                <span className="font-serif-luxury text-4xl sm:text-5xl font-normal text-[#1a1918]">
+                <span className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-normal text-[#1a1918]">
                   80%
                 </span>
                 <p className="text-xs font-mono tracking-widest text-[#8c827a] uppercase mt-1">
@@ -419,7 +394,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
                 </p>
               </div>
               <div>
-                <span className="font-serif-luxury text-4xl sm:text-5xl font-normal text-[#1a1918]">
+                <span className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-normal text-[#1a1918]">
                   100%
                 </span>
                 <p className="text-xs font-mono tracking-widest text-[#8c827a] uppercase mt-1">
@@ -458,9 +433,9 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
       {/* =========================================================================
           SECTION 5: FULL-WIDTH EDITORIAL TESTIMONIAL QUOTE
           ========================================================================= */}
-      <section className="py-24 sm:py-36 px-6 sm:px-10 lg:px-12 bg-[#faf8f5] text-center border-t border-[#eee9e0]">
+      <section className="py-12 sm:py-16 px-6 sm:px-10 lg:px-12 bg-[#faf8f5] text-center border-t border-[#eee9e0]">
         <div className="max-w-4xl mx-auto space-y-6">
-          <p className="font-serif-luxury italic text-2xl sm:text-4xl md:text-5xl text-[#1a1918] leading-[1.25] tracking-tight">
+          <p className="font-serif-luxury italic text-xl sm:text-3xl lg:text-4xl xl:text-5xl text-[#1a1918] leading-[1.25] tracking-tight">
             "Unifra didn't just build homes; they created an aesthetic discipline with timeless elegance. Our villa on ECR is more than a home; it's a sanctuary."
           </p>
           <div className="pt-4">
@@ -477,7 +452,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
       {/* =========================================================================
           SECTION 6: "Begin your journey." (Enquiry & Private Consultation)
           ========================================================================= */}
-      <section id="contact" className="py-16 sm:py-24 bg-[#faf8f5]">
+      <section id="contact" className="py-10 sm:py-14 bg-[#faf8f5]">
         <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
           <div className="rounded-[32px] bg-[#f4f0eb] border border-[#e5ded4] p-8 sm:p-14 lg:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.03)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -486,7 +461,7 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
               <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#8c827a]">
                 PRIVATE CONSULTATION
               </span>
-              <h2 className="font-serif-luxury text-4xl sm:text-6xl font-normal text-[#1a1918] tracking-tight">
+              <h2 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1a1918] tracking-tight">
                 Begin your
                 <br />
                 <span className="italic font-serif-luxury text-[#c59b67]">
@@ -514,75 +489,29 @@ export const UnifraEditorialTemplate: React.FC<UnifraEditorialTemplateProps> = (
               </div>
             </div>
 
-            {/* Right Column: Minimalist Form */}
-            <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-[24px] border border-[#eae4db] shadow-sm">
-              {isSubmitted ? (
-                <div className="py-12 text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-[#c59b67]/10 text-[#c59b67] flex items-center justify-center mx-auto">
-                    <Check className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-serif-luxury text-2xl text-[#1a1918]">
-                    Inquiry Received
-                  </h3>
-                  <p className="text-sm text-[#68625d] font-light max-w-sm mx-auto">
-                    Our Senior Architectural Advisory will contact you within 2 business hours for a private consultation.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label className="text-[10px] font-mono tracking-widest uppercase text-[#8c827a] block mb-2">
-                      YOUR FULL NAME *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Vikramaditya Singhania"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#faf8f5] border border-[#e5ded4] px-4 py-3.5 text-sm text-[#1a1918] placeholder-[#a8a199] rounded-sm focus:outline-none focus:border-[#1a1918]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-mono tracking-widest uppercase text-[#8c827a] block mb-2">
-                      PHONE NUMBER OR EMAIL *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="+91 98840 00000 or client@domain.com"
-                      value={formData.emailOrPhone}
-                      onChange={(e) => setFormData({ ...formData, emailOrPhone: e.target.value })}
-                      className="w-full bg-[#faf8f5] border border-[#e5ded4] px-4 py-3.5 text-sm text-[#1a1918] placeholder-[#a8a199] rounded-sm focus:outline-none focus:border-[#1a1918]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-mono tracking-widest uppercase text-[#8c827a] block mb-2">
-                      PREFERRED RESIDENCE
-                    </label>
-                    <select
-                      value={formData.residence}
-                      onChange={(e) => setFormData({ ...formData, residence: e.target.value })}
-                      className="w-full bg-[#faf8f5] border border-[#e5ded4] px-4 py-3.5 text-sm text-[#1a1918] rounded-sm focus:outline-none focus:border-[#1a1918]"
-                    >
-                      <option value="MYSA Luxe Villas — ECR">MYSA Luxe Villas — ECR (₹ 5.85 Cr*)</option>
-                      <option value="Azure Enclave — Akkarai">Azure Enclave — Akkarai (₹ 7.45 Cr*)</option>
-                      <option value="Custom Beachfront Land Parcel">Custom Beachfront Land Parcel</option>
-                    </select>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      className="w-full bg-[#1a1918] hover:bg-[#2b2723] text-white py-4 text-xs font-medium tracking-[0.22em] uppercase transition-all duration-300 cursor-pointer"
-                    >
-                      REQUEST PRIVATE PRESENTATION
-                    </button>
-                  </div>
-                </form>
-              )}
+            {/* Right Column: Single unified form CTA (form lives on the Contact page) */}
+            <div className="lg:col-span-7 bg-[#1a1918] p-8 sm:p-12 rounded-[24px] shadow-sm relative overflow-hidden">
+              <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-[#c59b67]/20 blur-3xl pointer-events-none" />
+              <div className="relative space-y-6">
+                <span className="text-[10px] font-mono tracking-widest uppercase text-[#c59b67] block">
+                  ONE FORM • EVERY PURPOSE
+                </span>
+                <h3 className="font-serif-luxury text-2xl sm:text-3xl text-white leading-snug">
+                  Inquiries, private ECR site visits with chauffeur pick-up, villa purchases, joint ventures &amp; consultancy — all in one place.
+                </h3>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-white/70 font-light">
+                  <li className="flex items-center gap-2.5"><Check className="w-3.5 h-3.5 text-[#c59b67] shrink-0" /> Response within 2 business hours</li>
+                  <li className="flex items-center gap-2.5"><Check className="w-3.5 h-3.5 text-[#c59b67] shrink-0" /> Complimentary chauffeur for site visits</li>
+                  <li className="flex items-center gap-2.5"><Check className="w-3.5 h-3.5 text-[#c59b67] shrink-0" /> Discreet, no-obligation consultation</li>
+                </ul>
+                <button
+                  onClick={() => onNavigatePage('contact')}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white hover:bg-[#f4f0eb] text-[#1a1918] px-8 py-4 text-xs font-medium tracking-[0.22em] uppercase transition-all duration-300 cursor-pointer"
+                >
+                  <span>OPEN THE INQUIRY FORM</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#c59b67]" />
+                </button>
+              </div>
             </div>
           </div>
           </div>

@@ -34,7 +34,7 @@ export interface ProjectItem {
   type: string;
   units: string;
   carpetArea: string;
-  priceStarting: string;
+  priceStarting?: string;
   status: 'Under Construction' | 'Ready to Move' | 'Upcoming';
   statusBadge?: string;
   badgeDays?: string;
@@ -70,6 +70,24 @@ export interface CoreValue {
 
 export type LeadStatus = 'New Lead' | 'Contacted' | 'VIP Visit Scheduled' | 'Converted' | 'Archived';
 
+export type LeadActivityType =
+  | 'created'
+  | 'status'
+  | 'note'
+  | 'tag'
+  | 'assign'
+  | 'visit'
+  | 'whatsapp'
+  | 'followup'
+  | 'system';
+
+export interface LeadActivity {
+  id: string;
+  type: LeadActivityType;
+  label: string;
+  createdAt: string; // ISO string
+}
+
 export interface ClientLead {
   id: string;
   name: string;
@@ -83,9 +101,9 @@ export interface ClientLead {
   createdAt: string; // ISO string
   formattedDate: string;
   status: LeadStatus;
-  budget?: string;
   assignedAgent?: string;
   tags?: string[];
   followUpDate?: string;
   visitDate?: string;
+  activityLog?: LeadActivity[];
 }

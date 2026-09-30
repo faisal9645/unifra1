@@ -22,7 +22,6 @@ import { VenturesCareersPage } from './components/pages/VenturesCareersPage';
 import { AdminLeadsPage } from './components/pages/AdminLeadsPage';
 
 import {
-  ConsultationModal,
   VirtualTourModal,
   GalleryLightbox,
   ArticleReaderModal
@@ -52,11 +51,9 @@ function AppContent() {
   const [currentPage, setCurrentPage] = useState<AppPage>('home');
 
   // Modal states
-  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isVirtualTourOpen, setIsVirtualTourOpen] = useState(false);
   const [selectedGalleryItem, setSelectedGalleryItem] = useState<GalleryItem | null>(null);
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null);
-  const [selectedProjectForVisit, setSelectedProjectForVisit] = useState<ProjectItem | null>(null);
 
   // Villa showcase gated access state
   const [isVillaUnlocked, setIsVillaUnlocked] = useState<boolean>(() => isVillaAccessUnlocked());
@@ -148,16 +145,16 @@ function AppContent() {
     }
   };
 
-  const handleOpenConsultation = (project?: ProjectItem) => {
-    if (project) {
-      setSelectedProjectForVisit(project);
-    }
-    setIsConsultationOpen(true);
-  };
+  // Unified inquiry form page: every general CTA routes to the Contact page.
+  // `contactPresetInterest` preselects the "I'm interested in" field.
+  const [contactPresetInterest, setContactPresetInterest] = useState<string | undefined>(undefined);
 
-  const handleDownloadBrochure = (project: ProjectItem) => {
-    setSelectedProjectForVisit(project);
-    setIsConsultationOpen(true);
+  const handleOpenConsultation = (project?: ProjectItem) => {
+    setContactPresetInterest(
+      project && project.name !== 'MYSA Luxe Villas' ? `Project: ${project.name}` : undefined
+    );
+    setCurrentPage('contact');
+    scrollTo(0, { immediate: true });
   };
 
   return (
@@ -185,8 +182,7 @@ function AppContent() {
               if (project.id === 'mysa' || project.id === 'mysa-villas') {
                 handleOpenVillaShowcase(project, 'Editorial Home — Select Card');
               } else {
-                setSelectedProjectForVisit(project);
-                setIsConsultationOpen(true);
+                handleOpenConsultation(project);
               }
             }}
             isVillaUnlocked={isVillaUnlocked}
@@ -253,7 +249,7 @@ function AppContent() {
         )}
 
         {currentPage === 'contact' && (
-          <ContactPage />
+          <ContactPage presetInterest={contactPresetInterest} />
         )}
 
         {currentPage === 'blog' && (
@@ -310,12 +306,6 @@ function AppContent() {
       </div>
 
       {/* Global Interactive Modals */}
-      <ConsultationModal
-        isOpen={isConsultationOpen}
-        onClose={() => setIsConsultationOpen(false)}
-        selectedProject={selectedProjectForVisit}
-      />
-
       <VirtualTourModal
         isOpen={isVirtualTourOpen}
         onClose={() => setIsVirtualTourOpen(false)}

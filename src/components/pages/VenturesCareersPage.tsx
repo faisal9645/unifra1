@@ -52,10 +52,10 @@ export const VenturesCareersPage: React.FC<VenturesCareersPageProps> = ({ type, 
   const [activeTab, setActiveTab] = useState<'ventures' | 'careers'>(type);
 
   return (
-    <div className="pt-28 sm:pt-36 pb-20 sm:pb-28 bg-[#faf8f5] text-[#1a1918]">
+    <div className="pt-20 sm:pt-24 pb-12 sm:pb-14 bg-[#faf8f5] text-[#1a1918]">
       <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
         {/* Editorial tab switcher */}
-        <div className="flex items-center justify-center gap-8 sm:gap-12 mb-16 sm:mb-20">
+        <div className="flex items-center justify-center gap-8 sm:gap-12 mb-10 sm:mb-12">
           <button
             onClick={() => setActiveTab('ventures')}
             className={`group flex items-center gap-2.5 pb-3 border-b-2 transition-all cursor-pointer ${
@@ -84,7 +84,7 @@ export const VenturesCareersPage: React.FC<VenturesCareersPageProps> = ({ type, 
         {activeTab === 'ventures' ? (
           <div className="animate-in fade-in duration-300">
             {/* Split hero */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20 sm:mb-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-14 sm:mb-16">
               <div className="lg:col-span-6 space-y-6">
                 <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-[#c59b67] rounded-full" />
@@ -144,7 +144,7 @@ export const VenturesCareersPage: React.FC<VenturesCareersPageProps> = ({ type, 
         ) : (
           <div className="animate-in fade-in duration-300">
             {/* Careers hero */}
-            <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+            <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
               <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-4 flex items-center justify-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#c59b67] rounded-full" />
                 <span>OPPORTUNITIES</span>

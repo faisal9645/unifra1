@@ -9,7 +9,7 @@ interface BlogSectionProps {
 
 export const BlogSection: React.FC<BlogSectionProps> = ({ onReadArticle }) => {
   return (
-    <section id="blog" className="py-14 sm:py-20 bg-[#faf8f5] text-[#1a1918] border-t border-[#eae4db]">
+    <section id="blog" className="py-10 sm:py-14 bg-[#faf8f5] text-[#1a1918] border-t border-[#eae4db]">
       <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">

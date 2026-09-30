@@ -66,30 +66,23 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
         isLight ? 'bg-[#faf8f5]' : 'bg-[#0b0c0e]'
       }`}
     >
-      {/* Background 4K Architectural Render - Full View Edge-to-Edge */}
+      {/* Background 4K Architectural Render - Full View Edge-to-Edge (vivid, no wash) */}
       <div className="absolute inset-0 z-0">
         <img
           key={currentItem.id}
           src={currentItem.imageUrl}
           alt={currentItem.title}
-          className="w-full h-full object-cover animate-in fade-in duration-700 select-none contrast-[1.04] brightness-[1.02]"
+          className="w-full h-full object-cover animate-in fade-in duration-700 select-none"
         />
 
-        {/* Luxury Ambient Gradients ensuring maximum readability & crystal clear 4K renders */}
-        <div
-          className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${
-            isLight
-              ? 'bg-gradient-to-r from-white/90 via-white/60 to-transparent'
-              : 'bg-gradient-to-r from-black/90 via-black/60 to-transparent'
-          }`}
-        />
-        <div
-          className={`absolute inset-0 pointer-events-none ${
-            isLight
-              ? 'bg-gradient-to-t from-white/85 via-transparent to-white/40'
-              : 'bg-gradient-to-t from-black/90 via-transparent to-black/40'
-          }`}
-        />
+        {/* Left scrim for banner text legibility + bottom shading for control bars (no white wash) */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-black/45 to-transparent" />
+        <div className={`absolute inset-x-0 bottom-0 h-40 pointer-events-none ${
+          isLight
+            ? 'bg-gradient-to-t from-black/50 via-black/15 to-transparent'
+            : 'bg-gradient-to-t from-black/80 via-black/30 to-transparent'
+        }`} />
       </div>
 
       {/* 1. TOP CONTROLS BAR: Render Metadata & Playback (Container aligned) */}
@@ -136,7 +129,9 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xs text-[11px] font-mono uppercase tracking-wider transition-all cursor-pointer border ${
                 isAutoPlay
                   ? 'bg-[#dfb776]/20 text-[#dfb776] border-[#dfb776]/50'
-                  : 'bg-black/60 text-gray-300 hover:text-white border-white/15'
+                  : isLight
+                    ? 'bg-white/75 text-gray-900 hover:text-black border-black/10'
+                    : 'bg-black/60 text-gray-300 hover:text-white border-white/15'
               }`}
               title={isAutoPlay ? 'Pause Slideshow' : 'Play Slideshow'}
             >
@@ -148,14 +143,22 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
             <div className="flex items-center gap-1">
               <button
                 onClick={handlePrev}
-                className="p-1.5 rounded-xs bg-black/60 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] border border-white/15 transition-colors cursor-pointer"
+                className={`p-1.5 rounded-xs transition-colors cursor-pointer border ${
+                  isLight
+                    ? 'bg-white/75 hover:bg-[#dfb776] text-gray-900 hover:text-[#0b0c0e] border-black/10'
+                    : 'bg-black/60 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] border border-white/15'
+                }`}
                 title="Previous 4K Render"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={handleNext}
-                className="p-1.5 rounded-xs bg-black/60 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] border border-white/15 transition-colors cursor-pointer"
+                className={`p-1.5 rounded-xs transition-colors cursor-pointer border ${
+                  isLight
+                    ? 'bg-white/75 hover:bg-[#dfb776] text-gray-900 hover:text-[#0b0c0e] border-black/10'
+                    : 'bg-black/60 hover:bg-[#dfb776] text-white hover:text-[#0b0c0e] border border-white/15'
+                }`}
                 title="Next 4K Render"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -167,35 +170,29 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
 
       {/* 2. MAIN CENTER BODY: Editorial Typography & Signature HUD Card (Container aligned, fill height) */}
       <div className="relative z-10 flex-1 w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 py-4 sm:py-6 lg:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center overflow-y-auto">
-        {/* Left Column: Brand Typography & CTAs */}
-        <div key={currentItem.id} className="lg:col-span-7 xl:col-span-7 text-left max-w-2xl animate-in fade-in duration-500">
+        {/* Left Column: Brand Typography & CTAs (data-dark-card keeps white text over photo in light theme) */}
+        <div key={currentItem.id} data-dark-card className="lg:col-span-7 xl:col-span-7 text-left max-w-2xl animate-in fade-in duration-500">
           {/* Eyebrow */}
           <div
             className={`text-[11px] sm:text-xs font-mono uppercase tracking-[0.28em] mb-3 sm:mb-4 flex items-center gap-2 ${
-              isLight ? 'text-[#9b6f1e]' : 'text-[#dfb776]'
+              isLight ? 'text-[#dfb776]' : 'text-[#dfb776]'
             }`}
           >
-            <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-[#9b6f1e]' : 'bg-[#dfb776]'}`} />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#dfb776]" />
             <span>{currentItem.heroEyebrow || 'INDEPENDENT HOMES / CHENNAI, INDIA'}</span>
           </div>
 
-          {/* Main Luxury Heading */}
-          <h1
-            className={`font-serif-luxury text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.05] mb-4 sm:mb-5 tracking-tight drop-shadow-md ${
-              isLight ? 'text-gray-950' : 'text-white'
-            }`}
+          {/* Main Luxury Heading */}          <h1
+            className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.05] mb-4 sm:mb-5 tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]"
           >
             {currentItem.heroHeadlineMain || 'The art of'}<br />
-            <span className={`italic font-serif-luxury ${isLight ? 'text-[#9b6f1e]' : 'text-[#dfb776]'}`}>
+            <span className="italic font-serif-luxury text-[#dfb776] drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">
               {currentItem.heroHeadlineItalic || 'arriving home.'}
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p
-            className={`text-xs sm:text-sm md:text-[15px] font-light leading-relaxed max-w-xl mb-6 sm:mb-8 drop-shadow ${
-              isLight ? 'text-gray-800' : 'text-gray-200'
-            }`}
+          {/* Subtitle */}          <p
+            className="text-xs sm:text-sm md:text-[15px] font-light leading-relaxed max-w-xl mb-6 sm:mb-8 text-gray-100 drop-shadow-[0_1px_8px_rgba(0,0,0,0.6)]"
           >
             {currentItem.heroSubtitle || "We create addresses with a point of view — considered Scandinavian architecture, tactile materials, and the kind of quiet that stays with you. Timeless luxury and effortless living on Chennai's East Coast Road."}
           </p>
@@ -215,11 +212,7 @@ export const ThreeHeroVilla: React.FC<ThreeHeroVillaProps> = ({
             {onOpenVirtualTour && (
               <button
                 onClick={onOpenVirtualTour}
-                className={`border text-xs tracking-[0.18em] uppercase px-5 sm:px-6 py-3.5 sm:py-4 rounded-sm transition-all duration-200 cursor-pointer flex items-center gap-2 ${
-                  isLight
-                    ? 'border-black/20 hover:border-[#9b6f1e] text-gray-900 hover:text-[#9b6f1e] bg-white/80 backdrop-blur-md shadow-md'
-                    : 'border-white/25 hover:border-[#dfb776] text-white hover:text-[#dfb776] bg-black/50 backdrop-blur-sm'
-                }`}
+                className={`border text-xs tracking-[0.18em] uppercase px-5 sm:px-6 py-3.5 sm:py-4 rounded-sm transition-all duration-200 cursor-pointer flex items-center gap-2 bg-black/45 backdrop-blur-md border-white/30 hover:border-[#dfb776] text-white hover:text-[#dfb776] shadow-lg`}
               >
                 <Eye className="w-3.5 h-3.5" />
                 <span>LAUNCH 360° TOUR</span>

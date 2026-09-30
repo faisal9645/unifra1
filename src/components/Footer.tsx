@@ -39,12 +39,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigatePage, onOpenContact })
   const isLight = true;
 
   return (
-    <footer className={`pt-20 pb-12 border-t relative overflow-hidden transition-colors ${
+    <footer className={`pt-10 pb-8 border-t relative overflow-hidden transition-colors ${
       isLight ? 'bg-[#faf8f5] text-[#1a1918] border-[#eae4db]' : 'bg-[#07080a] text-white border-white/10'
     }`}>
       <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 relative z-10">
         {/* Main Grid matching editorial screenshot */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-[#eae4db]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-10 border-b border-[#eae4db]">
           {/* Column 1: Official UNIFRA Brand Logo & Philosophy */}
           <div className="lg:col-span-4 space-y-5 text-left">
             <button
@@ -53,14 +53,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigatePage, onOpenContact })
               aria-label="Unifra - Creating Desires"
             >
               <img
-                src="/images/unifra-logo-horizontal.png"
+                src="/images/unifra-logo-stacked.png"
                 alt="Unifra Properties - Creating Desires"
-                className="h-11 sm:h-13 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                className="h-14 sm:h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
               />
             </button>
 
             <p className="text-[#68625d] text-xs sm:text-sm font-light leading-relaxed max-w-sm">
-              Architectural villas and beachfront sanctuaries crafted for discerning collectors of rare living along Chennai's East Coast Road.
+              Where quality craftsmanship, innovative design, and customer satisfaction come together to create remarkable homes that stand out in both style and substance.
             </p>
 
             <div className="pt-1">
@@ -131,12 +131,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigatePage, onOpenContact })
                   EDITORIAL JOURNAL
                 </button>
               </li>
-              <li>
-                <button onClick={() => handleLinkClick('admin')} className="text-[#c59b67] hover:text-[#1a1918] transition-colors cursor-pointer uppercase flex items-center gap-1.5 font-mono text-[11px] font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c59b67] animate-pulse" />
-                  <span>ADMIN CRM (/admin)</span>
-                </button>
-              </li>
             </ul>
           </div>
 
@@ -147,24 +141,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigatePage, onOpenContact })
             </h4>
             <div className="space-y-3 text-xs text-[#68625d] font-light">
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#8c827a] block mb-0.5">LOCATION</span>
+                <span className="text-[10px] font-mono uppercase text-[#8c827a] block mb-0.5">ADDRESS</span>
                 <p className="leading-relaxed">
-                  122, East Coast Road, Vettuvankeni,<br />
-                  Chennai – 600115, Tamil Nadu, India
+                  4/11, G R Mansion, 2nd Floor, Srinivasa Rd,<br />
+                  T. Nagar, Chennai, Tamil Nadu 600017
                 </p>
               </div>
 
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#8c827a] block mb-0.5">DIRECT CONCIERGE</span>
-                <a href="tel:+917358222445" className="hover:text-[#1a1918] transition-colors font-mono">
+                <span className="text-[10px] font-mono uppercase text-[#8c827a] block mb-0.5">CONTACTS</span>
+                <a href="tel:+917358222445" className="hover:text-[#1a1918] transition-colors font-mono block">
                   +91 73582 22445
                 </a>
               </div>
 
               <div>
                 <span className="text-[10px] font-mono uppercase text-[#8c827a] block mb-0.5">EMAIL</span>
-                <a href="mailto:info@unifrahomes.com" className="hover:text-[#1a1918] transition-colors font-mono">
-                  info@unifrahomes.com
+                <a href="mailto:info@unifra.in" className="hover:text-[#1a1918] transition-colors font-mono">
+                  info@unifra.in
                 </a>
               </div>
             </div>

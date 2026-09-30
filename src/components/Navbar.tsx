@@ -1,6 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Menu, X, Phone, Sparkles, ShieldCheck } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone, Sparkles } from 'lucide-react';
 import { SIGNATURE_PROJECTS } from '../data/mockData';
+
+// Portfolio status groups shown in the PROJECTS menu (MYSA leads its group)
+const PROJECT_STATUS_ORDER = ['Ongoing', 'Upcoming', 'Completed'] as const;
+
+const STATUS_META: Record<string, { label: string; dot: string; pulse?: boolean }> = {
+  Ongoing: { label: 'Ongoing', dot: 'bg-[#9b6f1e]', pulse: true },
+  Upcoming: { label: 'Upcoming', dot: 'bg-gray-400' },
+  Completed: { label: 'Completed', dot: 'bg-emerald-600' }
+};
+
+const groupProjectsByStatus = () =>
+  PROJECT_STATUS_ORDER
+    .map((status) => ({
+      status,
+      projects: SIGNATURE_PROJECTS.filter((p) => (p.statusBadge || 'Upcoming') === status)
+    }))
+    .filter((group) => group.projects.length > 0);
 
 export type AppPage = 'home' | 'about-story' | 'about-team' | 'projects' | 'mysa-detail' | 'contact' | 'blog' | 'ventures' | 'careers' | 'admin';
 
@@ -110,10 +127,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out will-change-transform [transform:translateZ(0)] ${
         isScrolled
-          ? 'bg-[#faf8f5]/92 backdrop-blur-xl border-b border-[#eae4db] py-3 sm:py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.04)]'
-          : 'bg-transparent py-4 sm:py-5.5'
+          ? 'bg-[#faf8f5] border-b border-[#eae4db] py-3 sm:py-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.04)]'
+          : 'bg-[#faf8f5] border-b border-transparent py-4 sm:py-5.5'
       }`}
     >
       <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
@@ -125,16 +142,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label="Unifra - Creating Desires"
           >
             <img
-              src="/images/unifra-logo-horizontal.png"
+              src="/images/unifra-logo-stacked.png"
               alt="Unifra Properties - Creating Desires"
               className={`w-auto object-contain transition-all duration-300 group-hover:opacity-90 ${
-                isScrolled ? 'h-8 sm:h-9' : 'h-10 sm:h-12'
+                isScrolled ? '-my-1.5 h-12 sm:h-14' : '-my-2 h-16 sm:h-18'
               }`}
             />
           </button>
 
           {/* Desktop Nav Links (Clean header navigation: PROJECTS, ABOUT US, LIFESTYLE, CONTACT) */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-7">
             {/* PROJECTS */}
             <div
               ref={projectsRef}
@@ -188,55 +205,79 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <span className={`text-xs group-hover:translate-x-1 transition-transform ${isLight ? 'text-[#9b6f1e]' : 'text-[#dfb776]'}`}>→</span>
                     </button>
 
-                    {/* All residences below ALL PROJECTS */}
-                    <div className={`py-1 divide-y ${isLight ? 'divide-black/5' : 'divide-white/5'}`}>
-                      {SIGNATURE_PROJECTS.map((proj) => {
-                        const isMysa = proj.id === 'mysa-villas';
+                    {/* Status-grouped portfolio: ONGOING / UPCOMING / COMPLETED */}
+                    <div className="py-1">
+                      {groupProjectsByStatus().map(({ status, projects }) => {
+                        const meta = STATUS_META[status] || STATUS_META.Upcoming;
                         return (
-                          <button
-                            key={proj.id}
-                            type="button"
-                            onClick={() => {
-                              if (isMysa && !isVillaUnlocked && onOpenVillaAccess) {
-                                setProjectsDropdownOpen(false);
-                                onOpenVillaAccess('Navbar Dropdown - Mysa Villas');
-                              } else {
-                                handleNavClick(isMysa ? 'mysa-detail' : 'projects');
-                              }
-                            }}
-                            className={`w-full text-left px-4 py-3 text-xs tracking-wider transition-all flex items-center justify-between group cursor-pointer ${
-                              isLight
-                                ? 'text-gray-700 hover:bg-amber-500/10 hover:text-black'
-                                : 'text-gray-300 hover:bg-[#dfb776]/10 hover:text-white'
-                            }`}
-                          >
-                            <div className="flex flex-col pr-2">
+                          <div key={status} className="pt-1.5 border-t border-black/5 first:border-t-0 first:pt-0">
+                            {/* Status group header */}
+                            <div className="px-4 pt-2 pb-1 flex items-center justify-between">
                               <div className="flex items-center gap-1.5">
-                                {isMysa && <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-[#9b6f1e]' : 'bg-[#dfb776]'}`} />}
-                                <span className={`font-semibold transition-colors ${
-                                  isMysa
-                                    ? isLight ? 'text-gray-900 group-hover:text-[#9b6f1e]' : 'text-white group-hover:text-[#dfb776]'
-                                    : isLight ? 'text-gray-800 group-hover:text-[#9b6f1e]' : 'text-gray-200 group-hover:text-[#dfb776]'
-                                }`}>
-                                  {proj.name.toUpperCase()}
+                                <span className={`w-1.5 h-1.5 rounded-full ${meta.dot} ${meta.pulse ? 'animate-pulse' : ''}`} />
+                                <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.22em] text-gray-500">
+                                  {meta.label}
                                 </span>
                               </div>
-                              <span className={`text-[10px] mt-0.5 font-light ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                                {proj.location} • {proj.specs.bedrooms}
+                              <span className="text-[9px] font-mono uppercase tracking-wider text-gray-400">
+                                {projects.length} {projects.length === 1 ? 'Project' : 'Projects'}
                               </span>
                             </div>
-                            <div className="flex items-center gap-1.5 shrink-0">
-                              <span className={`text-[9px] px-2 py-0.5 font-mono tracking-wider uppercase rounded-xs shrink-0 ${
-                                proj.status === 'Under Construction'
-                                  ? isLight ? 'bg-amber-500/20 border border-amber-600/30 text-amber-900 font-semibold' : 'bg-[#dfb776]/15 border border-[#dfb776]/30 text-[#dfb776]'
-                                  : proj.status === 'Upcoming'
-                                  ? 'bg-amber-500/15 border border-amber-500/30 text-amber-500'
-                                  : 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-500'
-                              }`}>
-                                {proj.statusBadge || (proj.status === 'Under Construction' ? 'ACTIVE' : proj.status === 'Upcoming' ? 'UPCOMING' : 'COMPLETED')}
-                              </span>
-                            </div>
-                          </button>
+
+                            {/* Projects within this status (MYSA leads its group) */}
+                            {projects.map((proj) => {
+                              const isMysa = proj.id === 'mysa-villas';
+                              return (
+                                <button
+                                  key={proj.id}
+                                  type="button"
+                                  onClick={() => {
+                                    if (!isMysa) {
+                                      setProjectsDropdownOpen(false);
+                                      handleNavClick('projects');
+                                      return;
+                                    }
+                                    if (!isVillaUnlocked && onOpenVillaAccess) {
+                                      setProjectsDropdownOpen(false);
+                                      onOpenVillaAccess('Navbar Dropdown - Mysa Villas');
+                                    } else {
+                                      handleNavClick('mysa-detail');
+                                    }
+                                  }}
+                                  className={`w-full text-left px-4 py-2.5 text-xs tracking-wider transition-all flex items-center justify-between group cursor-pointer ${
+                                    isMysa
+                                      ? isLight
+                                        ? 'text-gray-700 hover:bg-amber-500/10 hover:text-black'
+                                        : 'text-gray-300 hover:bg-[#dfb776]/10 hover:text-white'
+                                      : 'cursor-default opacity-60'
+                                  }`}
+                                >
+                                  <div className={`flex flex-col pr-2 ${isMysa ? '' : 'blur-[3px] select-none'}`}>
+                                    <div className="flex items-center gap-1.5">
+                                      {isMysa && <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-[#9b6f1e]' : 'bg-[#dfb776]'}`} />}
+                                      <span className={`font-semibold transition-colors ${
+                                        isMysa
+                                          ? isLight ? 'text-gray-900 group-hover:text-[#9b6f1e]' : 'text-white group-hover:text-[#dfb776]'
+                                          : isLight ? 'text-gray-800' : 'text-gray-200'
+                                      }`}>
+                                        {proj.name.toUpperCase()}
+                                      </span>
+                                    </div>
+                                    <span className={`text-[10px] mt-0.5 font-light ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                                      {proj.location} • {proj.specs.bedrooms}
+                                    </span>
+                                  </div>
+                                  {isMysa && (
+                                    <span className={`text-[9px] px-2 py-0.5 font-mono tracking-wider uppercase rounded-xs shrink-0 ${
+                                      isLight ? 'bg-amber-500/20 border border-amber-600/30 text-amber-900 font-semibold' : 'bg-[#dfb776]/15 border border-[#dfb776]/30 text-[#dfb776]'
+                                    }`}>
+                                      {proj.statusBadge || 'ONGOING'}
+                                    </span>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
                         );
                       })}
                     </div>
@@ -245,8 +286,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div className={`px-4 py-2 flex items-center justify-between text-[9px] font-mono border-t ${
                       isLight ? 'bg-gray-100 border-black/10 text-gray-600' : 'bg-black/40 border-white/5 text-gray-400'
                     }`}>
-                      <span>4 RESIDENCES IN CHENNAI</span>
-                      <span className={isLight ? 'text-[#9b6f1e] font-semibold' : 'text-[#dfb776]'}>SELECT TO VIEW</span>
+                      <span>MYSA LUXE VILLAS — NOW SELLING</span>
+                      <span className={isLight ? 'text-[#9b6f1e] font-semibold' : 'text-[#dfb776]'}>MORE COMING SOON</span>
                     </div>
                   </div>
                 </div>
@@ -350,38 +391,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </nav>
 
-          {/* Right Action side: Phone + BOOK A PRIVATE TOUR button + ADMIN CRM */}
-          <div className="hidden sm:flex items-center gap-3.5">
-
-            <button
-              type="button"
-              onClick={() => handleNavClick('admin')}
-              className={`inline-flex items-center gap-2 text-[11px] font-mono tracking-wider px-3 py-1.5 rounded-xs border transition-all uppercase cursor-pointer ${
-                currentPage === 'admin'
-                  ? 'bg-[#dfb776]/20 text-[#dfb776] border-[#dfb776] font-medium shadow-[0_0_15px_rgba(223,183,118,0.25)] ring-1 ring-[#dfb776]/50'
-                  : isLight
-                    ? 'border-black/15 text-gray-700 hover:text-black hover:border-[#dfb776] bg-black/[0.03]'
-                    : 'border-white/15 text-gray-300 hover:text-white hover:border-[#dfb776]/60 bg-white/[0.03]'
-              }`}
-              title="Executive Admin CRM (/admin)"
-            >
-              <ShieldCheck className={`w-3.5 h-3.5 transition-colors ${
-                currentPage === 'admin' ? 'text-[#dfb776]' : isLight ? 'text-gray-500' : 'text-gray-400'
-              }`} />
-              <span className="font-semibold tracking-wider">CRM</span>
-              <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded-xs transition-colors ${
-                currentPage === 'admin'
-                  ? 'bg-[#dfb776]/25 text-[#dfb776] border border-[#dfb776]/40 font-semibold'
-                  : isLight
-                    ? 'bg-black/5 text-gray-600 border border-black/10'
-                    : 'bg-white/5 text-gray-400 border border-white/10'
-              }`}>
-                /admin
-              </span>
-              {currentPage === 'admin' && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#dfb776] shadow-[0_0_6px_#dfb776] animate-pulse" />
-              )}
-            </button>
+          {/* Right Action side: Phone + BOOK A PRIVATE TOUR button */}
+          <div className="hidden sm:flex items-center gap-2.5 xl:gap-3.5">
 
             <a
               href="tel:+917358222445"
@@ -390,13 +401,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <Phone className={`w-3.5 h-3.5 ${isLight ? 'text-[#c59b67]' : 'text-[#dfb776]'}`} />
-              <span>+91 73582 22445</span>
+              <span className="hidden xl:inline">+91 73582 22445</span>
             </a>
 
             <button
               onClick={onOpenContact}
               className={`bg-[#1a1918] hover:bg-[#2b2723] text-white font-medium tracking-[0.2em] uppercase rounded-sm transition-all duration-300 cursor-pointer shadow-sm flex items-center gap-2 ${
-                isScrolled ? 'px-3.5 py-2 text-[10px]' : 'px-4 sm:px-5 py-2.5 text-[10px] sm:text-[11px]'
+                isScrolled ? 'px-3.5 py-2 text-[10px]' : 'px-3.5 lg:px-5 py-2.5 text-[10px]'
               }`}
             >
               <span>BOOK A PRIVATE TOUR</span>
@@ -439,9 +450,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label="Unifra - Creating Desires"
           >
             <img
-              src="/images/unifra-logo-horizontal.png"
+              src="/images/unifra-logo-stacked.png"
               alt="Unifra Properties - Creating Desires"
-              className="h-9 sm:h-10 w-auto object-contain"
+              className="h-10 sm:h-11 w-auto object-contain"
             />
           </button>
 
@@ -489,40 +500,57 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <span className="text-xs text-[#dfb776]">→</span>
                   </button>
 
-                  {SIGNATURE_PROJECTS.map((proj) => {
-                    const isMysa = proj.id === 'mysa-villas';
+                  {groupProjectsByStatus().map(({ status, projects }) => {
+                    const meta = STATUS_META[status] || STATUS_META.Upcoming;
                     return (
-                      <button
-                        key={proj.id}
-                        onClick={() => {
-                          handleNavClick(isMysa ? 'mysa-detail' : 'projects');
-                        }}
-                        className={`w-full text-left py-2.5 px-2 text-xs flex items-center justify-between border-t ${
-                          isLight
-                            ? 'border-black/5 text-gray-700 hover:text-black'
-                            : 'border-white/5 text-gray-300 hover:text-white'
-                        }`}
-                      >
-                        <div className="flex flex-col">
-                          <span className={isMysa ? 'font-semibold text-[#dfb776]' : 'font-medium'}>
-                            {proj.name.toUpperCase()}
+                      <div key={status} className="pt-2">
+                        {/* Status group header */}
+                        <div className="flex items-center gap-1.5 px-2 pb-1">
+                          <span className={`w-1.5 h-1.5 rounded-full ${meta.dot} ${meta.pulse ? 'animate-pulse' : ''}`} />
+                          <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.22em] text-gray-500">
+                            {meta.label}
                           </span>
-                          <span className={`text-[10px] ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                            {proj.location} • {proj.specs.bedrooms}
+                          <span className="ml-auto text-[9px] font-mono uppercase tracking-wider text-gray-400">
+                            {projects.length} {projects.length === 1 ? 'Project' : 'Projects'}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1.5">
-                          <span className={`text-[9px] px-1.5 py-0.5 font-mono rounded-xs ${
-                            proj.status === 'Under Construction'
-                              ? 'bg-[#dfb776]/20 text-[#dfb776]'
-                              : proj.status === 'Upcoming'
-                              ? 'bg-amber-500/20 text-amber-600'
-                              : 'bg-emerald-500/20 text-emerald-600'
-                          }`}>
-                            {proj.statusBadge || (proj.status === 'Under Construction' ? 'ACTIVE' : proj.status === 'Upcoming' ? 'UPCOMING' : 'COMPLETED')}
-                          </span>
-                        </div>
-                      </button>
+
+                        {projects.map((proj) => {
+                          const isMysa = proj.id === 'mysa-villas';
+                          return (
+                            <button
+                              key={proj.id}
+                              onClick={() => {
+                                if (isMysa) {
+                                  handleNavClick('mysa-detail');
+                                } else {
+                                  setMobileMenuOpen(false);
+                                  handleNavClick('projects');
+                                }
+                              }}
+                              className={`w-full text-left py-2.5 px-2 text-xs flex items-center justify-between border-t border-black/5 ${
+                                isMysa
+                                  ? 'text-gray-700 hover:text-black'
+                                  : 'cursor-default'
+                              }`}
+                            >
+                              <div className={`flex flex-col ${isMysa ? '' : 'blur-[3px] select-none'}`}>
+                                <span className={isMysa ? 'font-semibold text-[#dfb776]' : 'font-medium text-gray-600'}>
+                                  {proj.name.toUpperCase()}
+                                </span>
+                                <span className="text-[10px] text-gray-500">
+                                  {proj.location} • {proj.specs.bedrooms}
+                                </span>
+                              </div>
+                              {isMysa && (
+                                <span className="text-[9px] px-1.5 py-0.5 font-mono rounded-xs bg-[#dfb776]/20 text-[#dfb776] uppercase tracking-wider shrink-0">
+                                  {proj.statusBadge || 'ONGOING'}
+                                </span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
                     );
                   })}
                 </div>
@@ -565,27 +593,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               CONTACT
             </button>
 
-            {/* Mobile Admin Portal Link */}
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                handleNavClick('admin');
-              }}
-              className={`text-left py-3 px-4 text-xs uppercase tracking-widest rounded-sm flex items-center justify-between font-mono transition-all cursor-pointer ${
-                currentPage === 'admin'
-                  ? 'bg-[#dfb776]/20 text-[#dfb776] border border-[#dfb776] font-semibold shadow-md'
-                  : 'text-[#dfb776] hover:text-white bg-[#dfb776]/10 border border-[#dfb776]/30'
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#dfb776]" />
-                <span>ADMIN LEADS CRM (/admin)</span>
-              </div>
-              <span className="text-[10px] font-mono font-bold text-[#dfb776]">
-                {currentPage === 'admin' ? '● ACTIVE' : '→'}
-              </span>
-            </button>
           </div>
 
           {/* Bottom Actions */}

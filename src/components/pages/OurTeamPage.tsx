@@ -28,14 +28,23 @@ export const OurTeamPage: React.FC<OurTeamPageProps> = ({
       bio: 'As Project Manager, Nikesh orchestrates every phase of construction with precision and foresight. His expertise in timeline management and quality control ensures that every Unifra project is delivered on schedule and to the highest standards, turning blueprints into beautiful homes.',
       linkedin: 'https://linkedin.com',
       email: 'nikesh@unifra.in'
+    },
+    {
+      name: 'Thunku Abdel Rehman',
+      role: 'General Manager',
+      index: '03',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80',
+      bio: 'As General Manager, Thunku Abdel Rehman brings operational discipline and a client-first mindset to every Unifra engagement. From transparent communication to meticulous handovers, he ensures the home-buying journey remains seamless and deeply satisfying for every family.',
+      linkedin: 'https://linkedin.com',
+      email: 'info@unifra.in'
     }
   ];
 
   return (
-    <div className="pt-28 sm:pt-36 pb-20 sm:pb-28 bg-[#faf8f5] text-[#1a1918]">
+    <div className="pt-20 sm:pt-24 pb-12 sm:pb-14 bg-[#faf8f5] text-[#1a1918]">
       <div className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-4 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#c59b67] rounded-full" />
             <span>LEADERSHIP & ARCHITECTURAL MINDS</span>
@@ -45,7 +54,7 @@ export const OurTeamPage: React.FC<OurTeamPageProps> = ({
             Our <span className="italic font-serif-luxury text-[#c59b67]">Team</span>
           </h1>
           <p className="text-xs sm:text-sm text-[#68625d] font-light leading-relaxed">
-            Our strength lies in our individuality and shared passion for excellence.
+            Our strength lies in our individuality. Set up by Mr. Siddiq Ahmed, the team strives to bring in the best talent in various fields, from architecture to interior design and sales.
           </p>
 
           <div className="mt-10 flex items-center justify-center gap-4">
@@ -56,7 +65,7 @@ export const OurTeamPage: React.FC<OurTeamPageProps> = ({
         </div>
 
         {/* Team Grid — vertical editorial profiles */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-14">
           {teamMembers.map((member) => (
             <article key={member.name} className="group flex flex-col">
               {/* Arched portrait */}

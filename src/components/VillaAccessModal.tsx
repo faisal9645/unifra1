@@ -244,7 +244,7 @@ export const VillaAccessModal: React.FC<VillaAccessModalProps> = ({
                 </div>
                 <div className="p-2 rounded-sm bg-white border border-[#eae4db] text-center">
                   <div className="text-[9px] font-mono text-[#8c827a] uppercase tracking-wider">PRICING</div>
-                  <div className="text-[11px] text-[#c59b67] font-semibold mt-0.5">From ₹5.85 Cr*</div>
+                  <div className="text-[11px] text-[#c59b67] font-semibold mt-0.5">On Request</div>
                 </div>
                 <div className="p-2 rounded-sm bg-white border border-[#eae4db] text-center">
                   <div className="text-[9px] font-mono text-[#8c827a] uppercase tracking-wider">PROGRESS</div>

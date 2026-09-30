@@ -16,9 +16,9 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
   onOpenContact
 }) => {
   return (
-    <div className="pt-24 pb-20 bg-[#faf8f5] text-[#1a1918]">
+    <div className="pt-20 pb-12 bg-[#faf8f5] text-[#1a1918]">
       {/* 1. Hero Banner */}
-      <section className="relative w-full mb-16 px-6 sm:px-10 lg:px-12">
+      <section className="relative w-full mb-10 px-6 sm:px-10 lg:px-12">
         <div className="max-w-[1380px] mx-auto bg-[#fbf9f6] rounded-[32px] p-8 sm:p-14 lg:p-16 border border-[#eae4db] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-sm">
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2.5">
@@ -34,8 +34,8 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
             <h1 className="font-serif-luxury text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#1a1918] leading-[1.08]">
               About <span className="italic font-serif-luxury text-[#c59b67]">Unifra.</span>
             </h1>
-            <p className="text-base sm:text-lg text-[#68625d] font-light leading-relaxed max-w-xl">
-              Dreams are meant to come true. We craft bespoke architectural sanctuaries that blend Scandinavian calm, coastal luxury, and sustainable building craft.
+            <p className="text-sm sm:text-base lg:text-lg text-[#68625d] font-light leading-relaxed max-w-xl">
+              Dreams are meant to come true. We'll make it happen for you. At Unifra Homes, quality craftsmanship, innovative design, and customer satisfaction come together to create remarkable homes — built to stand out in both style and substance.
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-6 text-xs font-mono text-[#8c827a]">
               <div><strong className="text-[#1a1918] text-sm block">2022</strong> Founded in Chennai</div>
@@ -65,7 +65,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
       </section>
 
       {/* 2. Our Journey Section */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             CHRONICLE
@@ -74,7 +74,7 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
             Our <span className="italic font-serif-luxury text-[#c59b67]">Journey</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#68625d]">
-            Three years of passion, dedication, and crafting dream homes for our valued customers.
+            Years of passion, dedication, and crafting dream homes for our valued customers.
           </p>
         </div>
 
@@ -116,12 +116,12 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
       </section>
 
       {/* 3. Get to know us */}
-      <section className="max-w-4xl mx-auto px-6 sm:px-10 mb-24 text-center">
+      <section className="max-w-4xl mx-auto px-6 sm:px-10 mb-14 text-center">
         <div className="flex justify-center mb-6">
           <img
-            src="/images/unifra-logo-tight.png"
+            src="/images/unifra-logo-stacked.png"
             alt="Unifra - Creating Desires"
-            className="h-24 sm:h-32 w-auto object-contain opacity-95"
+            className="h-28 sm:h-36 w-auto object-contain opacity-95"
           />
         </div>
         <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
@@ -132,22 +132,22 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
         </h2>
         <div className="text-xs sm:text-sm text-[#68625d] leading-relaxed space-y-4 max-w-3xl mx-auto font-light">
           <p>
-            At Unifra Homes Pvt. Ltd., we don't just build houses, we create personalized living experiences that mirror your aspirations and lifestyle. Established with a vision to redefine residential architecture, Unifra blends aesthetics, functionality, and sustainability in every project.
+            We believe your home is an expression of your individuality. With our commitment to excellence, we have been creating extraordinary homes that exceed expectations. Our customizable options ensure your home perfectly aligns with your lifestyle. From initial consultation to final handover, our dedicated team prioritizes clear communication, attention to detail, and transparency.
           </p>
           <p>
-            Rooted in Chennai, we've built our legacy on trust, innovation, and craftsmanship. Every brick we lay reflects a promise — a promise of quality, timely delivery, and transparency that homeowners can count on. Whether it's a serene villa by the coast or a modern home in the city, Unifra stands for architecture that inspires and endures.
+            Join the Unifra Homes family and experience the joy of living in a thoughtfully crafted space that reflects your unique personality. Welcome to Unifra Homes, where dreams come alive.
           </p>
         </div>
       </section>
 
       {/* 4. Our Guiding Principles */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             TENETS
           </div>
           <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-[#1a1918] tracking-tight mb-3">
-            Our Guiding <span className="italic font-serif-luxury text-[#c59b67]">Principles</span>
+            Mission & <span className="italic font-serif-luxury text-[#c59b67]">Vision</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#68625d]">
             The core beliefs that drive our commitment to excellence.
@@ -163,42 +163,52 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
               Our Mission
             </h3>
             <p className="text-xs sm:text-sm text-[#68625d] leading-relaxed font-light">
-              To craft bespoke living spaces where modern elegance meets everyday comfort. We are devoted to delivering homes that are not only architecturally striking, but also environmentally conscious, intuitively planned, and built to withstand generations.
-            </p>
-            <div className="pt-2 flex flex-col gap-2.5">
+              We are dedicated to crafting extraordinary homes that exceed expectations. We strive to create living spaces that inspire and provide an unparalleled level of comfort, quality, and satisfaction. Through our commitment to excellence, we aim to make homeownership a truly remarkable experience.
+            </p>              <div className="pt-2 flex flex-col gap-2.5">
               <div className="flex items-center gap-3 text-xs sm:text-sm text-[#1a1918]">
                 <CheckCircle2 className="w-4 h-4 text-[#c59b67] shrink-0" />
-                <span>Uncompromising architectural precision and structural integrity</span>
+                <span>Extraordinary homes that exceed expectations</span>
               </div>
               <div className="flex items-center gap-3 text-xs sm:text-sm text-[#1a1918]">
                 <CheckCircle2 className="w-4 h-4 text-[#c59b67] shrink-0" />
-                <span>Complete financial and construction milestone transparency</span>
+                <span>Living spaces that inspire comfort, quality, and satisfaction</span>
               </div>
               <div className="flex items-center gap-3 text-xs sm:text-sm text-[#1a1918]">
                 <CheckCircle2 className="w-4 h-4 text-[#c59b67] shrink-0" />
-                <span>Personalized client advisory from initial deed to final key handover</span>
+                <span>Homeownership made a truly remarkable experience</span>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[16px] overflow-hidden border border-[#eae4db] h-72 sm:h-96">
-            <img
-              src="/images/mysa3d/KITCHEN.jpg"
-              alt="MYSA Minimalist Culinary Studio & Island"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-            />
+          <div className="space-y-4 text-left">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#c59b67] font-semibold">
+              OUR VISION
+            </span>
+            <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1a1918]">
+              Where We're Headed
+            </h3>
+            <p className="text-xs sm:text-sm text-[#68625d] leading-relaxed font-light">
+              Our vision is to be the preferred choice for individuals seeking exceptional homes that perfectly match their lifestyles and aspirations. We aim to continuously innovate and push the boundaries of design and construction, creating spaces that are both aesthetically captivating and functionally efficient.
+            </p>
+            <div className="rounded-[16px] overflow-hidden border border-[#eae4db] h-56 sm:h-64">
+              <img
+                src="/images/mysa3d/KITCHEN.jpg"
+                alt="MYSA Minimalist Culinary Studio & Island"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* 5. See Our Services */}
-      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-24">
+      <section className="w-full max-w-[1380px] mx-auto px-6 sm:px-10 lg:px-12 mb-14">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-[#c59b67] mb-2">
             CAPABILITIES
           </div>
           <h2 className="font-serif-luxury text-3xl sm:text-5xl font-normal text-[#1a1918] tracking-tight mb-3">
-            See our <span className="italic font-serif-luxury text-[#c59b67]">services</span>
+            Cast your eyes upon our <span className="italic font-serif-luxury text-[#c59b67]">array of endeavors</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#68625d] leading-relaxed">
             From consulting and strategy development to implementation and support, our comprehensive services can help your residential dreams thrive.
@@ -213,13 +223,13 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
                 <Compass className="w-5 h-5" />
               </div>
               <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-2">
-                Land & Site Acquisition Advisory
+                Expert Architecture Services
               </h4>
               <p className="text-xs text-[#68625d] leading-relaxed font-light">
-                Expert due-diligence, title clearance, and strategic plot selection along prime corridors like ECR and OMR.
+                Our experienced architects provide personalized design solutions that turn your dreams into reality.
               </p>
             </div>
-            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">Due Diligence • Clearance</span>
+            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">Personalized • Expert</span>
           </div>
 
           {/* Service 2 */}
@@ -229,13 +239,13 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
                 <Home className="w-5 h-5" />
               </div>
               <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-2">
-                Design & Architectural Consultancy
+                Innovative Solutions
               </h4>
               <p className="text-xs text-[#68625d] leading-relaxed font-light">
-                Nordic minimalism paired with tropical climate adaptability, passive cooling, and smart space planning.
+                We craft unique and innovative designs, working closely with our clients to bring their visions to life.
               </p>
             </div>
-            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">3D Modeling • BIM Blueprints</span>
+            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">Unique • Collaborative</span>
           </div>
 
           {/* Service 3 */}
@@ -245,13 +255,13 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
                 <Hammer className="w-5 h-5" />
               </div>
               <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-2">
-                Turn-key Construction Management
+                Timeless Space Creation
               </h4>
               <p className="text-xs text-[#68625d] leading-relaxed font-light">
-                End-to-end execution with licensed structural engineers, vendor management, and scheduled milestone sign-offs.
+                Our architecture services prioritize function and form to create spaces that stand the test of time.
               </p>
             </div>
-            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">End-to-End • On Schedule</span>
+            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">Function • Form</span>
           </div>
 
           {/* Service 4 */}
@@ -261,13 +271,13 @@ export const AboutStoryPage: React.FC<AboutStoryPageProps> = ({
                 <Award className="w-5 h-5" />
               </div>
               <h4 className="font-serif-luxury text-base font-bold text-[#1a1918] mb-2">
-                Custom Home Builds & Bespoke Villas
+                Complete Architecture Services
               </h4>
               <p className="text-xs text-[#68625d] leading-relaxed font-light">
-                Tailored residential sanctuaries with private plunge pools, home automation, double-height atriums, and custom timber joinery.
+                From concept to completion, our architecture services use the latest technology and techniques to deliver exceptional results.
               </p>
             </div>
-            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">Luxury Finishes • Tailored</span>
+            <span className="text-[10px] font-mono text-[#c59b67] uppercase tracking-wider mt-4">Concept • Completion</span>
           </div>
         </div>
       </section>

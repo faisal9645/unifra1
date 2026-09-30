@@ -6,7 +6,6 @@ import {
   Calendar,
   Search,
   Download,
-  Filter,
   Trash2,
   CheckCircle2,
   Clock,
@@ -22,20 +21,16 @@ import {
   Sparkles,
   ShieldCheck,
   Building2,
-  TrendingUp,
-  DollarSign,
   CheckSquare,
-  Square,
-  UserCheck,
   Tag,
-  ChevronRight,
   Send,
   Eye,
   Activity,
-  FileSpreadsheet,
-  Layers,
-  ArrowUpRight,
-  MoreVertical,
+  BellRing,
+  KanbanSquare,
+  AlarmClock,
+  ListChecks,
+  Flag,
   X
 } from 'lucide-react';
 import { ClientLead, LeadStatus } from '../../types';
@@ -47,25 +42,64 @@ import {
   deleteLead,
   clearAllLeads,
   resetSampleLeads,
+  logLeadActivity,
+  setLeadFollowUp,
   isVillaAccessUnlocked,
   setVillaAccessUnlocked
 } from '../../utils/leadsStorage';
 
-interface AdminLeadsPageProps {
+const STATUS_COLUMNS: LeadStatus[] = ['New Lead', 'Contacted', 'VIP Visit Scheduled', 'Converted', 'Archived'];
+
+const STATUS_ACCENT: Record<string, { dot: string; bar: string; text: string }> = {
+  'New Lead': { dot: 'bg-amber-400', bar: 'bg-amber-400', text: 'text-amber-400' },
+  'Contacted': { dot: 'bg-blue-400', bar: 'bg-blue-400', text: 'text-blue-400' },
+  'VIP Visit Scheduled': { dot: 'bg-emerald-400', bar: 'bg-emerald-400', text: 'text-emerald-400' },
+  'Converted': { dot: 'bg-[#dfb776]', bar: 'bg-[#dfb776]', text: 'text-[#dfb776]' },
+  'Archived': { dot: 'bg-gray-500', bar: 'bg-gray-500', text: 'text-gray-400' }
+};
+
+const ACTIVITY_META: Record<string, { dot: string; text: string }> = {
+  created: { dot: 'bg-[#dfb776]', text: 'text-[#dfb776]' },
+  status: { dot: 'bg-blue-400', text: 'text-blue-300' },
+  note: { dot: 'bg-purple-400', text: 'text-purple-300' },
+  tag: { dot: 'bg-pink-400', text: 'text-pink-300' },
+  assign: { dot: 'bg-cyan-400', text: 'text-cyan-300' },
+  visit: { dot: 'bg-emerald-400', text: 'text-emerald-300' },
+  whatsapp: { dot: 'bg-emerald-400', text: 'text-emerald-300' },
+  followup: { dot: 'bg-amber-400', text: 'text-amber-300' },
+  system: { dot: 'bg-gray-500', text: 'text-gray-400' }
+};
+
+const AGENT_OPTIONS = [
+  'Rajesh Sharma (Senior VP)',
+  'Priya V. (VIP Concierge)',
+  'Karthik R. (Managing Director)'
+];
+
+const timeAgo = (iso: string): string => {
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.round(diff / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.round(hrs / 24);
+  return `${days}d ago`;
+};
+
+export const AdminLeadsPage: React.FC<{
   onNavigateHome: () => void;
   onNavigateVilla: () => void;
-}
-
-export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
+}> = ({
   onNavigateHome,
   onNavigateVilla
 }) => {
-  const [activeTab, setActiveTab] = useState<'leads' | 'analytics' | 'visits' | 'whatsapp'>('leads');
+  const [activeTab, setActiveTab] = useState<'leads' | 'pipeline' | 'analytics' | 'visits' | 'whatsapp'>('leads');
   const [leads, setLeads] = useState<ClientLead[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [tagFilter, setTagFilter] = useState<string>('All');
-  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'name' | 'budget'>('newest');
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'name' | 'agent'>('newest');
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -76,7 +110,10 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
   const [inspectLead, setInspectLead] = useState<ClientLead | null>(null);
   const [inspectNotes, setInspectNotes] = useState('');
   const [inspectAgent, setInspectAgent] = useState('');
+  const [inspectFollowUp, setInspectFollowUp] = useState('');
   const [newTagInput, setNewTagInput] = useState('');
+  const [timelineNoteInput, setTimelineNoteInput] = useState('');
+  const [timelineNoteType, setTimelineNoteType] = useState<'note' | 'call' | 'whatsapp'>('note');
 
   // Add Lead Modal
   const [isAddLeadModalOpen, setIsAddLeadModalOpen] = useState(false);
@@ -88,7 +125,6 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
     timeline: 'Immediate (0 – 30 Days)',
     interestedUnit: 'MYSA Luxe 4BHK Villa with Private Pool',
     source: 'Manual Admin Entry',
-    budget: '₹ 5.85 Cr',
     assignedAgent: 'Rajesh Sharma (Senior VP)',
     notes: ''
   });
@@ -101,7 +137,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
 
   // WhatsApp Suite State
   const [waSelectedLead, setWaSelectedLead] = useState<ClientLead | null>(null);
-  const [waTemplate, setWaTemplate] = useState<'welcome' | 'visit' | 'pricing' | 'followup'>('welcome');
+  const [waTemplate, setWaTemplate] = useState<'welcome' | 'visit' | 'brochure' | 'followup'>('welcome');
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -120,6 +156,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
         setInspectLead(refreshed);
         setInspectNotes(refreshed.notes || '');
         setInspectAgent(refreshed.assignedAgent || 'Unassigned');
+        setInspectFollowUp(refreshed.followUpDate || '');
       }
     }
   };
@@ -145,6 +182,14 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
   const handleStatusChange = (id: string, newStatus: LeadStatus) => {
     updateLeadStatus(id, newStatus);
     showToast(`Status updated to "${newStatus}"`);
+    loadData();
+  };
+
+  const handleKanbanDrop = (id: string, newStatus: LeadStatus) => {
+    const target = leads.find(l => l.id === id);
+    if (!target || target.status === newStatus) return;
+    updateLeadStatus(id, newStatus);
+    showToast(`${target.name} moved to "${newStatus}"`);
     loadData();
   };
 
@@ -216,7 +261,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
       return;
     }
 
-    const headers = ['ID', 'Name', 'Email', 'Phone', 'City', 'Timeline', 'Interested Unit', 'Budget', 'Assigned Agent', 'Source', 'Status', 'Date Registered', 'Notes'];
+    const headers = ['ID', 'Name', 'Email', 'Phone', 'City', 'Timeline', 'Interested Unit', 'Assigned Agent', 'Source', 'Status', 'Follow-Up', 'Visit Date', 'Date Registered', 'Notes'];
     const rows = leadsToExport.map((lead) => [
       `"${lead.id}"`,
       `"${lead.name.replace(/"/g, '""')}"`,
@@ -225,10 +270,11 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
       `"${lead.city.replace(/"/g, '""')}"`,
       `"${lead.timeline.replace(/"/g, '""')}"`,
       `"${(lead.interestedUnit || '').replace(/"/g, '""')}"`,
-      `"${(lead.budget || '').replace(/"/g, '""')}"`,
       `"${(lead.assignedAgent || 'Unassigned').replace(/"/g, '""')}"`,
       `"${lead.source.replace(/"/g, '""')}"`,
       `"${lead.status}"`,
+      `"${(lead.followUpDate || '').replace(/"/g, '""')}"`,
+      `"${(lead.visitDate || '').replace(/"/g, '""')}"`,
       `"${lead.formattedDate}"`,
       `"${(lead.notes || '').replace(/"/g, '""')}"`
     ]);
@@ -260,7 +306,6 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
       timeline: 'Immediate (0 – 30 Days)',
       interestedUnit: 'MYSA Luxe 4BHK Villa with Private Pool',
       source: 'Manual Admin Entry',
-      budget: '₹ 5.85 Cr',
       assignedAgent: 'Rajesh Sharma (Senior VP)',
       notes: ''
     });
@@ -270,11 +315,44 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
 
   const handleSaveInspectLead = () => {
     if (!inspectLead) return;
+    const prev = leads.find(l => l.id === inspectLead.id);
+    const prevNotes = prev?.notes || '';
+    const prevAgent = prev?.assignedAgent || 'Unassigned';
+
     updateLead(inspectLead.id, {
       notes: inspectNotes,
       assignedAgent: inspectAgent
     });
+
+    if (inspectAgent !== prevAgent) {
+      logLeadActivity(inspectLead.id, 'assign', `Assigned to ${inspectAgent}`);
+    }
+    if (inspectNotes.trim() && inspectNotes !== prevNotes) {
+      logLeadActivity(inspectLead.id, 'note', 'Advisory notes updated');
+    }
+
     showToast(`Saved updates for ${inspectLead.name}`);
+    loadData();
+  };
+
+  const handleSaveFollowUp = () => {
+    if (!inspectLead) return;
+    setLeadFollowUp(inspectLead.id, inspectFollowUp);
+    showToast(inspectFollowUp ? `Follow-up set for ${inspectFollowUp}` : 'Follow-up cleared');
+    loadData();
+  };
+
+  const handleAddTimelineNote = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inspectLead || !timelineNoteInput.trim()) return;
+    const label = timelineNoteType === 'call'
+      ? `Call log: ${timelineNoteInput.trim()}`
+      : timelineNoteType === 'whatsapp'
+        ? `WhatsApp touchpoint: ${timelineNoteInput.trim()}`
+        : timelineNoteInput.trim();
+    logLeadActivity(inspectLead.id, timelineNoteType === 'call' ? 'note' : timelineNoteType, label);
+    setTimelineNoteInput('');
+    showToast('Activity logged to client timeline');
     loadData();
   };
 
@@ -284,6 +362,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
     if (!currentTags.includes(newTagInput.trim())) {
       const updatedTags = [...currentTags, newTagInput.trim()];
       updateLead(inspectLead.id, { tags: updatedTags });
+      logLeadActivity(inspectLead.id, 'tag', `Tag added: "${newTagInput.trim()}"`);
       setNewTagInput('');
       showToast(`Added tag "${newTagInput.trim()}"`);
       loadData();
@@ -294,6 +373,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
     if (!inspectLead) return;
     const updatedTags = (inspectLead.tags || []).filter(t => t !== tagToRemove);
     updateLead(inspectLead.id, { tags: updatedTags });
+    logLeadActivity(inspectLead.id, 'tag', `Tag removed: "${tagToRemove}"`);
     showToast(`Removed tag "${tagToRemove}"`);
     loadData();
   };
@@ -310,6 +390,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
       visitDate: formattedVisit,
       assignedAgent: visitFormAgent
     });
+    logLeadActivity(visitModalLead.id, 'visit', `VIP site visit scheduled — ${formattedVisit}`);
     setVisitModalLead(null);
     showToast(`Scheduled VIP Visit for ${visitModalLead.name} on ${formattedVisit}`);
     loadData();
@@ -329,7 +410,8 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
         lead.phone.toLowerCase().includes(searchQuery.toLowerCase()) ||
         lead.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
         lead.source.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (lead.assignedAgent || '').toLowerCase().includes(searchQuery.toLowerCase());
+        (lead.assignedAgent || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (lead.interestedUnit || '').toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesStatus = statusFilter === 'All' || lead.status === statusFilter;
       const matchesTag = tagFilter === 'All' || (lead.tags || []).includes(tagFilter);
@@ -340,10 +422,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
       if (sortBy === 'newest') return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       if (sortBy === 'oldest') return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
       if (sortBy === 'name') return a.name.localeCompare(b.name);
-      if (sortBy === 'budget') {
-        const getVal = (s?: string) => parseFloat((s || '0').replace(/[^0-9.]/g, '')) || 0;
-        return getVal(b.budget) - getVal(a.budget);
-      }
+      if (sortBy === 'agent') return (a.assignedAgent || 'Unassigned').localeCompare(b.assignedAgent || 'Unassigned');
       return 0;
     });
 
@@ -354,11 +433,70 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
   const newLeads = leads.filter(l => l.status === 'New Lead').length;
   const convertedLeads = leads.filter(l => l.status === 'Converted').length;
 
-  // Pipeline Financial Valuation (approx Cr)
-  const totalPipelineVal = leads.reduce((acc, l) => {
-    const val = parseFloat((l.budget || '5.85').replace(/[^0-9.]/g, '')) || 5.85;
-    return acc + val;
-  }, 0).toFixed(2);
+  // Follow-Up Radar computations
+  const todayStr = new Date().toISOString().split('T')[0];
+  const followUpLeads = leads
+    .filter(l => l.followUpDate && l.status !== 'Converted' && l.status !== 'Archived')
+    .sort((a, b) => (a.followUpDate || '').localeCompare(b.followUpDate || ''));
+  const overdueLeads = followUpLeads.filter(l => (l.followUpDate || '') < todayStr);
+  const dueTodayLeads = followUpLeads.filter(l => l.followUpDate === todayStr);
+  const dueSoonLeads = followUpLeads.filter(l => {
+    if ((l.followUpDate || '') <= todayStr) return false;
+    const diff = (new Date((l.followUpDate || '') + 'T23:59:59').getTime() - Date.now()) / 86400000;
+    return diff <= 3;
+  });
+  const radarTotal = overdueLeads.length + dueTodayLeads.length + dueSoonLeads.length;
+
+  // 14-day lead flow chart
+  const flowDays = Array.from({ length: 14 }, (_, i) => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - (13 - i));
+    const key = d.toISOString().split('T')[0];
+    return {
+      key,
+      label: d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
+      count: leads.filter(l => (l.createdAt || '').split('T')[0] === key).length
+    };
+  });
+  const flowMax = Math.max(...flowDays.map(d => d.count), 1);
+
+  // Agent leaderboard
+  const agentLeaderboard = AGENT_OPTIONS.map(name => {
+    const mine = leads.filter(l => (l.assignedAgent || '') === name);
+    return {
+      name,
+      total: mine.length,
+      visits: mine.filter(l => l.status === 'VIP Visit Scheduled' || l.visitDate).length,
+      won: mine.filter(l => l.status === 'Converted').length,
+      touchRate: mine.length ? Math.round((mine.filter(l => l.status !== 'New Lead').length / mine.length) * 100) : 0
+    };
+  }).sort((a, b) => b.won - a.won || b.visits - a.visits || b.total - a.total);
+
+  const unassignedCount = leads.filter(l => !l.assignedAgent || l.assignedAgent === 'Unassigned').length;
+
+  // Interest breakdown
+  const interestBreakdown = [
+    {
+      label: 'MYSA Luxe Villas (Flagship)',
+      count: leads.filter(l => (l.interestedUnit || '').toLowerCase().includes('mysa')).length
+    },
+    {
+      label: 'Oceanfront / Aurelia Collection',
+      count: leads.filter(l => {
+        const u = (l.interestedUnit || '').toLowerCase();
+        return u.includes('oceanfront') || u.includes('aurelia') || u.includes('pearl');
+      }).length
+    },
+    {
+      label: 'Dual Villa / Combination Interest',
+      count: leads.filter(l => {
+        const u = (l.interestedUnit || '').toLowerCase();
+        return u.includes('dual') || u.includes('combination');
+      }).length
+    }
+  ];
+  const interestOther = Math.max(totalLeads - interestBreakdown.reduce((acc, i) => acc + i.count, 0), 0);
 
   // WhatsApp Messaging Template Text Builder
   const getWhatsAppMessageText = (lead: ClientLead) => {
@@ -369,14 +507,14 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
     if (waTemplate === 'visit') {
       return `Dear ${firstName}, your private VIP site inspection for MYSA Luxe Villas on ECR Chennai has been reserved. Location: Vettuvankeni, ECR. Assigned Concierge: ${lead.assignedAgent || 'VIP Sales Executive'}. We look forward to welcoming you!`;
     }
-    if (waTemplate === 'pricing') {
-      return `Dear ${firstName}, following up regarding your interest in MYSA Luxe Villas (Starting ₹ 5.85 Cr*). We have shared the complete payment schedule and floor plans for Villa Layout 01. Please let us know if you would like a private consultation.`;
+    if (waTemplate === 'brochure') {
+      return `Dear ${firstName}, following up on your interest in MYSA Luxe Villas. We have shared the complete floor plans and layout gallery for Villa Layout 01. Please let us know if you would like a private consultation — our architectural advisory team will curate every detail.`;
     }
     return `Hello ${firstName}, checking in from UNIFRA Properties! Our architectural team is available to showcase the Scandinavian Butterfly Roof & private lap pool features of MYSA Villas. Would you be free for a 10-minute call today?`;
   };
 
   return (
-    <div className="pt-24 pb-20 bg-[#0b0c0e] text-[#f3f4f6] min-h-screen">
+    <div className="pt-20 pb-12 bg-[#0b0c0e] text-[#f3f4f6] min-h-screen">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-sm bg-[#121418] border border-[#dfb776] text-white text-xs font-mono shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-2">
@@ -449,7 +587,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
           </div>
 
           {/* CRM Main Tab Switcher */}
-          <div className="flex items-center gap-1 bg-[#121418] p-1 rounded-sm border border-white/10 text-xs font-mono">
+          <div className="flex items-center gap-1 bg-[#121418] p-1 rounded-sm border border-white/10 text-xs font-mono flex-wrap">
             <button
               onClick={() => setActiveTab('leads')}
               className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xs uppercase tracking-wider transition-all cursor-pointer ${
@@ -463,6 +601,18 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
             </button>
 
             <button
+              onClick={() => setActiveTab('pipeline')}
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xs uppercase tracking-wider transition-all cursor-pointer ${
+                activeTab === 'pipeline'
+                  ? 'bg-[#dfb776] text-[#0b0c0e] font-semibold shadow-md'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              <KanbanSquare className="w-3.5 h-3.5" />
+              <span>Pipeline Board</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('analytics')}
               className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xs uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === 'analytics'
@@ -471,7 +621,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
               }`}
             >
               <Activity className="w-3.5 h-3.5" />
-              <span>Pipeline Analytics</span>
+              <span>Analytics</span>
             </button>
 
             <button
@@ -504,15 +654,17 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <div className="p-4 rounded-sm bg-[#121418] border border-white/10 relative overflow-hidden">
             <div className="flex items-center justify-between text-gray-400 mb-1">
-              <span className="text-[10px] font-mono uppercase tracking-wider">PIPELINE VALUE</span>
-              <DollarSign className="w-4 h-4 text-[#dfb776]" />
+              <span className="text-[10px] font-mono uppercase tracking-wider">FOLLOW-UP RADAR</span>
+              <BellRing className="w-4 h-4 text-[#dfb776]" />
             </div>
             <div className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#dfb776]">
-              ₹ {totalPipelineVal} Cr
+              {radarTotal}
             </div>
             <div className="text-[10px] font-mono text-gray-400 mt-1 flex items-center gap-1">
-              <TrendingUp className="w-3 h-3 text-emerald-400" />
-              <span>Gross Potential Revenue</span>
+              <AlarmClock className={`w-3 h-3 ${overdueLeads.length > 0 ? 'text-red-400' : 'text-emerald-400'}`} />
+              <span>
+                {overdueLeads.length > 0 ? `${overdueLeads.length} overdue — act now` : 'Nothing overdue'}
+              </span>
             </div>
           </div>
 
@@ -526,7 +678,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
             </div>
             <div className="text-[10px] font-mono text-emerald-400 mt-1 flex items-center gap-1">
               <CheckCircle2 className="w-3 h-3" />
-              <span>100% Verified Contact Info</span>
+              <span>{immediateLeads} buying within 30 days</span>
             </div>
           </div>
 
@@ -573,6 +725,91 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
         {/* TAB 1: CLIENT LEADS MANAGEMENT TABLE */}
         {activeTab === 'leads' && (
           <div className="space-y-6">
+            {/* FOLLOW-UP RADAR PANEL */}
+            <div className="bg-[#121418] rounded-sm border border-white/10 p-5 shadow-2xl">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-sm bg-[#dfb776]/15 border border-[#dfb776]/40 flex items-center justify-center">
+                    <BellRing className="w-4 h-4 text-[#dfb776]" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif-luxury text-lg text-white font-semibold leading-tight">
+                      Follow-Up Radar
+                    </h3>
+                    <p className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">
+                      Never let a warm client go cold
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider">
+                  <span className={`px-2.5 py-1 rounded-xs border ${overdueLeads.length > 0 ? 'bg-red-500/15 border-red-500/40 text-red-400' : 'bg-white/5 border-white/10 text-gray-500'}`}>
+                    {overdueLeads.length} Overdue
+                  </span>
+                  <span className={`px-2.5 py-1 rounded-xs border ${dueTodayLeads.length > 0 ? 'bg-amber-500/15 border-amber-500/40 text-amber-400' : 'bg-white/5 border-white/10 text-gray-500'}`}>
+                    {dueTodayLeads.length} Due Today
+                  </span>
+                  <span className="px-2.5 py-1 rounded-xs bg-blue-500/10 border border-blue-500/30 text-blue-300">
+                    {dueSoonLeads.length} Next 3 Days
+                  </span>
+                </div>
+              </div>
+
+              {followUpLeads.length === 0 ? (
+                <p className="text-xs font-mono text-gray-500 py-4 text-center border border-dashed border-white/10 rounded-sm">
+                  No follow-ups scheduled yet. Open a client dossier and set a next-action date.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {(overdueLeads.length > 0 ? overdueLeads : dueTodayLeads.length > 0 ? dueTodayLeads : dueSoonLeads).slice(0, 4).map((lead) => {
+                    const isOverdue = (lead.followUpDate || '') < todayStr;
+                    const isToday = lead.followUpDate === todayStr;
+                    return (
+                      <div
+                        key={lead.id}
+                        className={`flex flex-wrap items-center justify-between gap-3 p-3 rounded-sm border text-xs ${
+                          isOverdue
+                            ? 'bg-red-500/5 border-red-500/30'
+                            : isToday
+                              ? 'bg-amber-500/5 border-amber-500/30'
+                              : 'bg-[#0b0c0e] border-white/10'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <Flag className={`w-3.5 h-3.5 shrink-0 ${isOverdue ? 'text-red-400' : isToday ? 'text-amber-400' : 'text-blue-300'}`} />
+                          <div className="min-w-0">
+                            <div className="font-semibold text-white truncate">{lead.name}</div>
+                            <div className="text-[10px] font-mono text-gray-400 truncate">
+                              {lead.assignedAgent || 'Unassigned'} • {lead.timeline}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded-xs border ${
+                            isOverdue
+                              ? 'text-red-300 border-red-500/40 bg-red-500/10'
+                              : isToday
+                                ? 'text-amber-300 border-amber-500/40 bg-amber-500/10'
+                                : 'text-blue-300 border-blue-500/30 bg-blue-500/10'
+                          }`}>
+                            {isOverdue ? 'Overdue: ' : isToday ? 'Due today: ' : 'Due: '}
+                            {lead.followUpDate}
+                          </span>
+                          <button
+                            onClick={() => setInspectLead(lead)}
+                            className="px-2.5 py-1 rounded-xs bg-[#dfb776]/15 border border-[#dfb776]/40 text-[#dfb776] text-[10px] font-mono uppercase tracking-wider hover:bg-[#dfb776] hover:text-[#0b0c0e] transition-colors cursor-pointer"
+                          >
+                            Open Dossier
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             {/* Toolbar: Search, Filters, Sort & Actions */}
             <div className="bg-[#121418] p-4 rounded-sm border border-white/10 flex flex-wrap items-center justify-between gap-4">
               {/* Search */}
@@ -580,7 +817,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                 <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Search by Name, Email, Phone, City, Source, or Agent..."
+                  placeholder="Search by Name, Email, Phone, City, Source, Agent, or Interest..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-9 pr-4 py-2 rounded-sm border border-white/15 focus:outline-none focus:border-[#dfb776] bg-[#0b0c0e] text-white text-xs placeholder:text-gray-500"
@@ -631,7 +868,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                 >
                   <option value="newest">Newest First</option>
                   <option value="oldest">Oldest First</option>
-                  <option value="budget">Highest Budget</option>
+                  <option value="agent">Agent A–Z</option>
                   <option value="name">Name A–Z</option>
                 </select>
               </div>
@@ -738,7 +975,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                         <th className="py-3.5 px-4">Client Details</th>
                         <th className="py-3.5 px-4">Contact Info</th>
                         <th className="py-3.5 px-4">Location / Urgency</th>
-                        <th className="py-3.5 px-4">Interest & Budget</th>
+                        <th className="py-3.5 px-4">Interest</th>
                         <th className="py-3.5 px-4">Assigned Agent</th>
                         <th className="py-3.5 px-4">Status</th>
                         <th className="py-3.5 px-4 text-right">Actions</th>
@@ -748,6 +985,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                       {filteredLeads.map((lead) => {
                         const cleanPhone = lead.phone.replace(/[^0-9]/g, '');
                         const isSelected = selectedLeadIds.includes(lead.id);
+                        const isFollowUpDue = lead.followUpDate && lead.followUpDate <= todayStr && lead.status !== 'Converted' && lead.status !== 'Archived';
                         return (
                           <tr
                             key={lead.id}
@@ -777,6 +1015,14 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                               <div className="text-[10px] text-gray-500 font-mono mt-0.5">
                                 Reg: {lead.formattedDate}
                               </div>
+
+                              {/* Follow-up due indicator */}
+                              {isFollowUpDue && (
+                                <div className="inline-flex items-center gap-1 text-[9px] font-mono text-red-300 bg-red-500/10 border border-red-500/30 px-1.5 py-0.5 rounded-xs mt-1">
+                                  <AlarmClock className="w-2.5 h-2.5" />
+                                  <span>Follow-up {lead.followUpDate === todayStr ? 'today' : 'overdue'}</span>
+                                </div>
+                              )}
 
                               {/* Tags */}
                               {lead.tags && lead.tags.length > 0 && (
@@ -865,15 +1111,18 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                                   <span>Visit: {lead.visitDate}</span>
                                 </div>
                               )}
+                              {!lead.visitDate && lead.followUpDate && (
+                                <div className="inline-flex items-center gap-1 text-[9px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-xs mt-1">
+                                  <Clock className="w-2.5 h-2.5" />
+                                  <span>Follow-up: {lead.followUpDate}</span>
+                                </div>
+                              )}
                             </td>
 
-                            {/* Interest & Budget */}
+                            {/* Interest */}
                             <td className="py-4 px-4 align-top">
                               <div className="text-white font-medium text-xs truncate max-w-[180px]">
                                 {lead.interestedUnit || 'MYSA Luxe Villas'}
-                              </div>
-                              <div className="text-[11px] font-mono text-[#dfb776] font-semibold mt-0.5">
-                                Budget: {lead.budget || '₹ 5.85 Cr'}
                               </div>
                               <div className="inline-flex items-center gap-1 text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 mt-1 rounded-xs bg-white/5 border border-white/10 text-gray-400">
                                 <span>{lead.source}</span>
@@ -886,15 +1135,16 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                                 value={lead.assignedAgent || 'Unassigned'}
                                 onChange={(e) => {
                                   updateLead(lead.id, { assignedAgent: e.target.value });
+                                  logLeadActivity(lead.id, 'assign', `Assigned to ${e.target.value}`);
                                   showToast(`Assigned ${lead.name} to ${e.target.value}`);
                                   loadData();
                                 }}
                                 className="px-2 py-1 rounded-xs text-[10px] font-mono border border-white/15 bg-[#0b0c0e] text-gray-300 focus:outline-none focus:border-[#dfb776] cursor-pointer"
                               >
                                 <option value="Unassigned">Unassigned</option>
-                                <option value="Rajesh Sharma (Senior VP)">Rajesh Sharma (VP)</option>
-                                <option value="Priya V. (VIP Concierge)">Priya V. (Concierge)</option>
-                                <option value="Karthik R. (Managing Director)">Karthik R. (MD)</option>
+                                {AGENT_OPTIONS.map((a) => (
+                                  <option key={a} value={a}>{a}</option>
+                                ))}
                               </select>
                             </td>
 
@@ -973,7 +1223,152 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
           </div>
         )}
 
-        {/* TAB 2: PIPELINE ANALYTICS & VISUAL METRICS */}
+        {/* TAB 2: PIPELINE KANBAN BOARD */}
+        {activeTab === 'pipeline' && (
+          <div className="space-y-5 animate-in fade-in">
+            <div className="bg-[#121418] p-5 rounded-sm border border-white/10 shadow-2xl flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h3 className="font-serif-luxury text-xl text-white font-normal mb-1">
+                  Drag & Drop Pipeline Board
+                </h3>
+                <p className="text-xs text-gray-400">
+                  Drag a client card between columns to move them through the sales pipeline — every move is timestamped in their activity timeline.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] font-mono text-gray-400">
+                <ListChecks className="w-4 h-4 text-[#dfb776]" />
+                <span>{totalLeads} leads across {STATUS_COLUMNS.length} stages</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
+              {STATUS_COLUMNS.map((col) => {
+                const colLeads = leads.filter(l => l.status === col);
+                const accent = STATUS_ACCENT[col];
+                return (
+                  <div
+                    key={col}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const id = e.dataTransfer.getData('text/plain');
+                      if (id) handleKanbanDrop(id, col);
+                    }}
+                    className="bg-[#0b0c0e]/60 border border-white/10 rounded-sm p-3 min-h-[320px] flex flex-col"
+                  >
+                    {/* Column header */}
+                    <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-white/10">
+                      <div className="flex items-center gap-2">
+                        <span className={`w-2 h-2 rounded-full ${accent.dot}`} />
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-gray-300 font-semibold">
+                          {col}
+                        </span>
+                      </div>
+                      <span className={`text-xs font-mono font-bold ${accent.text}`}>
+                        {colLeads.length}
+                      </span>
+                    </div>
+
+                    {/* Cards */}
+                    <div className="flex-1 space-y-2.5 overflow-y-auto">
+                      {colLeads.length === 0 ? (
+                        <p className="text-[10px] font-mono text-gray-600 text-center py-6 border border-dashed border-white/10 rounded-sm">
+                          Drop client cards here
+                        </p>
+                      ) : (
+                        colLeads.map((lead) => {
+                          const cleanPhone = lead.phone.replace(/[^0-9]/g, '');
+                          const isDue = lead.followUpDate && lead.followUpDate <= todayStr && col !== 'Converted' && col !== 'Archived';
+                          return (
+                            <div
+                              key={lead.id}
+                              draggable
+                              onDragStart={(e) => e.dataTransfer.setData('text/plain', lead.id)}
+                              className="bg-[#121418] border border-white/10 hover:border-[#dfb776]/60 rounded-sm p-3 cursor-grab active:cursor-grabbing transition-all shadow-md group"
+                            >
+                              <div className="flex items-start justify-between gap-2">
+                                <h5 className="text-xs font-semibold text-white leading-snug">
+                                  {lead.name}
+                                </h5>
+                                <span className="text-[9px] font-mono text-gray-500 shrink-0 mt-0.5">
+                                  {timeAgo(lead.createdAt)}
+                                </span>
+                              </div>
+
+                              <div className="text-[10px] font-mono text-gray-400 mt-1 flex items-center gap-1">
+                                <MapPin className="w-2.5 h-2.5 text-[#dfb776]" />
+                                <span className="truncate">{lead.city} • {lead.timeline}</span>
+                              </div>
+
+                              {/* Tags */}
+                              {lead.tags && lead.tags.length > 0 && (
+                                <div className="flex flex-wrap gap-1 mt-1.5">
+                                  {lead.tags.slice(0, 2).map((t, i) => (
+                                    <span key={i} className="text-[8px] font-mono px-1 py-0.5 rounded-xs bg-[#dfb776]/15 text-[#dfb776] border border-[#dfb776]/30">
+                                      {t}
+                                    </span>
+                                  ))}
+                                  {lead.tags.length > 2 && (
+                                    <span className="text-[8px] font-mono text-gray-500">+{lead.tags.length - 2}</span>
+                                  )}
+                                </div>
+                              )}
+
+                              {lead.notes && (
+                                <p className="text-[10px] text-gray-500 font-light mt-1.5 line-clamp-2 leading-relaxed">
+                                  {lead.notes}
+                                </p>
+                              )}
+
+                              {(lead.visitDate || isDue) && (
+                                <div className={`inline-flex items-center gap-1 text-[9px] font-mono px-1.5 py-0.5 rounded-xs mt-2 border ${
+                                  lead.visitDate
+                                    ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30'
+                                    : 'text-red-300 bg-red-500/10 border-red-500/30'
+                                }`}>
+                                  <Calendar className="w-2.5 h-2.5" />
+                                  <span>{lead.visitDate ? `Visit: ${lead.visitDate}` : `Follow-up: ${lead.followUpDate}`}</span>
+                                </div>
+                              )}
+
+                              {/* Card footer */}
+                              <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-white/5">
+                                <span className="text-[9px] font-mono text-gray-500 truncate">
+                                  {lead.assignedAgent ? lead.assignedAgent.split(' (')[0] : 'Unassigned'}
+                                </span>
+                                <div className="flex items-center gap-1 shrink-0">
+                                  <a
+                                    href={`https://wa.me/${cleanPhone}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="p-1 rounded-xs text-emerald-400/70 hover:text-emerald-300 hover:bg-emerald-500/10 transition-colors"
+                                    title="WhatsApp"
+                                  >
+                                    <MessageSquare className="w-3 h-3" />
+                                  </a>
+                                  <button
+                                    onClick={() => setInspectLead(lead)}
+                                    className="p-1 rounded-xs text-[#dfb776]/70 hover:text-[#dfb776] hover:bg-[#dfb776]/10 transition-colors"
+                                    title="Open Dossier"
+                                  >
+                                    <Eye className="w-3 h-3" />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 3: PIPELINE ANALYTICS & VISUAL METRICS */}
         {activeTab === 'analytics' && (
           <div className="space-y-8 animate-in fade-in">
             {/* Conversion Funnel */}
@@ -1034,24 +1429,50 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
               </div>
             </div>
 
-            {/* Analytics Breakdown Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Lead Sources Breakdown */}
+            {/* Lead Flow Chart + Analytics Breakdown Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* 14-Day Lead Flow */}
               <div className="bg-[#121418] p-6 rounded-sm border border-white/10">
-                <h4 className="font-serif-luxury text-lg text-white mb-4">Lead Origin Breakdown</h4>
+                <h4 className="font-serif-luxury text-lg text-white mb-1">Lead Flow — Last 14 Days</h4>
+                <p className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-5">
+                  Daily new inquiries captured
+                </p>
+
+                <div className="flex items-end justify-between gap-1.5 h-36">
+                  {flowDays.map((day) => (
+                    <div key={day.key} className="flex-1 flex flex-col items-center gap-1.5 group">
+                      <span className={`text-[9px] font-mono ${day.count > 0 ? 'text-[#dfb776] font-semibold' : 'text-gray-600'}`}>
+                        {day.count || ''}
+                      </span>
+                      <div
+                        className={`w-full rounded-t-xs transition-all group-hover:opacity-80 ${
+                          day.count > 0 ? 'bg-gradient-to-t from-[#8a6a35] to-[#dfb776]' : 'bg-white/5'
+                        }`}
+                        style={{ height: `${Math.max((day.count / flowMax) * 100, 3)}%` }}
+                        title={`${day.label}: ${day.count} lead${day.count === 1 ? '' : 's'}`}
+                      />
+                      <span className="text-[8px] font-mono text-gray-500 rotate-45 origin-top-left whitespace-nowrap h-6">
+                        {day.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Interest Breakdown */}
+              <div className="bg-[#121418] p-6 rounded-sm border border-white/10">
+                <h4 className="font-serif-luxury text-lg text-white mb-1">Demand by Collection</h4>
+                <p className="text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-5">
+                  Which residences clients are asking for
+                </p>
+
                 <div className="space-y-3.5 text-xs font-mono">
-                  {[
-                    { source: 'Villa Showcase Gate (VIP Unlock)', count: leads.filter(l => l.source.includes('Gate') || l.source.includes('Unlock')).length },
-                    { source: 'Menu / Direct Navigation', count: leads.filter(l => l.source.includes('Menu')).length },
-                    { source: 'Virtual Tour 3D', count: leads.filter(l => l.source.includes('Tour') || l.source.includes('3D')).length },
-                    { source: 'Brochure Download', count: leads.filter(l => l.source.includes('Brochure')).length },
-                    { source: 'Direct Phone / Concierge', count: leads.filter(l => l.source.includes('Phone') || l.source.includes('Manual')).length }
-                  ].map((item, idx) => {
+                  {[...interestBreakdown, { label: 'Other / General Inquiry', count: interestOther }].map((item, idx) => {
                     const pct = Math.round((item.count / Math.max(totalLeads, 1)) * 100);
                     return (
                       <div key={idx} className="space-y-1">
                         <div className="flex justify-between text-gray-300">
-                          <span>{item.source}</span>
+                          <span>{item.label}</span>
                           <span className="text-[#dfb776] font-semibold">{item.count} ({pct}%)</span>
                         </div>
                         <div className="w-full bg-black h-2 rounded-full overflow-hidden">
@@ -1062,38 +1483,62 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                   })}
                 </div>
               </div>
+            </div>
 
-              {/* Geographic Buyer Distribution */}
-              <div className="bg-[#121418] p-6 rounded-sm border border-white/10">
-                <h4 className="font-serif-luxury text-lg text-white mb-4">Geographic Buyer Demographics</h4>
-                <div className="space-y-3.5 text-xs font-mono">
-                  {[
-                    { region: 'Singapore / SE Asia (NRI)', count: leads.filter(l => l.city.includes('Singapore') || l.city.includes('NRI')).length },
-                    { region: 'Chennai Metro (Boat Club, Adyar, ECR)', count: leads.filter(l => l.city.includes('Chennai')).length },
-                    { region: 'Dubai / Middle East (NRI)', count: leads.filter(l => l.city.includes('Dubai') || l.city.includes('UAE')).length },
-                    { region: 'Bengaluru / Interstate Tech Founders', count: leads.filter(l => l.city.includes('Bengaluru')).length },
-                    { region: 'Other Industrial Metros', count: leads.filter(l => l.city.includes('Ahmedabad') || l.city.includes('Mumbai')).length }
-                  ].map((item, idx) => {
-                    const pct = Math.round((item.count / Math.max(totalLeads, 1)) * 100);
-                    return (
-                      <div key={idx} className="space-y-1">
-                        <div className="flex justify-between text-gray-300">
-                          <span>{item.region}</span>
-                          <span className="text-emerald-400 font-semibold">{item.count} ({pct}%)</span>
-                        </div>
-                        <div className="w-full bg-black h-2 rounded-full overflow-hidden">
-                          <div className="bg-emerald-400 h-full transition-all duration-500" style={{ width: `${pct}%` }} />
-                        </div>
-                      </div>
-                    );
-                  })}
+            {/* Agent Performance Leaderboard */}
+            <div className="bg-[#121418] p-6 rounded-sm border border-white/10 shadow-2xl">
+              <div className="flex items-center justify-between mb-5">
+                <div>
+                  <h4 className="font-serif-luxury text-lg text-white mb-1">Agent Performance Leaderboard</h4>
+                  <p className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">
+                    Closed deals • site visits booked • client touch rate
+                  </p>
                 </div>
+                {unassignedCount > 0 && (
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded-xs bg-amber-500/10 border border-amber-500/30 text-amber-400 uppercase tracking-wider">
+                    {unassignedCount} lead{unassignedCount === 1 ? '' : 's'} unassigned
+                  </span>
+                )}
+              </div>
+
+              <div className="space-y-3">
+                {agentLeaderboard.map((agent, idx) => (
+                  <div key={agent.name} className="flex flex-wrap items-center gap-4 bg-[#0b0c0e] border border-white/10 rounded-sm p-4">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-mono font-bold shrink-0 ${
+                      idx === 0 ? 'bg-[#dfb776] text-[#0b0c0e]' : 'bg-white/10 text-gray-300'
+                    }`}>
+                      {idx + 1}
+                    </div>
+
+                    <div className="min-w-[180px] flex-1">
+                      <div className="text-xs font-semibold text-white">{agent.name}</div>
+                      <div className="text-[10px] font-mono text-gray-400 mt-0.5">
+                        {agent.total} lead{agent.total === 1 ? '' : 's'} assigned
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-6 text-center font-mono">
+                      <div>
+                        <div className="text-lg font-bold text-emerald-400">{agent.visits}</div>
+                        <div className="text-[9px] uppercase tracking-wider text-gray-500">Visits</div>
+                      </div>
+                      <div>
+                        <div className="text-lg font-bold text-[#dfb776]">{agent.won}</div>
+                        <div className="text-[9px] uppercase tracking-wider text-gray-500">Closed</div>
+                      </div>
+                      <div className="hidden sm:block">
+                        <div className="text-lg font-bold text-blue-400">{agent.touchRate}%</div>
+                        <div className="text-[9px] uppercase tracking-wider text-gray-500">Touched</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 3: VIP SITE VISITS & CALENDAR */}
+        {/* TAB 4: VIP SITE VISITS & CALENDAR */}
         {activeTab === 'visits' && (
           <div className="space-y-6 animate-in fade-in">
             <div className="bg-[#121418] p-6 rounded-sm border border-white/10 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -1178,7 +1623,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
           </div>
         )}
 
-        {/* TAB 4: WHATSAPP CONCIERGE SUITE */}
+        {/* TAB 5: WHATSAPP CONCIERGE SUITE */}
         {activeTab === 'whatsapp' && (
           <div className="space-y-6 animate-in fade-in">
             <div className="bg-[#121418] p-6 rounded-sm border border-white/10 shadow-2xl">
@@ -1186,7 +1631,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                 Automated WhatsApp Concierge & Digital Brochure Transmitter
               </h3>
               <p className="text-xs text-gray-400">
-                Generate tailored high-converting WhatsApp invitations, 4K digital brochure passes, and site visit confirmations for VIP leads.
+                Generate tailored high-converting WhatsApp invitations, 4K digital brochure passes, and site visit confirmations for VIP leads. Every dispatch is logged to the client timeline.
               </p>
             </div>
 
@@ -1222,7 +1667,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                     {[
                       { id: 'welcome', label: 'VIP Welcome & 4K Digital Brochure Pass' },
                       { id: 'visit', label: 'On-Site Inspection Confirmation & Location' },
-                      { id: 'pricing', label: 'Custom Villa Pricing & Payment Schedule' },
+                      { id: 'brochure', label: 'Floor Plans & Layout Gallery Share' },
                       { id: 'followup', label: 'Scandinavian Architecture Advisory Follow-up' }
                     ].map((tpl) => (
                       <button
@@ -1256,6 +1701,7 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                         href={`https://wa.me/${waSelectedLead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(getWhatsAppMessageText(waSelectedLead))}`}
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() => logLeadActivity(waSelectedLead.id, 'whatsapp', `WhatsApp message dispatched (${waTemplate} template)`)}
                         className="inline-flex items-center gap-2 px-6 py-3 rounded-sm bg-emerald-500 hover:bg-emerald-600 text-black font-semibold text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer shadow-lg"
                       >
                         <Send className="w-4 h-4" />
@@ -1309,7 +1755,13 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                 <div className="flex items-center gap-3 text-xs font-mono">
                   <span className="text-[#dfb776] font-semibold">{inspectLead.city}</span>
                   <span className="text-gray-600">•</span>
-                  <span className="text-emerald-400 font-semibold">{inspectLead.budget || '₹ 5.85 Cr'} Budget</span>
+                  <span className="text-emerald-400 font-semibold">{inspectLead.status}</span>
+                  {inspectLead.followUpDate && (
+                    <>
+                      <span className="text-gray-600">•</span>
+                      <span className="text-amber-400 font-semibold">Follow-up: {inspectLead.followUpDate}</span>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -1342,10 +1794,47 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                     className="w-full px-3 py-2 rounded-sm border border-white/20 bg-[#0b0c0e] text-white focus:outline-none focus:border-[#dfb776]"
                   >
                     <option value="Unassigned">Unassigned</option>
-                    <option value="Rajesh Sharma (Senior VP)">Rajesh Sharma (Senior VP)</option>
-                    <option value="Priya V. (VIP Concierge)">Priya V. (VIP Concierge)</option>
-                    <option value="Karthik R. (Managing Director)">Karthik R. (Managing Director)</option>
+                    {AGENT_OPTIONS.map((a) => (
+                      <option key={a} value={a}>{a}</option>
+                    ))}
                   </select>
+                </div>
+
+                {/* Next Action Scheduler */}
+                <div className="bg-[#0b0c0e] border border-[#dfb776]/30 rounded-sm p-3.5">
+                  <label className="block text-[10px] uppercase text-[#dfb776] mb-2 font-semibold flex items-center gap-1.5">
+                    <AlarmClock className="w-3.5 h-3.5" />
+                    NEXT ACTION / FOLLOW-UP SCHEDULER
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="date"
+                      value={inspectFollowUp}
+                      onChange={(e) => setInspectFollowUp(e.target.value)}
+                      className="flex-1 px-3 py-2 rounded-sm border border-white/20 bg-[#121418] text-white focus:outline-none focus:border-[#dfb776]"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleSaveFollowUp}
+                      className="px-3 py-2 rounded-sm bg-[#dfb776]/15 border border-[#dfb776]/40 text-[#dfb776] hover:bg-[#dfb776] hover:text-[#0b0c0e] uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
+                    >
+                      Set Reminder
+                    </button>
+                  </div>
+                  {inspectFollowUp && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLeadFollowUp(inspectLead.id, '');
+                        setInspectFollowUp('');
+                        showToast('Follow-up cleared');
+                        loadData();
+                      }}
+                      className="text-[10px] text-gray-500 hover:text-red-300 mt-2 uppercase tracking-wider cursor-pointer"
+                    >
+                      Clear reminder
+                    </button>
+                  )}
                 </div>
 
                 <div>
@@ -1394,8 +1883,74 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                 </div>
               </div>
 
+              {/* Activity Timeline */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="text-[10px] font-mono uppercase text-gray-400 tracking-wider flex items-center gap-1.5">
+                    <Activity className="w-3.5 h-3.5 text-[#dfb776]" />
+                    CLIENT ACTIVITY TIMELINE
+                  </h4>
+                  <span className="text-[10px] font-mono text-gray-500">
+                    {(inspectLead.activityLog || []).length} event{(inspectLead.activityLog || []).length === 1 ? '' : 's'}
+                  </span>
+                </div>
+
+                {/* Quick Log Composer */}
+                <form onSubmit={handleAddTimelineNote} className="flex items-center gap-2 mb-4">
+                  <select
+                    value={timelineNoteType}
+                    onChange={(e) => setTimelineNoteType(e.target.value as any)}
+                    className="px-2 py-1.5 rounded-sm border border-white/15 bg-[#0b0c0e] text-gray-300 text-[10px] font-mono focus:outline-none focus:border-[#dfb776]"
+                  >
+                    <option value="note">Note</option>
+                    <option value="call">Call</option>
+                    <option value="whatsapp">WhatsApp</option>
+                  </select>
+                  <input
+                    type="text"
+                    placeholder="Log a call, note, or touchpoint..."
+                    value={timelineNoteInput}
+                    onChange={(e) => setTimelineNoteInput(e.target.value)}
+                    className="flex-1 px-3 py-1.5 rounded-sm border border-white/15 bg-[#0b0c0e] text-white text-xs focus:outline-none focus:border-[#dfb776]"
+                  />
+                  <button
+                    type="submit"
+                    className="px-3 py-1.5 rounded-sm bg-white/10 hover:bg-white/20 text-white text-[10px] font-mono uppercase cursor-pointer shrink-0"
+                  >
+                    Log
+                  </button>
+                </form>
+
+                <div className="space-y-0 max-h-64 overflow-y-auto pr-1">
+                  {(inspectLead.activityLog || []).map((event, idx, arr) => {
+                    const meta = ACTIVITY_META[event.type] || ACTIVITY_META.system;
+                    return (
+                      <div key={event.id} className="flex gap-3">
+                        {/* Rail */}
+                        <div className="flex flex-col items-center">
+                          <span className={`w-2 h-2 rounded-full ${meta.dot} mt-1.5 shrink-0`} />
+                          {idx < arr.length - 1 && <span className="w-px flex-1 bg-white/10 my-0.5" />}
+                        </div>
+                        {/* Content */}
+                        <div className="pb-3.5 min-w-0">
+                          <div className="flex items-baseline gap-2 flex-wrap">
+                            <span className={`text-[9px] font-mono uppercase tracking-wider font-semibold ${meta.text}`}>
+                              {event.type}
+                            </span>
+                            <span className="text-[9px] font-mono text-gray-500">{timeAgo(event.createdAt)}</span>
+                          </div>
+                          <p className="text-xs text-gray-300 font-light leading-relaxed mt-0.5">
+                            {event.label}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
               {/* Registration Meta */}
-              <div className="space-y-2 text-[11px] font-mono text-gray-400">
+              <div className="space-y-2 text-[11px] font-mono text-gray-400 pb-4">
                 <div className="flex justify-between">
                   <span>Interested Unit:</span>
                   <span className="text-white font-semibold">{inspectLead.interestedUnit}</span>
@@ -1573,20 +2128,6 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                 </div>
                 <div>
                   <label className="block text-[10px] font-mono uppercase text-gray-300 mb-1">
-                    ESTIMATED BUDGET
-                  </label>
-                  <input
-                    type="text"
-                    value={newLeadForm.budget}
-                    onChange={(e) => setNewLeadForm({ ...newLeadForm, budget: e.target.value })}
-                    className="w-full px-3 py-2 rounded-sm border border-white/15 bg-[#0b0c0e] text-white font-mono"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] font-mono uppercase text-gray-300 mb-1">
                     PURCHASE TIMELINE
                   </label>
                   <select
@@ -1600,6 +2141,9 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                     <option>Exploring / Real Estate Portfolio</option>
                   </select>
                 </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[10px] font-mono uppercase text-gray-300 mb-1">
                     ASSIGNED EXECUTIVE
@@ -1609,23 +2153,22 @@ export const AdminLeadsPage: React.FC<AdminLeadsPageProps> = ({
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, assignedAgent: e.target.value })}
                     className="w-full px-3 py-2 rounded-sm border border-white/15 bg-[#0b0c0e] text-white font-mono"
                   >
-                    <option value="Rajesh Sharma (Senior VP)">Rajesh Sharma (Senior VP)</option>
-                    <option value="Priya V. (VIP Concierge)">Priya V. (VIP Concierge)</option>
-                    <option value="Karthik R. (Managing Director)">Karthik R. (MD)</option>
+                    {AGENT_OPTIONS.map((a) => (
+                      <option key={a} value={a}>{a}</option>
+                    ))}
                   </select>
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-mono uppercase text-gray-300 mb-1">
-                  INTERESTED RESIDENCE
-                </label>
-                <input
-                  type="text"
-                  value={newLeadForm.interestedUnit}
-                  onChange={(e) => setNewLeadForm({ ...newLeadForm, interestedUnit: e.target.value })}
-                  className="w-full px-3 py-2 rounded-sm border border-white/15 bg-[#0b0c0e] text-white font-mono"
-                />
+                <div>
+                  <label className="block text-[10px] font-mono uppercase text-gray-300 mb-1">
+                    INTERESTED RESIDENCE
+                  </label>
+                  <input
+                    type="text"
+                    value={newLeadForm.interestedUnit}
+                    onChange={(e) => setNewLeadForm({ ...newLeadForm, interestedUnit: e.target.value })}
+                    className="w-full px-3 py-2 rounded-sm border border-white/15 bg-[#0b0c0e] text-white font-mono"
+                  />
+                </div>
               </div>
 
               <div>

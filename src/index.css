@@ -175,9 +175,11 @@ body.theme-light main .via-\[\#08090c\]:not(:has(img)) {
   --tw-gradient-via: #f8f9fb var(--tw-gradient-via-position) !important;
 }
 
-/* Ensure images remain crisp, high contrast, and sharp in Light Mode */
+/* Ensure images remain crisp, high contrast, and sharp in Light Mode.
+   Preserves Tailwind blur utilities (e.g. blurred upcoming-project cards):
+   --tw-blur is empty unless a blur-* class sets it, so normal images are unaffected. */
 body.theme-light img {
-  filter: contrast(1.03) brightness(1.02);
+  filter: var(--tw-blur,) contrast(1.03) brightness(1.02);
 }
 
 /* Text color overrides */

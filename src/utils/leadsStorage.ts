@@ -1,7 +1,14 @@
-import { ClientLead, LeadStatus } from '../types';
+import { ClientLead, LeadActivity, LeadActivityType, LeadStatus } from '../types';
 
 const LEADS_STORAGE_KEY = 'unifra_crm_leads';
 const UNLOCKED_KEY = 'unifra_villa_unlocked';
+
+const buildActivity = (type: LeadActivityType, label: string): LeadActivity => ({
+  id: `act-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+  type,
+  label,
+  createdAt: new Date().toISOString()
+});
 
 export const INITIAL_LEADS: ClientLead[] = [
   {
@@ -23,10 +30,14 @@ export const INITIAL_LEADS: ClientLead[] = [
       minute: '2-digit'
     }),
     status: 'VIP Visit Scheduled',
-    budget: '₹ 6.50 Cr',
     assignedAgent: 'Rajesh Sharma (Senior VP)',
     tags: ['NRI Investor', 'Hot Lead', '5BHK Request'],
-    visitDate: 'Sep 12, 2026 • 11:00 AM'
+    visitDate: 'Sep 12, 2026 • 11:00 AM',
+    activityLog: [
+      { id: 'act-1a', type: 'created', label: 'Lead captured via Villa Showcase Gate', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString() },
+      { id: 'act-1b', type: 'assign', label: 'Assigned to Rajesh Sharma (Senior VP)', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString() },
+      { id: 'act-1c', type: 'visit', label: 'VIP site visit scheduled — Sep 12, 2026 • 11:00 AM', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 1).toISOString() }
+    ]
   },
   {
     id: 'lead-2',
@@ -47,9 +58,14 @@ export const INITIAL_LEADS: ClientLead[] = [
       minute: '2-digit'
     }),
     status: 'Contacted',
-    budget: '₹ 5.85 Cr',
     assignedAgent: 'Priya V. (VIP Concierge)',
-    tags: ['Local Buyer', 'Doctor', 'EV Charging']
+    tags: ['Local Buyer', 'Doctor', 'EV Charging'],
+    followUpDate: new Date(Date.now() + 1000 * 60 * 60 * 36).toISOString().split('T')[0],
+    activityLog: [
+      { id: 'act-2a', type: 'created', label: 'Lead captured via Menu — Mysa Villas', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 26).toISOString() },
+      { id: 'act-2b', type: 'status', label: 'Status moved to Contacted — discovery call completed', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 20).toISOString() },
+      { id: 'act-2c', type: 'followup', label: 'Follow-up set for ' + new Date(Date.now() + 1000 * 60 * 60 * 36).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }), createdAt: new Date(Date.now() - 1000 * 60 * 60 * 19).toISOString() }
+    ]
   },
   {
     id: 'lead-3',
@@ -70,9 +86,11 @@ export const INITIAL_LEADS: ClientLead[] = [
       minute: '2-digit'
     }),
     status: 'New Lead',
-    budget: '₹ 7.45 Cr',
     assignedAgent: 'Unassigned',
-    tags: ['Tech Founder', 'Oceanfront', 'High Budget']
+    tags: ['Tech Founder', 'Oceanfront', 'Hot Lead'],
+    activityLog: [
+      { id: 'act-3a', type: 'created', label: 'Lead captured via Virtual Tour 3D', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString() }
+    ]
   },
   {
     id: 'lead-4',
@@ -93,10 +111,14 @@ export const INITIAL_LEADS: ClientLead[] = [
       minute: '2-digit'
     }),
     status: 'VIP Visit Scheduled',
-    budget: '₹ 6.00 Cr',
     assignedAgent: 'Rajesh Sharma (Senior VP)',
     tags: ['NRI Dubai', 'Holiday Home'],
-    visitDate: 'Sep 15, 2026 • 03:30 PM'
+    visitDate: 'Sep 15, 2026 • 03:30 PM',
+    activityLog: [
+      { id: 'act-4a', type: 'created', label: 'Lead captured via Brochure Download', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString() },
+      { id: 'act-4b', type: 'whatsapp', label: 'Digital brochure pass sent via WhatsApp', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 70).toISOString() },
+      { id: 'act-4c', type: 'visit', label: 'VIP site visit scheduled — Sep 15, 2026 • 03:30 PM', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 68).toISOString() }
+    ]
   },
   {
     id: 'lead-5',
@@ -117,9 +139,13 @@ export const INITIAL_LEADS: ClientLead[] = [
       minute: '2-digit'
     }),
     status: 'Converted',
-    budget: '₹ 11.70 Cr',
     assignedAgent: 'Karthik R. (Managing Director)',
-    tags: ['Corporate Booking', 'Closed Deal', 'Dual Villa']
+    tags: ['Corporate Booking', 'Closed Deal', 'Dual Villa'],
+    activityLog: [
+      { id: 'act-5a', type: 'created', label: 'Lead captured via Direct Phone Concierge', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 120).toISOString() },
+      { id: 'act-5b', type: 'visit', label: 'Dual-plot site inspection completed', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96).toISOString() },
+      { id: 'act-5c', type: 'status', label: 'Deal closed — booking deposit received', createdAt: new Date(Date.now() - 1000 * 60 * 60 * 90).toISOString() }
+    ]
   }
 ];
 
@@ -153,7 +179,6 @@ export function saveLead(
     source?: string;
     notes?: string;
     status?: LeadStatus;
-    budget?: string;
     assignedAgent?: string;
     tags?: string[];
   }
@@ -180,9 +205,11 @@ export function saveLead(
       minute: '2-digit'
     }),
     status: leadInput.status || 'New Lead',
-    budget: leadInput.budget || '₹ 5.85 Cr',
     assignedAgent: leadInput.assignedAgent || 'Unassigned',
-    tags: leadInput.tags || ['New Web Inquiry']
+    tags: leadInput.tags || ['New Web Inquiry'],
+    activityLog: [
+      buildActivity('created', `Lead captured via ${leadInput.source || 'Villa Showcase Gate'}`)
+    ]
   };
 
   const updatedLeads = [newLead, ...currentLeads];
@@ -217,7 +244,38 @@ export function updateLead(id: string, updates: Partial<ClientLead>): void {
 }
 
 export function updateLeadStatus(id: string, status: LeadStatus): void {
-  updateLead(id, { status });
+  const currentLeads = getStoredLeads();
+  const target = currentLeads.find(l => l.id === id);
+  if (!target || target.status === status) return;
+  updateLead(id, {
+    status,
+    activityLog: [
+      buildActivity('status', `Status moved to ${status}`),
+      ...(target.activityLog || [])
+    ]
+  });
+}
+
+export function logLeadActivity(id: string, type: LeadActivityType, label: string): void {
+  const currentLeads = getStoredLeads();
+  const target = currentLeads.find(l => l.id === id);
+  if (!target) return;
+  updateLead(id, {
+    activityLog: [buildActivity(type, label), ...(target.activityLog || [])]
+  });
+}
+
+export function setLeadFollowUp(id: string, followUpDate: string): void {
+  const currentLeads = getStoredLeads();
+  const target = currentLeads.find(l => l.id === id);
+  if (!target) return;
+  updateLead(id, {
+    followUpDate: followUpDate || undefined,
+    activityLog: [
+      buildActivity('followup', followUpDate ? `Follow-up scheduled for ${followUpDate}` : 'Follow-up cleared'),
+      ...(target.activityLog || [])
+    ]
+  });
 }
 
 export function deleteLead(id: string): void {

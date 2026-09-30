@@ -105,19 +105,28 @@ export const SignatureProjects: React.FC<SignatureProjectsProps> = ({
             return (
               <div
                 key={project.id}
-                data-cursor="EXPLORE"
+                data-cursor={isMysa ? 'EXPLORE' : 'COMING SOON'}
                 onClick={() => handleCardClick(project)}
                 className="group bg-white rounded-t-[40px] rounded-b-[20px] overflow-hidden border border-[#eae4db] hover:border-[#c59b67] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl cursor-pointer"
               >
-                {/* Project Image */}
+                {/* Project Image (blurred for non-MYSA upcoming projects) */}
                 <div className="relative h-72 sm:h-80 overflow-hidden bg-[#eae5dc]">
                   <img
                     src={project.imageUrl}
                     alt={project.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+                      isMysa ? 'group-hover:scale-105' : 'blur-md scale-110 group-hover:blur-lg'
+                    }`}
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 opacity-70" />
+                  {!isMysa && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="px-4 py-2 rounded-sm bg-white/92 backdrop-blur-md border border-[#e5ded4] text-[10px] font-mono tracking-[0.25em] uppercase text-[#1a1918] font-semibold">
+                        Details on Request
+                      </span>
+                    </div>
+                  )}
 
                   {/* Status Badges */}
                   <div className="absolute top-4 left-4 flex flex-wrap items-center gap-2">
@@ -142,12 +151,14 @@ export const SignatureProjects: React.FC<SignatureProjectsProps> = ({
                   </div>
                 </div>
 
-                {/* Info block: Name & Location on left, Price on right */}
+                {/* Info block: Name & Location (specs blurred for non-MYSA) */}
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-start justify-between gap-4 mb-2">
+                    <div className="mb-2">
                       <div>
-                        <h4 className="font-serif-luxury text-xl font-bold text-[#1a1918] group-hover:text-[#c59b67] transition-colors">
+                        <h4 className={`font-serif-luxury text-xl font-bold transition-colors ${
+                          isMysa ? 'text-[#1a1918] group-hover:text-[#c59b67]' : 'text-[#8c827a]'
+                        }`}>
                           {project.name}
                         </h4>
                         <div className="flex items-center gap-1.5 text-xs text-[#8c827a] font-mono uppercase tracking-wider mt-1">
@@ -155,21 +166,18 @@ export const SignatureProjects: React.FC<SignatureProjectsProps> = ({
                           <span>{project.location}</span>
                         </div>
                       </div>
-
-                      <div className="text-right whitespace-nowrap">
-                        <div className="text-[10px] font-mono uppercase tracking-widest text-[#8c827a]">STARTING</div>
-                        <div className="text-sm font-bold font-mono text-[#c59b67]">
-                          {project.priceStarting}
-                        </div>
-                      </div>
                     </div>
 
-                    <p className="text-[#68625d] text-xs font-light leading-relaxed my-3 line-clamp-2">
+                    <p className={`text-xs font-light leading-relaxed my-3 line-clamp-2 ${
+                      isMysa ? 'text-[#68625d]' : 'blur-[3px] select-none'
+                    }`}>
                       {project.tagline}
                     </p>
 
                     {/* Specs row in subtle light aesthetic */}
-                    <div className="grid grid-cols-4 gap-2 py-3 border-y border-[#eee9e0] text-center mb-4 text-[#68625d]">
+                    <div className={`grid grid-cols-4 gap-2 py-3 border-y border-[#eee9e0] text-center mb-4 text-[#68625d] ${
+                      isMysa ? '' : 'blur-[3px] select-none'
+                    }`}>
                       <div>
                         <BedDouble className="w-3.5 h-3.5 mx-auto text-[#c59b67] mb-1" />
                         <div className="text-[10px] font-mono">
@@ -215,14 +223,17 @@ export const SignatureProjects: React.FC<SignatureProjectsProps> = ({
                             </>
                           )
                         ) : (
-                          <span>Explore Residence</span>
+                          <span className="flex items-center gap-1.5 text-[#8c827a]">
+                            <Lock className="w-3.5 h-3.5 text-[#8c827a]" />
+                            <span>Details on Request</span>
+                          </span>
                         )}
                       </span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#c59b67]" />
                     </button>
                   </div>
-                  {/* Actions: Request Site Visit & Download Brochure */}
-                  <div className="grid grid-cols-2 gap-3 mt-3">
+                  {/* Actions: Request Site Visit & Download Brochure (MYSA only) */}
+                  <div className={`grid grid-cols-2 gap-3 mt-3 ${isMysa ? '' : 'hidden'}`}>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
